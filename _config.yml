@@ -1,7 +1,7 @@
 # Setup
-title: Not Pure Poole
-description: A simple, beautiful, and powerful Jekyll theme for blogs
-url: https://vszhub.github.io
+title: 海苔脆的博客
+description: 不改变世界也要给予挣扎
+url: https://Huatiancen.github.io
 avatar: /avatar.jpeg
 paginate: 5
 permalink: pretty
@@ -29,14 +29,14 @@ exclude:
 
 # Optimize Jekyl SEO Tag
 twitter:
-  username: vszhub
+  username: Huatiancen
   card: summary
 logo: logo.png
 social:
-  name: Songzi Vong
+  name: Tiancen Hua
   links:
-    - https://twitter.com/vszhub
-    - https://github.com/vszhub
+    - https://twitter.com/Huatiancen
+    - https://github.com/Huatiancen
 google_site_verification: xxxxx
 lang: en
 
@@ -54,9 +54,9 @@ sass:
 
 # Specify the author for blog posts
 author:
-  name: Songzi Vong
-  url: https://github.com/vszhub/
-  email: vszhub@gmail.com
+  name: Tiancen Hua
+  url: https://github.com/Huatiancen
+  email: 1047347257@qq.com
   
 plugins:
   - jekyll-remote-theme
