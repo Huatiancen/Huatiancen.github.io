@@ -1,3 +1,12 @@
+---
+layout: post
+title: Translation into SSA Form
+date: 2025-04-10 00:00 +0800
+last_modified_at: 2025-04-10 00:00 +0800
+tags: [编译原理]
+toc:  true
+---
+
 # Translation into SSA Form
 
 ## SSA and Extensions

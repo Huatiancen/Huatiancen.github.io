@@ -1,3 +1,12 @@
+---
+layout: post
+title: Intermediate Representation
+date: 2025-04-10 00:00 +0800
+last_modified_at: 2025-04-10 00:00 +0800
+tags: [编译原理]
+toc:  true
+---
+
 # Intermediate Representation
 
 使用syntax-directed transition来生成IR

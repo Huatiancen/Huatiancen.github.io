@@ -1,3 +1,12 @@
+---
+layout: post
+title: Syntax Analysis
+date: 2025-04-10 00:00 +0800
+last_modified_at: 2025-04-10 00:00 +0800
+tags: [编译原理]
+toc:  true
+---
+
 # Syntax Analysis
 
 建立语法树的过程
