@@ -2,104 +2,85 @@
 layout: compress
 ---
 
-<!DOCTYPE html>
-<html lang="{{ page.jekyll-theme-WuK.default.html_lang }}">
+<!doctype html>
 
-<head>
-  <title>
-    {% if page.title == "Home" %}
-    {{ site.title }} &middot; {{ site.tagline }}
-    {% else %}
-    {{ page.title }} &middot; {{ site.title }}
-    {% endif %}
-  </title>
-  {% if site.plugins contains 'jekyll-seo-tag' %}
-  {% seo title=false %}
-  {% endif %}
-  {% for node in page.jekyll-theme-WuK.default.append_to_head %}
-  {{ node }}
-  {% endfor %}
-</head>
+{% include origin-type.html %}
 
-<body>
-  <div id="wrap-loader">
-    <span class="loader"></span>
-  </div>
+{% include lang.html %}
 
-  <div id="wrap-menu" class="position-fixed right-0 m-5 z-3"
-    data-color-mode="{{ page.jekyll-theme-WuK.default.color-mode | default: 'auto'}}"
-    data-light-theme="{{ page.jekyll-theme-WuK.default.light-theme | default: 'light'}}"
-    data-dark-theme="{{ page.jekyll-theme-WuK.default.dark-theme | default: 'dark'}}">
+{% if site.theme_mode %}
+  {% capture prefer_mode %}data-mode="{{ site.theme_mode }}"{% endcapture %}
+{% endif %}
 
-    <details class="details-reset details-overlay">
+<!-- `site.alt_lang` can specify a language different from the UI -->
+<html lang="{{ page.lang | default: site.alt_lang | default: site.lang }}" {{ prefer_mode }}>
+  {% include head.html %}
 
-      <summary class="btn" aria-haspopup="true">
-        Menu
-      </summary>
+  <body>
+    {% include sidebar.html lang=lang %}
 
-      <div class="SelectMenu right-0">
+    <div id="main-wrapper" class="d-flex justify-content-center">
+      <div class="container d-flex flex-column px-xxl-5">
+        {% include topbar.html lang=lang %}
 
-        <div class="SelectMenu-modal">
+        <div class="row flex-grow-1">
+          <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            {% if layout.refactor or layout.layout == 'default' %}
+              {% include refactor-content.html content=content lang=lang %}
+            {% else %}
+              {{ content }}
+            {% endif %}
+          </main>
 
-          <div class="SelectMenu-list">
-
-            {% for node in page.jekyll-theme-WuK.default.menu.prepend %}
-            {{ node }}
-            {% endfor %}
-
-            {% for node in page.jekyll-theme-WuK.default.menu.nav %}
-            <a href="{{ node.href }}">
-              <button class="SelectMenu-item" role="menuitem">
-                {{ node.title }}
-              </button>
-            </a>
-            {% endfor %}
-
-            <div class="SelectMenu-item">
-              {% if page.jekyll-theme-WuK.default.menu.jekyll-toc.enable %}
-              {{ page.jekyll-theme-WuK.default.menu.jekyll-toc.prepend }}
-              {% include toc.html html=content ordered=true skipNoIDs=true sanitize=true id="wrap-toc" %}
-              {% endif %}
+          <!-- panel -->
+          <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 text-muted">
+            <div class="access">
+              {% include_cached update-list.html lang=lang %}
+              {% include_cached trending-tags.html lang=lang %}
             </div>
 
-            {% for node in page.jekyll-theme-WuK.default.menu.append %}
-            {{ node }}
+            {% for _include in layout.panel_includes %}
+              {% assign _include_path = _include | append: '.html' %}
+              {% include {{ _include_path }} lang=lang %}
             {% endfor %}
-
-          </div>
-
-          <footer class="SelectMenu-footer">
-            {{ page.jekyll-theme-WuK.default.menu.footer }}
-          </footer>
-
+          </aside>
         </div>
 
+        <div class="row">
+          <!-- tail -->
+          <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            {% for _include in layout.tail_includes %}
+              {% assign _include_path = _include | append: '.html' %}
+              {% include {{ _include_path }} lang=lang %}
+            {% endfor %}
+
+            {% include_cached footer.html lang=lang %}
+          </div>
+        </div>
+
+        {% include_cached search-results.html lang=lang %}
       </div>
 
-    </details>
+      <aside aria-label="Scroll to Top">
+        <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow">
+          <i class="fas fa-angle-up"></i>
+        </button>
+      </aside>
+    </div>
 
-  </div>
+    <div id="mask" class="d-none position-fixed w-100 h-100 z-1"></div>
 
-  <div id="wrap-content" data-color-mode="{{ page.jekyll-theme-WuK.default.color-mode | default: 'auto'}}"
-    data-light-theme="{{ page.jekyll-theme-WuK.default.light-theme | default: 'light'}}"
-    data-dark-theme="{{ page.jekyll-theme-WuK.default.dark-theme | default: 'dark'}}">
-
-    {% capture _content %}
-    {{ content }}
-    {% endcapture %}
-    {% if _content contains '
-    <pre class="highlight">' %}
-    {% comment %}
-    Fixed kramdown code highlight rendering:
-    https://github.com/penibelst/jekyll-compress-html/issues/101
-    https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901
-    {% endcomment %}
-    {% assign _content = _content | replace: '<pre class="highlight"><code', '<code' %}
-    {% assign _content = _content | replace: '</code></pre>', '</code>' %}
+    {% if site.pwa.enabled %}
+      {% include_cached notification.html lang=lang %}
     {% endif %}
-    {{ _content }}
-  </div>
-  {{ page.jekyll-theme-WuK.default.append }}
-</body>
 
+    <!-- Embedded scripts -->
+
+    {% for _include in layout.script_includes %}
+      {% assign _include_path = _include | append: '.html' %}
+      {% include {{ _include_path }} %}
+    {% endfor %}
+
+    {% include_cached search-loader.html lang=lang %}
+  </body>
 </html>
