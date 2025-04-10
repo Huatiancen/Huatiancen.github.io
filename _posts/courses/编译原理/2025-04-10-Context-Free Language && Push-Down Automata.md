@@ -35,7 +35,7 @@ Context Free Grammar(CFG)    上下文无关文法
 
 **Derivation  推导 $\Rightarrow _G$**
 
-![](img/屏幕截图 2025-03-19 214310.png)
+![](img/屏幕截图2025-03-19214310.png)
 
 表示经过零步或若干步推导，记作  $\Rightarrow ^*$
 
