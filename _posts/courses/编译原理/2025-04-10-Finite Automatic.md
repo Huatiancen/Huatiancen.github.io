@@ -7,8 +7,6 @@ tags: [编译原理]
 toc:  true
 ---
 
-# Finite  Automata
-
 有限自动机
 
 根据patterns查找Lexemes，并创建tokens
