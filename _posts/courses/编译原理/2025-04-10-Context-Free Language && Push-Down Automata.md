@@ -12,7 +12,7 @@ toc:  true
 上下文无关语言
 
 **课件中有习题**
-
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/202506240034414.png)
 ## Context-Free Language
 
 Context Free Grammar(CFG)    上下文无关文法
