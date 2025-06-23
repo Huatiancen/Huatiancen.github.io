@@ -17,7 +17,7 @@ toc:  true
 - Pattern：正则表达式（如果没有匹配的模式，则会出现词法错误）
 - Token： <token类名，属性> 比如 60 为<number,60>
 
-![](img/屏幕截图 2025-03-18 214244.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-18%20214244.png)
 
 形式语言与自动机理论
 
@@ -65,7 +65,7 @@ Positive-Closure 正闭包 L^+^ =  L^*^ - {$\epsilon$}
 
 确定性有限自动机 DFA
 
-![](img/屏幕截图 2025-03-19 012220.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-19%20012220.png)
 
 
 
@@ -80,13 +80,13 @@ DFA 是一个五元组 $(Q,\Sigma,\delta,q_0,F)$
 - q~0~初始状态
 - F 最终状态的有限子集
 
-![](img/屏幕截图 2025-03-19 014707.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-19%20014707.png)
 
 **DFA Minimization**
 
 - 有利于提高计算效率
 
-![](img/屏幕截图 2025-03-19 144911.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-19%20144911.png)
 
 其实就是合并状态 可以看到q~0~和q~1~输入a/b后的状态属于一个集合里的
 
@@ -107,15 +107,15 @@ DFA 是一个五元组 $(Q,\Sigma,\delta,q_0,F)$
   - 对所有输入符号a∈Σ，如果p通过a转移到p'，则q通过a必须转移到q'，且(p',q')∈R
   - 反之亦然：如果q通过a转移到q'，则p通过a必须转移到p'，且(p',q')∈R
 
-![](img/屏幕截图 2025-03-19 150720.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-19%20150720.png)
 
 ## Non-deterministic Finite Automata
 
 NFA
 
-![](img/屏幕截图 2025-03-19 151150.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-19%20151150.png)
 
-![](img/屏幕截图 2025-03-19 151453.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-19%20151453.png)
 
 NFA 是一个五元组 $(Q,\Sigma\cup\{\epsilon\},\delta,q_0,F)$
 
@@ -132,7 +132,7 @@ $\epsilon$-Closure
 
 - $\epsilon$-Closure(q)返回所有q能通过$\epsilon$到达的状态,包括q自身
 
-![](img/屏幕截图 2025-03-19 152515.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-19%20152515.png)
 
 DFA和NFA的等价性
 
@@ -140,7 +140,7 @@ NFA可以通过子集构造法转化为DFA
 
 NFA状态集合的一个集合是DFA的一个状态
 
-![](img/屏幕截图 2025-03-19 154328.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-19%20154328.png)
 
 步骤1：初始化DFA
 
@@ -158,4 +158,4 @@ NFA状态集合的一个集合是DFA的一个状态
 
 步骤3：添加转移
 
-- **添加DFA转移**：将计算得到的集合 *S* 作为新的DFA状态，并添加转移 *δ*′({*qi*,*qj*,…,*qm*},*a*)=*S*。
+- **添加DFA转移**：将计算得到的集合 *S* 作为新的DFA状态，并添加转移 *δ*′({*qi*,*qj*,…,*qm*},*a*)
