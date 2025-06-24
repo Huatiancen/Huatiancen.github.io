@@ -22,7 +22,7 @@ title: 友链
       <h3 class="friend-name">Siyuan Liu的博客</h3>
       <p class="friend-desc">分享技术与生活的点点滴滴</p>
       <div class="friend-meta">
-        <span class="friend-domain">[example-a.com](https://sirilaw.github.io/)</span>
+        <span class="friend-domain">[[example-a.com](https://sirilaw.github.io/)](https://sirilaw.github.io/)</span>
       </div>
     </div>
     <a href="https://sirilaw.github.io/" class="friend-link" target="_blank" rel="noopener">
@@ -32,16 +32,16 @@ title: 友链
 
   <div class="friend-card">
     <div class="friend-avatar">
-      <img src="https://via.placeholder.com/80x80/4ecdc4/ffffff?text=B" alt="朋友B">
+      <img src="https://erinwithbmq.github.io/images/avatar.jpg" alt=" ErinwithBMQ">
     </div>
     <div class="friend-info">
-      <h3 class="friend-name">朋友B的小站</h3>
-      <p class="friend-desc">记录学习路上的酸甜苦辣</p>
+      <h3 class="friend-name">寻梦之旅</h3>
+      <p class="friend-desc">循此苦旅，终抵繁星</p>
       <div class="friend-meta">
-        <span class="friend-domain">example-b.com</span>
+        <span class="friend-domain">[[example-b.com](https://www.erinwithbmq.xin/)](https://www.erinwithbmq.xin/)</span>
       </div>
     </div>
-    <a href="https://example-b.com" class="friend-link" target="_blank" rel="noopener">
+    <a href=" https://www.erinwithbmq.xin/" class="friend-link" target="_blank" rel="noopener">
       <i class="fas fa-external-link-alt"></i>
     </a>
   </div>
