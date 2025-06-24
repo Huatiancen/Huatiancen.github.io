@@ -3,9 +3,65 @@ layout: page
 title: 友链
 ---
 
+---
+layout: page
+title: 友链
+---
+
 ## 友情链接
 
 这里是我的朋友们的博客，欢迎互相交流学习！
+
+<div class="friend-links-grid">
+  <!-- 示例友链卡片 -->
+  <div class="friend-card">
+    <div class="friend-avatar">
+      <img src="https://sirilaw.github.io/" alt="Siyuan Liu">
+    </div>
+    <div class="friend-info">
+      <h3 class="friend-name">Siyuan Liu的博客</h3>
+      <p class="friend-desc">分享技术与生活的点点滴滴</p>
+      <div class="friend-meta">
+        <span class="friend-domain">[example-a.com](https://sirilaw.github.io/)</span>
+      </div>
+    </div>
+    <a href="https://sirilaw.github.io/" class="friend-link" target="_blank" rel="noopener">
+      <i class="fas fa-external-link-alt"></i>
+    </a>
+  </div>
+
+  <div class="friend-card">
+    <div class="friend-avatar">
+      <img src="https://via.placeholder.com/80x80/4ecdc4/ffffff?text=B" alt="朋友B">
+    </div>
+    <div class="friend-info">
+      <h3 class="friend-name">朋友B的小站</h3>
+      <p class="friend-desc">记录学习路上的酸甜苦辣</p>
+      <div class="friend-meta">
+        <span class="friend-domain">example-b.com</span>
+      </div>
+    </div>
+    <a href="https://example-b.com" class="friend-link" target="_blank" rel="noopener">
+      <i class="fas fa-external-link-alt"></i>
+    </a>
+  </div>
+
+  <div class="friend-card">
+    <div class="friend-avatar">
+      <img src="https://via.placeholder.com/80x80/45b7d1/ffffff?text=C" alt="朋友C">
+    </div>
+    <div class="friend-info">
+      <h3 class="friend-name">朋友C的博客</h3>
+      <p class="friend-desc">代码改变世界，梦想照进现实</p>
+      <div class="friend-meta">
+        <span class="friend-domain">example-c.com</span>
+      </div>
+    </div>
+    <a href="https://example-c.com" class="friend-link" target="_blank" rel="noopener">
+      <i class="fas fa-external-link-alt"></i>
+    </a>
+  </div>
+</div>
 
 
 ## 申请友链
