@@ -4,6 +4,9 @@
 - title: Bilibili
   url: https://space.bilibili.com/321134542
   icon: fab fa-bilibili
+- title: 小红书
+  url: https://www.xiaohongshu.com/user/profile/64f1ba5800000000040259bb
+  icon: fas fa-heart
 - title: GitHub
   url: https://github.com/Huatiancen
   icon: fab fa-github
