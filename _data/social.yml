@@ -1,6 +1,6 @@
 - title: Email
   url: mailto:1047347257@qq.com
-  icon: fas fa-envelope
+  svg_icon: /assets/images/email-icon.svg
 - title: Bilibili
   url: https://space.bilibili.com/321134542
   svg_icon: /assets/images/bilibili-icon.svg
@@ -9,4 +9,4 @@
   svg_icon: /assets/images/xiaohongshu-icon.svg
 - title: GitHub
   url: https://github.com/Huatiancen
-  icon: fab fa-github
+  svg_icon: /assets/images/github-icon.svg
