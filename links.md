@@ -3,10 +3,6 @@ layout: page
 title: 友链
 ---
 
----
-layout: page
-title: 友链
----
 
 ## 友情链接
 
