@@ -1,8 +1,7 @@
 ---
 layout: page
-title: About
+title: 花天岑
 ---
 
-**Not Pure Poole** is a simple, beautiful, and powerful Jekyll theme for blogs. It is built on [Poole](https://github.com/poole/poole) and [Pure](https://purecss.io/).
-
-For more information about Not Pure Poole, please browse the [README](https://github.com/vszhub/not-pure-poole) file.
+## 个人简介
+男，共青团员，软件学院2023级本科生
