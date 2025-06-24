@@ -36,6 +36,9 @@
   @import "syntax-dark";
 }
 
+// 引入自定义图标
+@import 'custom-icons';
+
 // Sass for creating the swatches
 .colors {
   display: grid;
@@ -52,3 +55,6 @@
     margin-left: var(--spacer);
   }
 }
+
+// 引入自定义图标
+@import 'custom-icons';
