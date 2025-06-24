@@ -16,11 +16,11 @@ title: 友链
   <!-- 示例友链卡片 -->
   <div class="friend-card">
     <div class="friend-avatar">
-      <img src="https://sirilaw.github.io/" alt="Siyuan Liu">
+      <img src="https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/202506241944323.jpg" alt="Siyuan Liu">
     </div>
     <div class="friend-info">
       <h3 class="friend-name">Siyuan Liu的博客</h3>
-      <p class="friend-desc">分享技术与生活的点点滴滴</p>
+      <p class="friend-desc">万事胜意</p>
       <div class="friend-meta">
         <span class="friend-domain">https://sirilaw.github.io/</span>
       </div>
@@ -48,16 +48,16 @@ title: 友链
 
   <div class="friend-card">
     <div class="friend-avatar">
-      <img src="https://via.placeholder.com/80x80/45b7d1/ffffff?text=C" alt="朋友C">
+      <img src="https://via.placeholder.com/80x80/45b7d1/ffffff?text=C" alt="Low-keyyyy">
     </div>
     <div class="friend-info">
-      <h3 class="friend-name">朋友C的博客</h3>
-      <p class="friend-desc">代码改变世界，梦想照进现实</p>
+      <h3 class="friend-name">Low-keyyyy's Blog</h3>
+      <p class="friend-desc">A Blog Site Recording Musings of a Chronic Procrastinator.</p>
       <div class="friend-meta">
-        <span class="friend-domain">example-c.com</span>
+        <span class="friend-domain">https://lowkeyyyy.top/</span>
       </div>
     </div>
-    <a href="https://example-c.com" class="friend-link" target="_blank" rel="noopener">
+    <a href="https://lowkeyyyy.top/" class="friend-link" target="_blank" rel="noopener">
       <i class="fas fa-external-link-alt"></i>
     </a>
   </div>
