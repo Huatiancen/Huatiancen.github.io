@@ -3,7 +3,7 @@
   icon: fas fa-envelope
 - title: Bilibili
   url: https://space.bilibili.com/321134542
-  icon: fab fa-bilibili
+  icon: fas fa-video
 - title: 小红书
   url: https://www.xiaohongshu.com/user/profile/64f1ba5800000000040259bb
   icon: fas fa-heart
