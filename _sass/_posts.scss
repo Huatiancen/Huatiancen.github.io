@@ -126,3 +126,33 @@
   border: 1px solid var(--border-color);
   border-radius: .5em;
 }
+
+// Post navigation (back button)
+.post-navigation {
+  margin-bottom: var(--spacer);
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--gray-100);
+  color: var(--gray-700);
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+
+  &:hover,
+  &:focus {
+    background-color: var(--gray-200);
+    color: var(--gray-800);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
