@@ -44,7 +44,7 @@ title: 友链
 
   <div class="friend-card">
     <div class="friend-avatar">
-      <img src="https://via.placeholder.com/80x80/45b7d1/ffffff?text=C" alt="Low-keyyyy">
+      <img src="https://lowkeyyyy.top/assets/img/prof_pic.jpg?defcbf0a4ad1141eb5e649f904ea8916" alt="Low-keyyyy">
     </div>
     <div class="friend-info">
       <h3 class="friend-name">Low-keyyyy's Blog</h3>
