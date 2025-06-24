@@ -77,7 +77,7 @@ title: 友链
 ### 我的信息：
 - **网站名称**：海苔脆的博客
 - **网站地址**：https://huatiancen.github.io/
-- **网站描述**：海苔脆的一些学习生活日常
+- **简介**：不改变世界也要给予挣扎
 - **头像**： https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/202506241603691.png
 
 ### 联系方式：
