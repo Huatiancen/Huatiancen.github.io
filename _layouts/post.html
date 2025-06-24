@@ -40,9 +40,24 @@ layout: default
     {% include post-tags.html %}
   {% endif %}
 
-  {% if jekyll.environment == "production" and site.disqus and page.comments != false %}
-    {% include disqus.html %}
-  {% endif %}
+  <!-- 打赏功能 -->
+  {% unless page.reward == false %}
+    {% include reward.html %}
+  {% endunless %}
+
+  <!-- 评论区 -->
+  {% unless page.comments == false %}
+    <div class="comments-section">
+      <h3>💬 评论区</h3>
+      {% if site.giscus %}
+        {% include giscus.html %}
+      {% elsif site.disqus %}
+        {% include disqus.html %}
+      {% else %}
+        <p>评论功能尚未配置，请在 <code>_config.yml</code> 中设置 Giscus 或 Disqus。</p>
+      {% endif %}
+    </div>
+  {% endunless %}
 </article>
 
 {% if site.related_posts != empty %}

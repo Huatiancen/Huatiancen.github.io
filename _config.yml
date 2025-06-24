@@ -46,10 +46,17 @@ sass:
 
 # Options
 
+# Giscus 评论系统配置（免费，基于 GitHub Discussions）
+giscus:
+  repo: "Huatiancen/Huatiancen.github.io"  # 你的仓库名
+  repo_id: "R_kgDOOWtknA"  # 仓库 ID，从 giscus.app 获取
+  category: "General"  # 讨论分类
+  category_id: "DIC_kwDOOWtknM4Cr6xF"  # 分类 ID，从 giscus.app 获取
+
 # Replace this value and uncomment to enable Google Analytics tracking
 # google_analytics: UA-000000-0
 
-# Replace this value and uncomment to enable Disqus
+# Replace this value and uncomment to enable Disqus (如果不用 Giscus 的话)
 # disqus: xxxxxx
 
 # Specify the author for blog posts

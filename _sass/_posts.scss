@@ -338,3 +338,194 @@
     }
   }
 }
+
+// 打赏功能样式
+.reward-section {
+  margin: 3rem 0;
+  padding: 2rem;
+  background: var(--gray-000);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--border-radius);
+  text-align: center;
+}
+
+.reward-header {
+  margin-bottom: 2rem;
+
+  h3 {
+    margin: 0 0 1rem 0;
+    color: var(--heading-color);
+    font-size: 1.3rem;
+  }
+
+  p {
+    margin: 0;
+    color: var(--gray-600);
+    font-size: 0.95rem;
+  }
+}
+
+.reward-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.reward-item {
+  .reward-qr {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+
+    &:hover {
+      transform: translateY(-3px);
+      background: var(--gray-100);
+    }
+
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    span {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--gray-700);
+      font-weight: 500;
+    }
+  }
+}
+
+// 打赏二维码弹窗
+.reward-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.reward-modal-content {
+  background-color: var(--body-bg);
+  margin: 15% auto;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  width: 300px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin: 0;
+    color: var(--gray-600);
+    font-size: 0.9rem;
+  }
+}
+
+.reward-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: var(--gray-500);
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+
+  &:hover {
+    color: var(--gray-700);
+  }
+}
+
+// 评论区样式
+.comments-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--border-color);
+
+  h3 {
+    margin: 0 0 1.5rem 0;
+    color: var(--heading-color);
+    font-size: 1.3rem;
+  }
+}
+
+// Giscus 评论区样式
+.giscus-container {
+  margin-top: 1.5rem;
+  
+  // 自定义 Giscus 样式
+  .giscus {
+    max-width: 100%;
+  }
+  
+  // 确保主题适配
+  .giscus-frame {
+    width: 100%;
+    border: none;
+    color-scheme: auto;
+  }
+}
+
+// 暗色主题适配
+@media (prefers-color-scheme: dark) {
+  .reward-section {
+    background: var(--gray-800);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .reward-item .reward-qr:hover {
+    background: var(--gray-700);
+  }
+
+  .reward-modal-content {
+    background-color: var(--gray-800);
+  }
+
+  .reward-close:hover {
+    color: var(--gray-300);
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .reward-section {
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .reward-buttons {
+    gap: 1.5rem;
+  }
+
+  .reward-item .reward-qr img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .reward-modal-content {
+    width: 280px;
+    margin: 20% auto;
+    padding: 1.5rem;
+
+    img {
+      width: 180px;
+      height: 180px;
+    }
+  }
+}

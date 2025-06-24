@@ -1,0 +1,64 @@
+<!-- 打赏区域 -->
+<div class="reward-section">
+  <div class="reward-header">
+    <h3>💖 请我喝杯咖啡</h3>
+    <p>如果这篇文章对你有帮助，欢迎请我喝杯咖啡~ 你的支持是我创作的动力！</p>
+  </div>
+  
+  <div class="reward-buttons">
+    <div class="reward-item">
+      <div class="reward-qr" data-type="alipay">
+        <img src="/assets/images/alipay-qr.png" alt="支付宝">
+        <span>支付宝</span>
+      </div>
+    </div>
+    
+    <div class="reward-item">
+      <div class="reward-qr" data-type="wechat">
+        <img src="/assets/images/wechat-qr.png" alt="微信">
+        <span>微信</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 二维码弹窗 -->
+  <div class="reward-modal" id="reward-modal">
+    <div class="reward-modal-content">
+      <span class="reward-close">&times;</span>
+      <img id="reward-qr-image" src="" alt="">
+      <p id="reward-qr-text">扫描二维码进行打赏</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// 打赏功能JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+  const rewardQrs = document.querySelectorAll('.reward-qr');
+  const modal = document.getElementById('reward-modal');
+  const modalImg = document.getElementById('reward-qr-image');
+  const modalText = document.getElementById('reward-qr-text');
+  const closeBtn = document.querySelector('.reward-close');
+  
+  rewardQrs.forEach(qr => {
+    qr.addEventListener('click', function() {
+      const type = this.getAttribute('data-type');
+      const img = this.querySelector('img');
+      
+      modalImg.src = img.src;
+      modalText.textContent = type === 'alipay' ? '支付宝扫码打赏' : '微信扫码打赏';
+      modal.style.display = 'block';
+    });
+  });
+  
+  closeBtn.addEventListener('click', function() {
+    modal.style.display = 'none';
+  });
+  
+  window.addEventListener('click', function(event) {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
+</script>
