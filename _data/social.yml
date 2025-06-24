@@ -3,10 +3,10 @@
   icon: fas fa-envelope
 - title: Bilibili
   url: https://space.bilibili.com/321134542
-  icon: fab fa-bilibili-custom
+  svg_icon: /assets/images/bilibili-icon.svg
 - title: 小红书
   url: https://www.xiaohongshu.com/user/profile/64f1ba5800000000040259bb
-  icon: fab fa-xiaohongshu-custom
+  svg_icon: /assets/images/xiaohongshu-icon.svg
 - title: GitHub
   url: https://github.com/Huatiancen
   icon: fab fa-github

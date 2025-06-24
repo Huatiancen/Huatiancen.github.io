@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+  <defs>
+    <linearGradient id="xiaohongshuGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff2442;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e91e63;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <path fill="url(#xiaohongshuGrad)" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.5 8.5c-.828 0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5 1.5-.672 1.5-1.5-.672-1.5-1.5-1.5zM6.5 8.5C5.672 8.5 5 9.172 5 10s.672 1.5 1.5 1.5S8 10.828 8 10s-.672-1.5-1.5-1.5zM12 6c-3.314 0-6 2.686-6 6 0 1.105.301 2.14.825 3.025L12 18l5.175-2.975C17.699 14.14 18 13.105 18 12c0-3.314-2.686-6-6-6zm0 9c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"/>
+  <circle cx="12" cy="12" r="2" fill="white"/>
+</svg>

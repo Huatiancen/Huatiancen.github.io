@@ -32,7 +32,11 @@
       {% for social in site.data.social -%}
         <li class="pure-menu-item">
           <a class="social-icon pure-menu-link" href="{{ social.url }}">
-            <i class="{{ social.icon | default: 'fas fa-link' }}" title="{{ social.title }}"></i>
+            {% if social.svg_icon %}
+              <img src="{{ social.svg_icon | relative_url }}" alt="{{ social.title }}" class="custom-social-icon">
+            {% else %}
+              <i class="{{ social.icon | default: 'fas fa-link' }}" title="{{ social.title }}"></i>
+            {% endif %}
           </a>
         </li>
       {%- endfor %}

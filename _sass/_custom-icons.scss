@@ -1,34 +1,29 @@
-/* 自定义社交媒体图标 */
+/* 自定义 SVG 社交媒体图标样式 */
 
-/* Bilibili 图标 */
-.fab.fa-bilibili-custom::before {
-  content: "";
-  display: inline-block;
+.custom-social-icon {
   width: 1em;
   height: 1em;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%2300a1d6' d='M488.6 104.1C505.3 122.2 513 143.8 513 169.5V360C513 446.3 446.3 513 360 513H152C65.7 513 -1 446.3 -1 360V169.5C-1 143.8 6.7 122.2 23.4 104.1L121.8 5.7C138.5-12.4 160.1-20.1 185.8-20.1H326.2C351.9-20.1 373.5-12.4 390.2 5.7L488.6 104.1zM152 85C138.7 85 128 95.7 128 109S138.7 133 152 133H360C373.3 133 384 122.3 384 109S373.3 85 360 85H152zM128 192V256C128 269.3 138.7 280 152 280H192V320C192 333.3 202.7 344 216 344S240 333.3 240 320V280H272V320C272 333.3 282.7 344 296 344S320 333.3 320 320V280H360C373.3 280 384 269.3 384 256V192C384 178.7 373.3 168 360 168H152C138.7 168 128 178.7 128 192z'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  display: inline-block;
+  vertical-align: middle;
+  transition: all 0.3s ease;
 }
 
-/* 小红书图标 */
-.fab.fa-xiaohongshu-custom::before {
-  content: "";
-  display: inline-block;
+/* 悬停效果 */
+.social-icon:hover .custom-social-icon {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* 确保 SVG 图标与 Font Awesome 图标大小一致 */
+.social-icons .social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icons .social-icon i,
+.social-icons .social-icon .custom-social-icon {
+  font-size: 1rem;
   width: 1em;
   height: 1em;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff2442' d='M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 7.431c-.16-.32-.352-.608-.576-.864-.224-.256-.48-.48-.768-.672-.288-.192-.608-.352-.96-.48-.352-.128-.72-.192-1.104-.192-.576 0-1.088.128-1.536.384-.448.256-.832.608-1.152 1.056-.32.448-.576.976-.768 1.584-.192.608-.288 1.264-.288 1.968 0 .32.032.64.096.96.064.32.16.624.288.912.128.288.288.544.48.768.192.224.416.416.672.576.256.16.544.288.864.384.32.096.656.144 1.008.144.576 0 1.088-.128 1.536-.384.448-.256.832-.608 1.152-1.056.32-.448.576-.976.768-1.584.192-.608.288-1.264.288-1.968 0-.32-.032-.64-.096-.96-.064-.32-.16-.624-.288-.912-.128-.288-.288-.544-.48-.768-.192-.224-.416-.416-.672-.576z'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-/* 确保图标正确显示 */
-.social-links .fab.fa-bilibili-custom,
-.social-links .fab.fa-xiaohongshu-custom {
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
 }
