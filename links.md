@@ -22,7 +22,7 @@ title: 友链
       <h3 class="friend-name">Siyuan Liu的博客</h3>
       <p class="friend-desc">分享技术与生活的点点滴滴</p>
       <div class="friend-meta">
-        <span class="friend-domain">[[example-a.com](https://sirilaw.github.io/)](https://sirilaw.github.io/)</span>
+        <span class="friend-domain">https://sirilaw.github.io/</span>
       </div>
     </div>
     <a href="https://sirilaw.github.io/" class="friend-link" target="_blank" rel="noopener">
@@ -38,7 +38,7 @@ title: 友链
       <h3 class="friend-name">寻梦之旅</h3>
       <p class="friend-desc">循此苦旅，终抵繁星</p>
       <div class="friend-meta">
-        <span class="friend-domain">[[example-b.com](https://www.erinwithbmq.xin/)](https://www.erinwithbmq.xin/)</span>
+        <span class="friend-domain">https://www.erinwithbmq.xin/</span>
       </div>
     </div>
     <a href=" https://www.erinwithbmq.xin/" class="friend-link" target="_blank" rel="noopener">
