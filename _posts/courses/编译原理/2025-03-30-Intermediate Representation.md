@@ -1,13 +1,11 @@
 ---
 layout: post
 title: Intermediate Representation
-date: 2025-04-10 00:00 +0800
+date: 2025-03-30 00:00 +0800
 last_modified_at: 2025-04-10 00:00 +0800
 tags: [编译原理]
 toc:  true
 ---
-
-# Intermediate Representation
 
 使用syntax-directed transition来生成IR
 
@@ -35,9 +33,9 @@ toc:  true
 
 可以用三元组或者四元组来实现
 
-![](img/屏幕截图 2025-03-21 145845.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-21%20145845.png)
 
-![](img/屏幕截图 2025-03-21 145922.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-21%20145922.png)
 
 这里的（0）指的是第0步的计算结果
 
@@ -47,19 +45,19 @@ toc:  true
 - 属性与文法中的符号相关联 
 - 规则与文法中的产生式相关联
 
-![](img/屏幕截图 2025-03-26 004013.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-26%20004013.png)
 
-![](img/屏幕截图 2025-03-26 005555.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-26%20005555.png)
 
 这里的语法树，就是对应右边的规则 比如第一条规则，指碰到赋值语句则构造一个以=为根节点，子节点为variable和Exp的树
 
 ## Translating Variable Declarations
 
-![](img/屏幕截图 2025-03-26 162823.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-26%20162823.png)
 
 基本类型 复合类型（数组 记录类型（结构体））
 
-![](img/屏幕截图 2025-03-26 163108.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-26%20163108.png)
 
 这里面D表示赋值语句 
 
@@ -69,13 +67,13 @@ B表示基本类型
 
 C表示数组维度
 
-![](img/屏幕截图 2025-03-26 185407.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-26%20185407.png)
 
-![](img/屏幕截图 2025-03-26 185744.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-26%20185744.png)
 
 ## Translating Statements
 
-![](img/屏幕截图 2025-03-26 190311.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-26%20190311.png)
 
 1. S → id = E ;
 
@@ -117,11 +115,11 @@ C表示数组维度
 - **E.code = ''**
   - **E.code**：没有额外的中间代码生成，因为只是简单地引用了一个变量。
 
-![](img/屏幕截图 2025-03-26 191913.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-26%20191913.png)
 
 ## Translating Control Flows
 
-![](img/屏幕截图 2025-03-26 193725.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-26%20193725.png)
 
 每次都会给下一个语句创建一个label，类似于汇编中那种记录语句位置用于跳转的东西
 
@@ -129,5 +127,5 @@ while那个里面的begin对应的是如果B是true，goto S1.code，否则goto 
 
 整个相当于是维护了一个链表，程序按照链表顺序执行
 
-![](img/屏幕截图 2025-03-27 110033.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-27%20110033.png)
 

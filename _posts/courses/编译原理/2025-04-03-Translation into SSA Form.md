@@ -1,13 +1,11 @@
 ---
 layout: post
 title: Translation into SSA Form
-date: 2025-04-10 00:00 +0800
+date: 2025-04-03 00:00 +0800
 last_modified_at: 2025-04-10 00:00 +0800
 tags: [编译原理]
 toc:  true
 ---
-
-# Translation into SSA Form
 
 ## SSA and Extensions
 
@@ -20,7 +18,7 @@ Static Single-Assignment
 
 - **变量版本号区分**：为了确保每个变量在SSA形式中只被赋值一次，需要一种机制来区分同一变量在不同赋值点的不同版本。通常通过在变量名后添加下标或其他标识符来实现，例如，对于变量`x`，其不同的版本可以表示为`x1`、`x2`、`x3`等。
 
-![](img/屏幕截图 2025-03-30 164131.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-30%20164131.png)
 
 **Gated SSA**
 
@@ -36,11 +34,11 @@ $\gamma$符号类似于一个门控节点，用于在多个可能的路径中选
 
 - **位置与作用**：η符号通常用于循环退出点，表示循环变量在循环结束时的状态。它用于记录循环变量在循环结束时的值，以便在循环外使用。
 
-![](img/屏幕截图 2025-03-30 211857.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-30%20211857.png)
 
 ## LLVM IR
 
-![](img/屏幕截图 2025-03-31 194350.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-31%20194350.png)
 
 `iN`：N位的整数，如`i32`表示32位整数
 
@@ -71,14 +69,14 @@ $\gamma$符号类似于一个门控节点，用于在多个可能的路径中选
 - 数字占位符（如`%1`、`%2`）是自动生成的，用于标识指令的结果。
 - 名称占位符（如`%sum`）是用户或编译器定义的，用于标识变量或函数参数。
 
-![](img/屏幕截图 2025-03-31 195222.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-31%20195222.png)
 
 元数据 用于调试
 
 - **`7`**：表示函数 `factorial` 的调试信息，包括函数名、文件名、起始行号等。
 - **`!14`、`!16`、`!17` 等**：表示具体的调试表达式，通常用于表示源代码中的行号或列号。
 
-![image-20250408233522934](img/image-20250408233522934.png)
+![image-20250408233522934](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250408233522934.png)
 
 ## Translation into SSA
 
@@ -90,11 +88,11 @@ Partition three-address code to basic blocks
 - 任何作为跳转目标的指令都是引导指令
 - 任何跟随跳转的指令都是引导指令
 
-![image-20250408235849206](img/image-20250408235849206.png)
+![image-20250408235849206](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250408235849206.png)
 
 这张图就是通过找到所有的引导指令，从而根据引导指令划分basic block
 
-![image-20250409000200102](img/image-20250409000200102.png)
+![image-20250409000200102](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250409000200102.png)
 
 - **Pre-Header（预头部）**：B1 是预头部，包含 `i = 1` 的初始化。
 - **Header（头部）**：B2 是头部，包含 `j = 1` 的初始化。
@@ -118,7 +116,7 @@ The header **dominates** all blocks in the loop.
 
 - Immediate dominance – A strict-dom B, but there’s no C, such that A strict-dom C, C strict-dom B
 
-![image-20250409002154977](img/image-20250409002154977.png)
+![image-20250409002154977](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250409002154977.png)
 
 - **时间复杂度**：构建支配树的时间复杂度接近线性（`O(n)`），这使得它在处理大规模控制流图时非常高效。
 - **节点**：支配树中的每个节点代表控制流图中的一个基本块（Block）。
@@ -137,17 +135,17 @@ The header **dominates** all blocks in the loop.
   - Not all successors can reach B
 - By definition,we always need a forward traversal(遍历) from all successors of B to test if A ctrl-depends on B.  Too expensive!!
 
-![image-20250409003854041](img/image-20250409003854041.png)
+![image-20250409003854041](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250409003854041.png)
 
 左边两张图是用上面的法则根据最右边的图画出来的
 
-![image-20250409004753531](img/image-20250409004753531.png)
+![image-20250409004753531](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250409004753531.png)
 
 就是去找满足两个条件的
 
 比如要找A的DF，那就在被A dominate的节点的后继中找不被A dominate的节点
 
-![image-20250409005748572](img/image-20250409005748572.png)
+![image-20250409005748572](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250409005748572.png)
 
 假设我们有一个块集 `Bset = {A, B, C}`，我们需要计算其 IDF。
 
@@ -174,8 +172,8 @@ The header **dominates** all blocks in the loop.
 
 所以`IDE({A,B,C}) = {F, E}`
 
-![image-20250409010214425](img/image-20250409010214425.png)
+![image-20250409010214425](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250409010214425.png)
 
-![image-20250409010949258](img/image-20250409010949258.png)
+![image-20250409010949258](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250409010949258.png)
 
 通过向上查找Dominator Tree去寻找对应的定义

@@ -1,13 +1,11 @@
 ---
 layout: post
 title: Context-Free Language && Push-Down Automata
-date: 2025-04-10 00:00 +0800
+date: 2025-03-26 00:00 +0800
 last_modified_at: 2025-04-10 00:00 +0800
 tags: [编译原理]
 toc:  true
 ---
-
-# Context-Free Language && Push-Down Automata
 
 上下文无关语言
 
@@ -29,27 +27,27 @@ Context Free Grammar(CFG)    上下文无关文法
 
   - 形式是 $A\to a$
   - $A\in \epsilon$
-  -  $a\in (N \cup T)^*$
+  - $a\in (N \cup T)^*$
 
   - 比如 assignment->identifier = expression
 
 **Derivation  推导 $\Rightarrow _G$**
 
-![](img/屏幕截图2025-03-19214310.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-19%20214310.png)
 
 表示经过零步或若干步推导，记作  $\Rightarrow ^*$
 
 **Left-Most Derivation 最左推导 $\Rightarrow_{lm}$**
 
-![](img/屏幕截图 2025-03-19 214826.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-19%20214826.png)
 
-![](img/屏幕截图 2025-03-19 215902.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-19%20215902.png)
 
 最左推导优先替换左边的非终止符 最右推导优先替换右边的非终止符
 
-![](img/屏幕截图 2025-03-20 005835.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-20%20005835.png)
 
-![](img/屏幕截图 2025-03-20 010507.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-20%20010507.png)
 
 歧义 一个字符串有两种推导树
 
@@ -194,6 +192,7 @@ Instantaneous Description（瞬时描述）
 ---
 
 #### **核心组成**
+
 一个 ID 通常表示为三元组：  $(q, w, \gamma)$
 
 - **\( q \)**：自动机当前所处的状态。  
@@ -218,17 +217,17 @@ Instantaneous Description（瞬时描述）
 - **证明自动机等价性**：例如证明两个自动机接受同一语言时，需构造 ID 的双向映射。  
 - **非确定性路径分析**：在非确定型自动机（如 NPDA）中，ID 表示所有可能的并行计算路径。
 
-![](img/屏幕截图 2025-03-26 153148.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-26%20153148.png)
 
 ## CFG = PDA
 
-![](img/屏幕截图 2025-03-26 161542.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-26%20161542.png)
 
-![](img/屏幕截图 2025-03-26 161630.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-26%20161630.png)
 
 ## Properties of CFL
 
-![](img/屏幕截图 2025-03-26 161737.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-26%20161737.png)
 
 ## Pumping Lemma for CFL
 

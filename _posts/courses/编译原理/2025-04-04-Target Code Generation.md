@@ -1,13 +1,11 @@
 ---
 layout: post
 title: Target Code Generation
-date: 2025-04-10 00:00 +0800
+date: 2025-04-04 00:00 +0800
 last_modified_at: 2025-04-10 00:00 +0800
 tags: [编译原理]
 toc:  true
 ---
-
-# Target Code Generation
 
 ## Target Code Generation
 
@@ -25,7 +23,7 @@ toc:  true
 
 **Memory Structure**
 
-![image-20250404103111110](img/image-20250404103111110.png)
+![image-20250404103111110](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404103111110.png)
 
 - **代码/文本区**：存储程序指令。
 - **全局/静态区**：存储全局变量和静态变量。
@@ -53,23 +51,23 @@ toc:  true
   - 根据堆栈中的返回地址返回给调用者 
   - 恢复数据；如果函数有返回值，则获取返回值
 
-![image-20250404104612146](img/image-20250404104612146.png)
+![image-20250404104612146](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404104612146.png)
 
-![image-20250404111037383](img/image-20250404111037383.png)
+![image-20250404111037383](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404111037383.png)
 
-![image-20250404111124253](img/image-20250404111124253.png)
+![image-20250404111124253](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404111124253.png)
 
-![image-20250404111824276](img/image-20250404111824276.png)
+![image-20250404111824276](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404111824276.png)
 
 通过return的跳转无法进行长跳转（跳过中间的栈），但是异常可以
 
-![image-20250404112158245](img/image-20250404112158245.png)
+![image-20250404112158245](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404112158245.png)
 
 抛出异常后，异常会向上传播，寻找能够处理它的 `catch` 块
 
 ## In-Block Optimization 块内优化
 
-![image-20250404142228388](img/image-20250404142228388.png)
+![image-20250404142228388](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404142228388.png)
 
 就是定义一系列指令选择的规则，然后按照规则去搞就行了
 
@@ -77,11 +75,11 @@ toc:  true
 
 Local Common Sub-Expression 局部公共子表达式
 
-![image-20250404142835607](img/image-20250404142835607.png)
+![image-20250404142835607](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404142835607.png)
 
-![image-20250404142857629](img/image-20250404142857629.png)
+![image-20250404142857629](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404142857629.png)
 
-![image-20250404143402780](img/image-20250404143402780.png)
+![image-20250404143402780](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404143402780.png)
 
 ## Peephole Optimization 窥孔优化
 
@@ -89,28 +87,28 @@ Local Common Sub-Expression 局部公共子表达式
 - 处理IR或者target code
 - cross-block optimization
 
-![image-20250404143910221](img/image-20250404143910221.png)
+![image-20250404143910221](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404143910221.png)
 
-![image-20250404143932303](img/image-20250404143932303.png)
+![image-20250404143932303](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404143932303.png)
 
-![image-20250404144017679](img/image-20250404144017679.png)
+![image-20250404144017679](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404144017679.png)
 
 上面三个都是优化的规则示例，我们可以定义多种规则来进行优化
 
 优化的过程：
 
-![image-20250404144144529](img/image-20250404144144529.png)
+![image-20250404144144529](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404144144529.png)
 
-![image-20250404144205764](img/image-20250404144205764.png)
+![image-20250404144205764](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404144205764.png)
 
-![image-20250404144233350](img/image-20250404144233350.png)
+![image-20250404144233350](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404144233350.png)
 
-![image-20250404144247558](img/image-20250404144247558.png)
+![image-20250404144247558](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404144247558.png)
 
-![image-20250404144346972](img/image-20250404144346972.png)
+![image-20250404144346972](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404144346972.png)
 
-![image-20250404144402551](img/image-20250404144402551.png)
+![image-20250404144402551](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404144402551.png)
 
 以此类推，直至：
 
-![image-20250404144437111](img/image-20250404144437111.png)
+![image-20250404144437111](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/image-20250404144437111.png)

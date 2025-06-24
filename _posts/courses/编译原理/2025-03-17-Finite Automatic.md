@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Finite  Automata
-date: 2025-04-10 00:00 +0800
+date: 2025-03-17 00:00 +0800
 last_modified_at: 2025-04-10 00:00 +0800
 tags: [编译原理]
 toc:  true

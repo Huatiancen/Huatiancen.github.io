@@ -1,13 +1,11 @@
 ---
 layout: post
 title: Syntax Analysis
-date: 2025-04-10 00:00 +0800
+date: 2025-03-28 00:00 +0800
 last_modified_at: 2025-04-10 00:00 +0800
 tags: [编译原理]
 toc:  true
 ---
-
-# Syntax Analysis
 
 建立语法树的过程
 
@@ -15,7 +13,7 @@ toc:  true
 
 用先序构造一个语法树
 
-![](img/屏幕截图 2025-03-21 154922.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-21%20154922.png)
 
 代码方面举个例子，比如对于S->c A b
 
@@ -32,7 +30,7 @@ bool S() {
 
 但是这样可能会出现一些匹配的问题，比如多种可选匹配组合下，如果按照这个代码跑就会漏掉一些情况，所以需要回溯等方法来处理 再比如可能会出现死循环
 
-![](img/屏幕截图 2025-03-21 172908.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-21%20172908.png)
 
 LL(1) 是一种具体的预测解析方法：  无二义性 无死循环
 
@@ -55,17 +53,17 @@ FOLLOW(A)：FOLLOW(A) 是一个集合，包含所有可能出现在非终结符A
   - 如果β可以推导出ε，或者β是空，那么将FOLLOW(A)中的所有符号加入FOLLOW(B)。
 - 重复上述步骤直到FOLLOW集不再变化。
 
-![](img/屏幕截图 2025-03-21 174511.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-21%20174511.png)
 
-![](img/屏幕截图 2025-03-21 185227.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-21%20185227.png)
 
-![](img/屏幕截图 2025-03-21 190926.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-21%20190926.png)
 
 ## Bottom-up Parsing
 
 后序遍历
 
-![](img/屏幕截图 2025-03-21 192114.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-21%20192114.png)
 
 LR(0) 解析的特点
 
@@ -73,4 +71,4 @@ LR(0) 解析的特点
 - **最右推导**：LR(0) 解析器使用最右推导（right-most derivation），即在每一步推导时，总是展开最右边的非终结符。
 - **零个符号的前瞻**：LR(0) 解析器在解析过程中不需要使用前瞻符号来做出决策。这意味着解析表的构造相对简单，但适用范围有限。
 
-![](img/屏幕截图 2025-03-21 192555.png)
+![](https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-03-21%20192555.png)
