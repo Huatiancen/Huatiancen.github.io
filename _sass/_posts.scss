@@ -368,15 +368,17 @@
 .reward-buttons {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .reward-item {
   .reward-qr {
     cursor: pointer;
     transition: all 0.3s ease;
-    padding: 1rem;
+    padding: 0.75rem;
     border-radius: var(--border-radius);
+    text-align: center;
+    min-width: 70px;
 
     &:hover {
       transform: translateY(-3px);
@@ -384,18 +386,19 @@
     }
 
     img {
-      width: 60px;
-      height: 60px;
-      border-radius: 8px;
-      margin-bottom: 0.5rem;
+      width: 45px;
+      height: 45px;
+      border-radius: 6px;
+      margin-bottom: 0.3rem;
       display: block;
     }
 
     span {
       display: block;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: var(--gray-700);
       font-weight: 500;
+      margin-top: 0.2rem;
     }
   }
 }
@@ -510,12 +513,17 @@
   }
 
   .reward-buttons {
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
-  .reward-item .reward-qr img {
-    width: 50px;
-    height: 50px;
+  .reward-item .reward-qr {
+    padding: 0.5rem;
+    min-width: 60px;
+    
+    img {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   .reward-modal-content {
