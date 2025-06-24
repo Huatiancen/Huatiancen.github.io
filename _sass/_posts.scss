@@ -3,6 +3,83 @@
 // Each post is wrapped in `.post` and is used on default and post layouts. Each
 // page is wrapped in `.page` and is only used on the page layout.
 
+// 固定在右上角的返回按钮
+.back-button-fixed {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: var(--body-bg);
+  color: var(--gray-700);
+  text-decoration: none;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: var(--gray-100);
+    color: var(--gray-800);
+    text-decoration: none;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// 暗色主题适配
+@media (prefers-color-scheme: dark) {
+  .back-button {
+    background-color: var(--gray-800);
+    color: var(--gray-300);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+    &:hover,
+    &:focus {
+      background-color: var(--gray-700);
+      color: var(--gray-200);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .back-button-fixed {
+    top: 15px;
+    right: 15px;
+  }
+
+  .back-button {
+    width: 44px;
+    height: 44px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
 .post-entry {
   border-bottom: 1px solid var(--border-color);
   margin-bottom: var(--spacer-3);
