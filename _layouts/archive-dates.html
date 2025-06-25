@@ -8,14 +8,6 @@ layout: default
     <p class="archive-subtitle">按年份浏览所有文章</p>
   </header>
 
-  <!-- 搜索功能 -->
-  <div class="search-container">
-    <input type="text" id="date-search" class="search-input" placeholder="🔍 搜索年份..." autocomplete="off">
-    <div class="search-stats">
-      <span id="search-stats"></span>
-    </div>
-  </div>
-
   {%- assign taxonomies = site.posts | group_by_exp: "post", "post.date | date: '%Y'" -%}
 
   <div class="taxonomies-wrapper">
@@ -92,41 +84,4 @@ layout: default
     const main = document.getElementById("site-main");
     main.scrollTop = 0;
   }
-
-  // 年份搜索功能
-  document.addEventListener('DOMContentLoaded', function() {
-    const dateSearchInput = document.getElementById('date-search');
-    const searchStats = document.getElementById('search-stats');
-    const taxonomyItems = document.querySelectorAll('.taxonomy-card');
-    
-    if (dateSearchInput) {
-      dateSearchInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase().trim();
-        let visibleCount = 0;
-        let totalCount = taxonomyItems.length;
-        
-        taxonomyItems.forEach(function(item) {
-          const year = item.getAttribute('data-year');
-          const isVisible = year.includes(searchTerm);
-          
-          if (isVisible) {
-            item.style.display = 'block';
-            visibleCount++;
-          } else {
-            item.style.display = 'none';
-          }
-        });
-        
-        // 更新搜索统计
-        if (searchTerm === '') {
-          searchStats.textContent = `共 ${totalCount} 个年份`;
-        } else {
-          searchStats.textContent = `找到 ${visibleCount} / ${totalCount} 个年份`;
-        }
-      });
-      
-      // 初始化统计
-      searchStats.textContent = `共 ${taxonomyItems.length} 个年份`;
-    }
-  });
 </script>

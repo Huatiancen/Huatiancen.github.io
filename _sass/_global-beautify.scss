@@ -296,27 +296,6 @@ body:not(.home) .sidebar-right {
   }
 }
 
-/* 搜索功能增强 */
-.search-container .search-input {
-  width: 100%;
-  padding: 1rem 1rem 1rem 3rem;
-  border: 2px solid rgba(102, 126, 234, 0.2);
-  border-radius: 25px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  font-size: 1rem;
-  color: #2d3748;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.search-container .search-input:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-  background: white;
-}
-
 /* 响应式设计 */
 @media (max-width: 768px) {
   body:not(.home) .content {

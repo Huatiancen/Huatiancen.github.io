@@ -16,15 +16,6 @@ layout: default
     </p>
   </header>
 
-  <!-- 搜索功能 -->
-  <div class="search-container">
-    <input type="text" id="taxonomy-search" class="search-input" 
-           placeholder="🔍 搜索{% if page.type == 'categories' %}分类{% else %}标签{% endif %}..." autocomplete="off">
-    <div class="search-stats">
-      <span id="search-stats"></span>
-    </div>
-  </div>
-
   {% comment %} Check the type of archive {% endcomment %}
   {%- if page.type == 'categories' -%}
     {%- assign taxonomies = site.categories -%}
@@ -144,46 +135,4 @@ layout: default
     const main = document.getElementById("site-main");
     main.scrollTop = 0;
   }
-
-  // 标签/分类搜索功能
-  document.addEventListener('DOMContentLoaded', function() {
-    const taxonomySearchInput = document.getElementById('taxonomy-search');
-    const searchStats = document.getElementById('search-stats');
-    const taxonomyCards = document.querySelectorAll('.taxonomy-tag-card');
-    
-    // 检测页面类型
-    const isCategories = document.querySelector('h1').textContent.includes('分类');
-    const taxonomyType = isCategories ? '分类' : '标签';
-    
-    if (taxonomySearchInput) {
-      taxonomySearchInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase().trim();
-        let visibleCount = 0;
-        let totalCount = taxonomyCards.length;
-        
-        taxonomyCards.forEach(function(card) {
-          const tagName = card.getAttribute('data-tag');
-          const tagText = card.querySelector('.tag-name').textContent.toLowerCase();
-          const isVisible = tagName.includes(searchTerm) || tagText.includes(searchTerm);
-          
-          if (isVisible) {
-            card.style.display = 'block';
-            visibleCount++;
-          } else {
-            card.style.display = 'none';
-          }
-        });
-        
-        // 更新搜索统计
-        if (searchTerm === '') {
-          searchStats.textContent = `共 ${totalCount} 个${taxonomyType}`;
-        } else {
-          searchStats.textContent = `找到 ${visibleCount} / ${totalCount} 个${taxonomyType}`;
-        }
-      });
-      
-      // 初始化统计
-      searchStats.textContent = `共 ${taxonomyCards.length} 个${taxonomyType}`;
-    }
-  });
 </script>
