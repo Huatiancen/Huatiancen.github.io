@@ -312,6 +312,91 @@ class DynamicStats {
     }
 }
 
+// 目录跟随滚动和高亮功能
+class TableOfContents {
+    constructor() {
+        this.tocNav = document.querySelector('.toc-nav');
+        this.tocLinks = document.querySelectorAll('.toc a');
+        this.headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        this.activeClass = 'active';
+        
+        if (this.tocNav && this.tocLinks.length > 0 && this.headings.length > 0) {
+            this.init();
+        }
+    }
+    
+    init() {
+        // 为目录链接添加点击平滑滚动
+        this.tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // 监听滚动事件
+        window.addEventListener('scroll', () => this.updateActiveLink());
+        
+        // 初始化高亮
+        this.updateActiveLink();
+    }
+    
+    updateActiveLink() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const offset = 100; // 偏移量
+        
+        let activeHeading = null;
+        
+        // 找到当前可视区域的标题
+        for (let i = this.headings.length - 1; i >= 0; i--) {
+            const heading = this.headings[i];
+            const headingTop = heading.offsetTop;
+            
+            if (scrollTop >= headingTop - offset) {
+                activeHeading = heading;
+                break;
+            }
+        }
+        
+        // 移除所有高亮
+        this.tocLinks.forEach(link => link.classList.remove(this.activeClass));
+        
+        // 添加当前标题的高亮
+        if (activeHeading) {
+            const activeLink = document.querySelector(`.toc a[href="#${activeHeading.id}"]`);
+            if (activeLink) {
+                activeLink.classList.add(this.activeClass);
+                
+                // 确保活动链接在可视区域内
+                this.scrollToActiveLink(activeLink);
+            }
+        }
+    }
+    
+    scrollToActiveLink(activeLink) {
+        const tocNav = this.tocNav;
+        const linkTop = activeLink.offsetTop;
+        const linkHeight = activeLink.offsetHeight;
+        const navHeight = tocNav.clientHeight;
+        const scrollTop = tocNav.scrollTop;
+        
+        // 如果链接在可视区域外，滚动到合适位置
+        if (linkTop < scrollTop) {
+            tocNav.scrollTop = linkTop - 20;
+        } else if (linkTop + linkHeight > scrollTop + navHeight) {
+            tocNav.scrollTop = linkTop + linkHeight - navHeight + 20;
+        }
+    }
+}
+
 // 初始化所有特效
 document.addEventListener('DOMContentLoaded', function() {
     // 判断是否在主页
@@ -347,6 +432,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // 动态统计
         new DynamicStats();
     }
+    
+    // 目录高亮
+    new TableOfContents();
 });
 
 // 页面卸载时清理资源

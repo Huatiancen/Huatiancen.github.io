@@ -1,78 +1,11 @@
-<!-- 文章目录 - 仅在文章页显示 -->
-{% if page.toc and page.layout == 'post' %}
-<div class="toc-wrapper sidebar-widget">
-  <h3 class="widget-title">📖 目录</h3>
-  <nav class="toc-nav">
-    {% include toc.html html=content h_min=2 h_max=3 skipNoIDs=true class="toc" %}
-  </nav>
-</div>
-{% endif %}
-
-<!-- 文章相关信息 - 仅在文章页显示 -->
+<!-- 文章目录 - 仅在文章页显示，跟随滚动 -->
 {% if page.layout == 'post' %}
-<!-- 文章统计 -->
-<div class="post-stats-widget sidebar-widget">
-  <h3 class="widget-title">� 文章信息</h3>
-  <div class="widget-content">
-    <div class="post-meta-grid">
-      <div class="meta-item">
-        <span class="meta-label">发布时间</span>
-        <span class="meta-value">{{ page.date | date: "%Y-%m-%d" }}</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">字数统计</span>
-        <span class="meta-value">{{ content | number_of_words }} 字</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">预计阅读</span>
-        <span class="meta-value">{{ content | number_of_words | divided_by: 200 }} 分钟</span>
-      </div>
-      {% if page.categories.size > 0 %}
-      <div class="meta-item">
-        <span class="meta-label">分类</span>
-        <span class="meta-value">
-          {% for category in page.categories %}
-            <span class="category-tag">{{ category }}</span>
-          {% endfor %}
-        </span>
-      </div>
-      {% endif %}
-    </div>
-  </div>
-</div>
-
-<!-- 文章标签 -->
-{% if page.tags.size > 0 %}
-<div class="post-tags-widget sidebar-widget">
-  <h3 class="widget-title">🏷️ 标签</h3>
-  <div class="widget-content">
-    <div class="tag-cloud">
-      {% for tag in page.tags %}
-        <a href="/tags/#{{ tag | slugify }}" class="tag-item">{{ tag }}</a>
-      {% endfor %}
-    </div>
-  </div>
-</div>
-{% endif %}
-
-<!-- 相关文章 -->
-<div class="related-posts-widget sidebar-widget">
-  <h3 class="widget-title">📝 相关文章</h3>
-  <div class="widget-content">
-    {% assign related_posts = site.related_posts | limit: 5 %}
-    {% if related_posts.size == 0 %}
-      {% assign related_posts = site.posts | limit: 5 %}
-    {% endif %}
-    {% for post in related_posts %}
-    {% unless post.url == page.url %}
-    <article class="widget-post">
-      <h4 class="widget-post-title">
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      </h4>
-      <time class="widget-post-date">{{ post.date | date: "%Y-%m-%d" }}</time>
-    </article>
-    {% endunless %}
-    {% endfor %}
+<div class="toc-sticky-wrapper">
+  <div class="toc-wrapper sidebar-widget">
+    <h3 class="widget-title">📖 目录</h3>
+    <nav class="toc-nav">
+      {% include toc.html html=content h_min=2 h_max=3 skipNoIDs=true class="toc" %}
+    </nav>
   </div>
 </div>
 {% endif %}
