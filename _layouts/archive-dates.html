@@ -6,15 +6,25 @@ layout: default
 
 <h1>{{ page.title }}</h1>
 
+<!-- 搜索功能 -->
+<div class="search-container">
+  <div class="search-box">
+    <input type="text" id="date-search" placeholder="🔍 搜索年份..." autocomplete="off">
+    <div class="search-stats">
+      <span id="search-stats"></span>
+    </div>
+  </div>
+</div>
+
 {%- assign taxonomies = site.posts | group_by_exp: "post", "post.date | date: '%Y'" -%}
 
 <div class="taxonomies-wrapper">
-  <ul class="taxonomies">
+  <ul class="taxonomies" id="taxonomies-list">
     {%- for taxonomy in taxonomies -%}
-      <li>
+      <li class="taxonomy-item" data-year="{{ taxonomy.name }}">
         {%- capture link -%}{{ page.permalink }}#{{ taxonomy.name }}{%- endcapture -%}
         <a class="taxonomy" href="{{ link | relative_url }}">
-            <span>{{ taxonomy.name }}</span>
+            <span class="taxonomy-name">{{ taxonomy.name }}</span>
             <span class="taxonomy-count">{{ taxonomy.size }}</span>
         </a> 
       </li>
@@ -24,18 +34,29 @@ layout: default
 
 {% comment %} Show posts by taxonomy {% endcomment %}
 {%- for taxonomy in taxonomies -%}
-  <h2 id="{{ taxonomy.name }}">
-    {{ taxonomy.name }}
-  </h2>
-  <ul class="post-list-by-taxonomy">
-    {%- assign posts = taxonomy.items -%}
-    {%- for post in posts -%}
-      <li>
-        <time datetime="{{ page.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time> &raquo; <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-      </li>
-    {%- endfor -%}
-  </ul>
-  <a href="#" onclick="backToTop()" class="back-to-top">Top &#8648;</a>
+  <div class="taxonomy-section" id="{{ taxonomy.name }}" data-year="{{ taxonomy.name }}">
+    <div class="taxonomy-header">
+      <h2>{{ taxonomy.name }}</h2>
+      <div class="post-search-box">
+        <input type="text" class="post-search" placeholder="🔍 搜索该年份下的文章..." data-year="{{ taxonomy.name }}">
+        <span class="post-search-stats"></span>
+      </div>
+    </div>
+    <ul class="post-list-by-taxonomy" data-year="{{ taxonomy.name }}">
+      {%- assign posts = taxonomy.items -%}
+      {%- for post in posts -%}
+        <li class="post-item" data-title="{{ post.title | downcase }}" data-date="{{ post.date | date: '%Y-%m-%d' }}">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time> 
+          &raquo; 
+          <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        </li>
+      {%- endfor -%}
+    </ul>
+    <div class="no-results" style="display: none;">
+      <p>😔 没有找到匹配的文章</p>
+    </div>
+    <a href="#" onclick="backToTop()" class="back-to-top">Top &#8648;</a>
+  </div>
 {%- endfor -%}
 
 <script>
@@ -43,4 +64,182 @@ layout: default
     const main = document.getElementById("site-main");
     main.scrollTop = 0;
   }
+
+  // 年份搜索功能
+  document.addEventListener('DOMContentLoaded', function() {
+    const dateSearchInput = document.getElementById('date-search');
+    const searchStats = document.getElementById('search-stats');
+    const taxonomyItems = document.querySelectorAll('.taxonomy-item');
+    
+    if (dateSearchInput) {
+      dateSearchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase().trim();
+        let visibleCount = 0;
+        let totalCount = taxonomyItems.length;
+        
+        taxonomyItems.forEach(function(item) {
+          const year = item.getAttribute('data-year');
+          const isVisible = year.includes(searchTerm);
+          
+          if (isVisible) {
+            item.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+        
+        // 更新搜索统计
+        if (searchTerm === '') {
+          searchStats.textContent = `共 ${totalCount} 个年份`;
+        } else {
+          searchStats.textContent = `找到 ${visibleCount} / ${totalCount} 个年份`;
+        }
+      });
+      
+      // 初始化统计
+      searchStats.textContent = `共 ${taxonomyItems.length} 个年份`;
+    }
+    
+    // 文章搜索功能
+    const postSearchInputs = document.querySelectorAll('.post-search');
+    
+    postSearchInputs.forEach(function(searchInput) {
+      const year = searchInput.getAttribute('data-year');
+      const postList = document.querySelector(`.post-list-by-taxonomy[data-year="${year}"]`);
+      const postItems = postList ? postList.querySelectorAll('.post-item') : [];
+      const noResults = postList ? postList.parentElement.querySelector('.no-results') : null;
+      const statsElement = searchInput.parentElement.querySelector('.post-search-stats');
+      
+      if (statsElement) {
+        statsElement.textContent = `共 ${postItems.length} 篇文章`;
+      }
+      
+      searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase().trim();
+        let visibleCount = 0;
+        
+        postItems.forEach(function(item) {
+          const title = item.getAttribute('data-title');
+          const date = item.getAttribute('data-date');
+          const isVisible = title.includes(searchTerm) || date.includes(searchTerm);
+          
+          if (isVisible) {
+            item.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+        
+        // 显示/隐藏无结果提示
+        if (noResults) {
+          if (searchTerm !== '' && visibleCount === 0) {
+            noResults.style.display = 'block';
+            postList.style.display = 'none';
+          } else {
+            noResults.style.display = 'none';
+            postList.style.display = 'block';
+          }
+        }
+        
+        // 更新统计
+        if (statsElement) {
+          if (searchTerm === '') {
+            statsElement.textContent = `共 ${postItems.length} 篇文章`;
+          } else {
+            statsElement.textContent = `找到 ${visibleCount} / ${postItems.length} 篇文章`;
+          }
+        }
+      });
+    });
+    
+    // 高亮搜索结果
+    function highlightSearchTerm(element, searchTerm) {
+      if (!searchTerm) return;
+      
+      const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+      );
+      
+      const textNodes = [];
+      let node;
+      
+      while (node = walker.nextNode()) {
+        textNodes.push(node);
+      }
+      
+      textNodes.forEach(function(textNode) {
+        const parent = textNode.parentNode;
+        if (parent.tagName === 'SCRIPT' || parent.tagName === 'STYLE') return;
+        
+        const text = textNode.textContent;
+        const regex = new RegExp(`(${searchTerm})`, 'gi');
+        
+        if (regex.test(text)) {
+          const highlightedHTML = text.replace(regex, '<mark class="search-highlight">$1</mark>');
+          const wrapper = document.createElement('span');
+          wrapper.innerHTML = highlightedHTML;
+          parent.replaceChild(wrapper, textNode);
+        }
+      });
+    }
+    
+    // 清除高亮
+    function clearHighlight() {
+      const highlights = document.querySelectorAll('.search-highlight');
+      highlights.forEach(function(highlight) {
+        const parent = highlight.parentNode;
+        parent.replaceChild(document.createTextNode(highlight.textContent), highlight);
+        parent.normalize();
+      });
+    }
+    
+    // 添加键盘快捷键支持
+    document.addEventListener('keydown', function(e) {
+      // Ctrl+F 或 Cmd+F 聚焦到主搜索框
+      if ((e.ctrlKey || e.metaKey) && e.key === 'f' && dateSearchInput) {
+        e.preventDefault();
+        dateSearchInput.focus();
+        dateSearchInput.select();
+      }
+      
+      // Esc 键清空搜索
+      if (e.key === 'Escape') {
+        if (dateSearchInput && document.activeElement === dateSearchInput) {
+          dateSearchInput.value = '';
+          dateSearchInput.dispatchEvent(new Event('input'));
+        }
+        
+        postSearchInputs.forEach(function(input) {
+          if (document.activeElement === input) {
+            input.value = '';
+            input.dispatchEvent(new Event('input'));
+          }
+        });
+      }
+    });
+  });
 </script>
+
+<style>
+  /* 搜索高亮样式 */
+  .search-highlight {
+    background-color: yellow;
+    color: black;
+    padding: 1px 2px;
+    border-radius: 2px;
+    font-weight: bold;
+  }
+  
+  /* 暗色主题下的高亮 */
+  @media (prefers-color-scheme: dark) {
+    .search-highlight {
+      background-color: #ffeb3b;
+      color: #333;
+    }
+  }
+</style>
