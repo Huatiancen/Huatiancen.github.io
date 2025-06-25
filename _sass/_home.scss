@@ -16,16 +16,6 @@ body.home .top-navbar {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* 确保侧边栏布局正常 */
-body.home .sidebar-left {
-  /* 保持原有的position: fixed等布局属性 */
-  /* 只清除全局美化添加的装饰样式 */
-  backdrop-filter: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  /* 不要覆盖背景色，保持default.html中的内联样式 */
-}
-
 body.home .sidebar-right {
   /* 保持原有布局 */
   background: transparent !important;
