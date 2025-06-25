@@ -3,7 +3,7 @@
 
   {% include head.html %}
 
-  <body class="{% if page.layout == 'home' %}home{% endif %}">
+  <body class="{% if page.layout == 'home' %}home{% endif %}{% if page.layout == 'post' %} layout-post{% endif %}">
 
     <div class="container pure-g">
       {%- assign cover_bg_color = site.cover_bg_color | default: "rgb(40, 73, 77)" -%}

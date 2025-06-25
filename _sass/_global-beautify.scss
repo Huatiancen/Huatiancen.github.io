@@ -50,6 +50,28 @@ body:not(.home) .content {
   body:not(.home) .content {
     margin-left: 25% !important; /* 确保不被覆盖 */
   }
+  
+  /* 非文章页面，内容区域扩展到右侧 */
+  body:not(.home):not(.layout-post) .content {
+    width: calc(75% - 2rem) !important; /* 扩展到右侧边栏区域 */
+  }
+  
+  /* 非文章页面隐藏右侧边栏 */
+  body:not(.home):not(.layout-post) .sidebar-right {
+    display: none !important;
+  }
+}
+
+/* 文章页面保持三栏布局 */
+@media (min-width: 64rem) {
+  body.layout-post .content {
+    width: 50% !important; /* 文章页面中间栏宽度 */
+  }
+  
+  body.layout-post .sidebar-right {
+    display: block !important; /* 文章页面显示右侧边栏 */
+    padding: 1rem;
+  }
 }
 
 /* 侧边栏美化 - 仅对非首页生效 */

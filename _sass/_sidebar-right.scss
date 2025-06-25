@@ -198,6 +198,54 @@
   font-size: 0.9rem;
 }
 
+/* 文章页面特有的右侧边栏样式 */
+.post-meta-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 8px;
+}
+
+.meta-label {
+  font-size: 0.8rem;
+  color: #718096;
+  font-weight: 500;
+}
+
+.meta-value {
+  font-size: 0.9rem;
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.category-tag {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  margin-left: 0.2rem;
+}
+
+/* 相关文章特殊样式 */
+.related-posts-widget .widget-post {
+  border-left: 3px solid #667eea;
+  padding-left: 1rem;
+}
+
+.related-posts-widget .widget-post:hover {
+  border-left-color: #f093fb;
+  background: rgba(102, 126, 234, 0.05);
+}
+
 /* 响应式设计 */
 @media (max-width: 64rem) {
   .sidebar-widget {

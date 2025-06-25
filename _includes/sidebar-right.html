@@ -1,5 +1,5 @@
-<!-- 文章目录 -->
-{% if page.toc %}
+<!-- 文章目录 - 仅在文章页显示 -->
+{% if page.toc and page.layout == 'post' %}
 <div class="toc-wrapper sidebar-widget">
   <h3 class="widget-title">📖 目录</h3>
   <nav class="toc-nav">
@@ -8,84 +8,71 @@
 </div>
 {% endif %}
 
-<!-- 最新文章 -->
-<div class="recent-posts-widget sidebar-widget">
-  <h3 class="widget-title">📝 最新文章</h3>
+<!-- 文章相关信息 - 仅在文章页显示 -->
+{% if page.layout == 'post' %}
+<!-- 文章统计 -->
+<div class="post-stats-widget sidebar-widget">
+  <h3 class="widget-title">� 文章信息</h3>
   <div class="widget-content">
-    {% assign recent_posts = site.posts | limit: 5 %}
-    {% for post in recent_posts %}
+    <div class="post-meta-grid">
+      <div class="meta-item">
+        <span class="meta-label">发布时间</span>
+        <span class="meta-value">{{ page.date | date: "%Y-%m-%d" }}</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">字数统计</span>
+        <span class="meta-value">{{ content | number_of_words }} 字</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">预计阅读</span>
+        <span class="meta-value">{{ content | number_of_words | divided_by: 200 }} 分钟</span>
+      </div>
+      {% if page.categories.size > 0 %}
+      <div class="meta-item">
+        <span class="meta-label">分类</span>
+        <span class="meta-value">
+          {% for category in page.categories %}
+            <span class="category-tag">{{ category }}</span>
+          {% endfor %}
+        </span>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- 文章标签 -->
+{% if page.tags.size > 0 %}
+<div class="post-tags-widget sidebar-widget">
+  <h3 class="widget-title">🏷️ 标签</h3>
+  <div class="widget-content">
+    <div class="tag-cloud">
+      {% for tag in page.tags %}
+        <a href="/tags/#{{ tag | slugify }}" class="tag-item">{{ tag }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- 相关文章 -->
+<div class="related-posts-widget sidebar-widget">
+  <h3 class="widget-title">📝 相关文章</h3>
+  <div class="widget-content">
+    {% assign related_posts = site.related_posts | limit: 5 %}
+    {% if related_posts.size == 0 %}
+      {% assign related_posts = site.posts | limit: 5 %}
+    {% endif %}
+    {% for post in related_posts %}
+    {% unless post.url == page.url %}
     <article class="widget-post">
       <h4 class="widget-post-title">
         <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
       </h4>
       <time class="widget-post-date">{{ post.date | date: "%Y-%m-%d" }}</time>
     </article>
+    {% endunless %}
     {% endfor %}
   </div>
 </div>
-
-<!-- 标签云 -->
-<div class="tags-widget sidebar-widget">
-  <h3 class="widget-title">🏷️ 标签</h3>
-  <div class="widget-content">
-    <div class="tag-cloud">
-      {% assign tags = site.tags | sort %}
-      {% for tag in tags %}
-        {% assign tag_name = tag[0] %}
-        {% assign tag_posts = tag[1] %}
-        <a href="/tags/#{{ tag_name | slugify }}" class="tag-item" title="{{ tag_posts.size }} 篇文章">
-          {{ tag_name }}
-          <span class="tag-count">{{ tag_posts.size }}</span>
-        </a>
-      {% endfor %}
-    </div>
-  </div>
-</div>
-
-<!-- 归档统计 -->
-<div class="archive-widget sidebar-widget">
-  <h3 class="widget-title">📊 统计</h3>
-  <div class="widget-content">
-    <div class="stat-grid">
-      <div class="stat-item">
-        <span class="stat-number">{{ site.posts.size }}</span>
-        <span class="stat-label">文章</span>
-      </div>
-      <div class="stat-item">
-        {% assign total_words = 0 %}
-        {% for post in site.posts %}
-          {% assign words = post.content | number_of_words %}
-          {% assign total_words = total_words | plus: words %}
-        {% endfor %}
-        <span class="stat-number">{{ total_words | divided_by: 1000 }}k</span>
-        <span class="stat-label">字数</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">{{ site.tags.size }}</span>
-        <span class="stat-label">标签</span>
-      </div>
-      <div class="stat-item">
-        {% assign categories = site.posts | map: 'categories' | join: ',' | split: ',' | uniq %}
-        <span class="stat-number">{{ categories.size }}</span>
-        <span class="stat-label">分类</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 友情链接 -->
-<div class="links-widget sidebar-widget">
-  <h3 class="widget-title">🔗 友情链接</h3>
-  <div class="widget-content">
-    <div class="friend-links">
-      <a href="https://github.com" target="_blank" class="friend-link">
-        <span class="link-icon">🐙</span>
-        <span class="link-text">GitHub</span>
-      </a>
-      <a href="https://jekyllrb.com" target="_blank" class="friend-link">
-        <span class="link-icon">💎</span>
-        <span class="link-text">Jekyll</span>
-      </a>
-    </div>
-  </div>
-</div>
+{% endif %}
