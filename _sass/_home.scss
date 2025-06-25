@@ -5,6 +5,13 @@
 body.home {
   /* 确保变量可用 */
   font-family: var(--body-font);
+  /* 首页隐藏顶部导航栏 */
+  padding-top: 0 !important;
+}
+
+/* 首页隐藏顶部导航栏 */
+body.home .top-navbar {
+  display: none;
 }
 
 /* 确保侧边栏布局正常 */
