@@ -41,7 +41,6 @@ title: 友链
       <i class="fas fa-external-link-alt"></i>
     </a>
   </div>
-
   <div class="friend-card">
     <div class="friend-avatar">
       <img src="https://lowkeyyyy.top/assets/img/prof_pic.jpg?defcbf0a4ad1141eb5e649f904ea8916" alt="Low-keyyyy">
@@ -54,6 +53,22 @@ title: 友链
       </div>
     </div>
     <a href="https://lowkeyyyy.top/" class="friend-link" target="_blank" rel="noopener">
+      <i class="fas fa-external-link-alt"></i>
+    </a>
+  </div>
+
+  <div class="friend-card">
+    <div class="friend-avatar">
+      <img src="https://re-char.github.io/image/avator.png" alt="Re_Char">
+    </div>
+    <div class="friend-info">
+      <h3 class="friend-name">Re_Char の 趣味小屋</h3>
+      <p class="friend-desc">逸一时，误一世</p>
+      <div class="friend-meta">
+        <span class="friend-domain">https://re-char.github.io/</span>
+      </div>
+    </div>
+    <a href="https://re-char.github.io/" class="friend-link" target="_blank" rel="noopener">
       <i class="fas fa-external-link-alt"></i>
     </a>
   </div>
