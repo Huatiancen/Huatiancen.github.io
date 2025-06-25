@@ -1,23 +1,31 @@
 /* 全站美化样式 - GitHub Pages 兼容版本 */
 
-/* 全局基础样式 */
-body {
+/* 全局基础样式 - 仅对非首页生效 */
+body:not(.home) {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   background-attachment: fixed;
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* 首页专用样式保护 - 不应用全局背景和内容样式 */
-body.home {
-  background: none;
+/* 首页专用 - 清除所有全局美化样式 */
+body.home .content {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-body.home .content {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  backdrop-filter: none;
-  /* 保持原有的布局间距，不设置margin和padding为0 */
+body.home .sidebar-left {
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
 }
 
 /* 容器美化 */
