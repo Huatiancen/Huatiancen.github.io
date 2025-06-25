@@ -85,10 +85,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 简单的搜索功能实现
     function performSearch(query) {
-        // 这里可以实现更复杂的搜索逻辑
-        // 目前简单地重定向到标签页面
+        // 重定向到搜索页面
         if (query) {
-            const searchUrl = `/tags/#${encodeURIComponent(query)}`;
+            const searchUrl = `/search/?q=${encodeURIComponent(query)}`;
             window.location.href = searchUrl;
         }
     }

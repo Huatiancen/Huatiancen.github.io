@@ -5,13 +5,15 @@
 body.home {
   /* 确保变量可用 */
   font-family: var(--body-font);
-  /* 首页隐藏顶部导航栏 */
-  padding-top: 0 !important;
+  /* 首页显示顶部导航栏，保持一致性 */
+  padding-top: 70px !important;
 }
 
-/* 首页隐藏顶部导航栏 */
+/* 首页的顶部导航栏使用透明背景 */
 body.home .top-navbar {
-  display: none;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* 确保侧边栏布局正常 */
