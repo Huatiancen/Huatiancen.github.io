@@ -17,8 +17,7 @@ body.home .content {
   border: none;
   box-shadow: none;
   backdrop-filter: none;
-  margin: 0;
-  padding: 0;
+  /* 保持原有的布局间距，不设置margin和padding为0 */
 }
 
 /* 容器美化 */
@@ -305,13 +304,13 @@ a:not(.btn):not(.pagination-item):hover {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-  .content {
+  body:not(.home) .content {
     margin: 0.5rem;
     padding: 1.5rem;
     border-radius: 15px;
   }
   
-  .sidebar-left {
+  body:not(.home) .sidebar-left {
     border-radius: 0;
     margin-bottom: 1rem;
   }
