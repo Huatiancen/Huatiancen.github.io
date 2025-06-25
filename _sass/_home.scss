@@ -1,39 +1,39 @@
 /* 首页专用样式 - GitHub Pages 兼容版本 */
-/* 保持原有布局结构，仅清除不必要的美化样式 */
+/* 保持原有布局结构，仅清除全局美化装饰样式 */
 
-/* 首页整体样式 */
+/* 首页整体样式 - 保持原有背景 */
 body.home {
-  background: #f8f9fa;
-  color: #333;
+  /* 确保变量可用 */
+  font-family: var(--body-font);
 }
 
-/* 保持容器布局，清除美化背景 */
-body.home .container {
-  position: relative; /* 保持相对定位 */
+/* 确保侧边栏布局正常 */
+body.home .sidebar-left {
+  /* 保持原有的position: fixed等布局属性 */
+  /* 只清除全局美化添加的装饰样式 */
+  backdrop-filter: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  /* 不要覆盖背景色，保持default.html中的内联样式 */
 }
 
-/* 清除内容区域的美化，但保持布局 */
+body.home .sidebar-right {
+  /* 保持原有布局 */
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 内容区域 - 保持布局，清除装饰 */
 body.home .content {
+  /* 清除全局美化的装饰样式，但保持原有的margin-left等布局 */
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
   backdrop-filter: none !important;
-  /* 保持原有的pure-u布局和padding，不完全清零 */
-}
-
-/* 保持侧边栏样式，但清除全局美化 */
-body.home .sidebar-left {
-  /* 保持原有的背景色和布局 */
-  backdrop-filter: none !important;
   border-radius: 0 !important;
-  box-shadow: none !important;
-}
-
-body.home .sidebar-right {
-  background: transparent !important;
-  backdrop-filter: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+  /* 重要：不要覆盖margin和padding，保持原有的margin-left: 25%等布局 */
 }
 
 /* 欢迎区域基础样式 */

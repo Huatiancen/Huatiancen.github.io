@@ -10,19 +10,18 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* 首页专用 - 清除所有全局美化样式 */
+/* 首页专用 - 仅清除装饰样式，保持布局 */
 body.home .content {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
   border-radius: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  /* 不要覆盖margin和padding，保持原有布局 */
 }
 
 body.home .sidebar-left {
-  background: transparent !important;
+  /* 不要覆盖背景色，保持default.html中的内联样式 */
   border-radius: 0 !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
