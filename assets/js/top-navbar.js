@@ -56,54 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     window.addEventListener('scroll', handleScroll, { passive: true });
     
-    // 搜索功能
-    const searchInput = document.querySelector('#navbar-search');
-    if (searchInput) {
-        let searchTimeout;
-        
-        searchInput.addEventListener('input', function() {
-            clearTimeout(searchTimeout);
-            const query = this.value.trim();
-            
-            if (query.length > 0) {
-                searchTimeout = setTimeout(() => {
-                    performSearch(query);
-                }, 300);
-            }
-        });
-        
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const query = this.value.trim();
-                if (query.length > 0) {
-                    performSearch(query);
-                }
-            }
-        });
-    }
-    
-    // 简单的搜索功能实现
-    function performSearch(query) {
-        // 重定向到搜索页面
-        if (query) {
-            const searchUrl = `/search/?q=${encodeURIComponent(query)}`;
-            window.location.href = searchUrl;
-        }
-    }
-    
-    // 键盘快捷键：Ctrl/Cmd + K 聚焦搜索框
-    document.addEventListener('keydown', function(e) {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-            e.preventDefault();
-            const searchInput = document.querySelector('#navbar-search');
-            if (searchInput) {
-                searchInput.focus();
-                searchInput.select();
-            }
-        }
-    });
-    
     // 点击其他地方关闭移动端菜单
     document.addEventListener('click', function(e) {
         if (navbarNav && navbarNav.classList.contains('show')) {

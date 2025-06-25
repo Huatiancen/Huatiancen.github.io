@@ -21,6 +21,7 @@
   align-items: center;
   justify-content: space-between;
   height: 4rem;
+  gap: 2rem;
 }
 
 /* 品牌Logo */
@@ -62,6 +63,8 @@
   margin: 0;
   padding: 0;
   gap: 0.5rem;
+  flex: 1;
+  justify-content: center;
 }
 
 .nav-item {
@@ -124,35 +127,6 @@
   font-size: 0.9rem;
 }
 
-/* 搜索框 */
-.navbar-search {
-  flex: 1;
-  max-width: 300px;
-  margin: 0 2rem;
-}
-
-.navbar-search .search-input {
-  width: 100%;
-  padding: 0.8rem 1.2rem;
-  border: 2px solid rgba(102, 126, 234, 0.2);
-  border-radius: 25px;
-  background: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  outline: none;
-}
-
-.navbar-search .search-input:focus {
-  border-color: #667eea;
-  background: white;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-  transform: scale(1.02);
-}
-
-.navbar-search .search-input::placeholder {
-  color: #718096;
-}
-
 /* 移动端菜单按钮 */
 .mobile-menu-toggle {
   display: none;
@@ -207,21 +181,6 @@
     color: #90cdf4;
   }
   
-  .navbar-search .search-input {
-    background: rgba(45, 55, 72, 0.8);
-    border-color: rgba(144, 205, 244, 0.2);
-    color: #e2e8f0;
-  }
-  
-  .navbar-search .search-input:focus {
-    border-color: #90cdf4;
-    background: #2d3748;
-  }
-  
-  .navbar-search .search-input::placeholder {
-    color: #a0aec0;
-  }
-  
   .hamburger-line {
     background: #cbd5e0;
   }
@@ -256,10 +215,6 @@
     justify-content: center;
     padding: 1rem;
     border-radius: 12px;
-  }
-  
-  .navbar-search {
-    display: none;
   }
   
   .mobile-menu-toggle {
