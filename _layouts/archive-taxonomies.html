@@ -18,7 +18,7 @@ layout: default
 
   <!-- 搜索功能 -->
   <div class="search-container">
-    <input type="text" id="tag-search" class="search-input" 
+    <input type="text" id="taxonomy-search" class="search-input" 
            placeholder="🔍 搜索{% if page.type == 'categories' %}分类{% else %}标签{% endif %}..." autocomplete="off">
     <div class="search-stats">
       <span id="search-stats"></span>
@@ -91,12 +91,6 @@ layout: default
                 分类：{{ taxonomy_name }}
               {%- endif -%}
             </h2>
-            <div class="post-search-container">
-              <input type="text" class="post-search search-input" 
-                     placeholder="🔍 搜索该{% if page.type == 'categories' %}分类{% else %}标签{% endif %}下的文章..." 
-                     data-tag="{{ slugified_taxonomy_name | downcase }}">
-              <span class="post-search-stats"></span>
-            </div>
           </header>
           
           <div class="archive-posts-grid" data-tag="{{ slugified_taxonomy_name | downcase }}">
@@ -151,181 +145,43 @@ layout: default
     main.scrollTop = 0;
   }
 
-  // 标签搜索功能
+  // 标签/分类搜索功能
   document.addEventListener('DOMContentLoaded', function() {
-    const tagSearchInput = document.getElementById('tag-search');
+    const taxonomySearchInput = document.getElementById('taxonomy-search');
     const searchStats = document.getElementById('search-stats');
-    const taxonomyItems = document.querySelectorAll('.taxonomy-item');
+    const taxonomyCards = document.querySelectorAll('.taxonomy-tag-card');
+    const pageType = '{{ page.type }}';
+    const taxonomyType = pageType === 'categories' ? '分类' : '标签';
     
-    if (tagSearchInput) {
-      tagSearchInput.addEventListener('input', function() {
+    if (taxonomySearchInput) {
+      taxonomySearchInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase().trim();
         let visibleCount = 0;
-        let totalCount = taxonomyItems.length;
+        let totalCount = taxonomyCards.length;
         
-        taxonomyItems.forEach(function(item) {
-          const tagName = item.getAttribute('data-tag');
-          const isVisible = tagName.includes(searchTerm);
+        taxonomyCards.forEach(function(card) {
+          const tagName = card.getAttribute('data-tag');
+          const tagText = card.querySelector('.tag-name').textContent.toLowerCase();
+          const isVisible = tagName.includes(searchTerm) || tagText.includes(searchTerm);
           
           if (isVisible) {
-            item.classList.remove('hidden');
+            card.style.display = 'block';
             visibleCount++;
           } else {
-            item.classList.add('hidden');
+            card.style.display = 'none';
           }
         });
         
         // 更新搜索统计
         if (searchTerm === '') {
-          searchStats.textContent = `共 ${totalCount} 个标签`;
+          searchStats.textContent = `共 ${totalCount} 个${taxonomyType}`;
         } else {
-          searchStats.textContent = `找到 ${visibleCount} / ${totalCount} 个标签`;
+          searchStats.textContent = `找到 ${visibleCount} / ${totalCount} 个${taxonomyType}`;
         }
       });
       
       // 初始化统计
-      searchStats.textContent = `共 ${taxonomyItems.length} 个标签`;
+      searchStats.textContent = `共 ${taxonomyCards.length} 个${taxonomyType}`;
     }
-    
-    // 文章搜索功能
-    const postSearchInputs = document.querySelectorAll('.post-search');
-    
-    postSearchInputs.forEach(function(searchInput) {
-      const tagName = searchInput.getAttribute('data-tag');
-      const postList = document.querySelector(`.post-list-by-taxonomy[data-tag="${tagName}"]`);
-      const postItems = postList ? postList.querySelectorAll('.post-item') : [];
-      const noResults = postList ? postList.parentElement.querySelector('.no-results') : null;
-      const statsElement = searchInput.parentElement.querySelector('.post-search-stats');
-      
-      if (statsElement) {
-        statsElement.textContent = `共 ${postItems.length} 篇文章`;
-      }
-      
-      searchInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase().trim();
-        let visibleCount = 0;
-        
-        postItems.forEach(function(item) {
-          const title = item.getAttribute('data-title');
-          const date = item.getAttribute('data-date');
-          const isVisible = title.includes(searchTerm) || date.includes(searchTerm);
-          
-          if (isVisible) {
-            item.classList.remove('hidden');
-            visibleCount++;
-          } else {
-            item.classList.add('hidden');
-          }
-        });
-        
-        // 显示/隐藏无结果提示
-        if (noResults) {
-          if (searchTerm !== '' && visibleCount === 0) {
-            noResults.style.display = 'block';
-            postList.style.display = 'none';
-          } else {
-            noResults.style.display = 'none';
-            postList.style.display = 'block';
-          }
-        }
-        
-        // 更新统计
-        if (statsElement) {
-          if (searchTerm === '') {
-            statsElement.textContent = `共 ${postItems.length} 篇文章`;
-          } else {
-            statsElement.textContent = `找到 ${visibleCount} / ${postItems.length} 篇文章`;
-          }
-        }
-      });
-    });
-    
-    // 高亮搜索结果
-    function highlightSearchTerm(element, searchTerm) {
-      if (!searchTerm) return;
-      
-      const walker = document.createTreeWalker(
-        element,
-        NodeFilter.SHOW_TEXT,
-        null,
-        false
-      );
-      
-      const textNodes = [];
-      let node;
-      
-      while (node = walker.nextNode()) {
-        textNodes.push(node);
-      }
-      
-      textNodes.forEach(function(textNode) {
-        const parent = textNode.parentNode;
-        if (parent.tagName === 'SCRIPT' || parent.tagName === 'STYLE') return;
-        
-        const text = textNode.textContent;
-        const regex = new RegExp(`(${searchTerm})`, 'gi');
-        
-        if (regex.test(text)) {
-          const highlightedHTML = text.replace(regex, '<mark class="search-highlight">$1</mark>');
-          const wrapper = document.createElement('span');
-          wrapper.innerHTML = highlightedHTML;
-          parent.replaceChild(wrapper, textNode);
-        }
-      });
-    }
-    
-    // 清除高亮
-    function clearHighlight() {
-      const highlights = document.querySelectorAll('.search-highlight');
-      highlights.forEach(function(highlight) {
-        const parent = highlight.parentNode;
-        parent.replaceChild(document.createTextNode(highlight.textContent), highlight);
-        parent.normalize();
-      });
-    }
-    
-    // 添加键盘快捷键支持
-    document.addEventListener('keydown', function(e) {
-      // Ctrl+F 或 Cmd+F 聚焦到主搜索框
-      if ((e.ctrlKey || e.metaKey) && e.key === 'f' && tagSearchInput) {
-        e.preventDefault();
-        tagSearchInput.focus();
-        tagSearchInput.select();
-      }
-      
-      // Esc 键清空搜索
-      if (e.key === 'Escape') {
-        if (tagSearchInput && document.activeElement === tagSearchInput) {
-          tagSearchInput.value = '';
-          tagSearchInput.dispatchEvent(new Event('input'));
-        }
-        
-        postSearchInputs.forEach(function(input) {
-          if (document.activeElement === input) {
-            input.value = '';
-            input.dispatchEvent(new Event('input'));
-          }
-        });
-      }
-    });
   });
 </script>
-
-<style>
-  /* 搜索高亮样式 */
-  .search-highlight {
-    background-color: yellow;
-    color: black;
-    padding: 1px 2px;
-    border-radius: 2px;
-    font-weight: bold;
-  }
-  
-  /* 暗色主题下的高亮 */
-  @media (prefers-color-scheme: dark) {
-    .search-highlight {
-      background-color: #ffeb3b;
-      color: #333;
-    }
-  }
-</style>

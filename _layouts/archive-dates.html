@@ -40,10 +40,6 @@ layout: default
     <section class="archive-section" id="{{ taxonomy.name }}" data-year="{{ taxonomy.name }}">
       <header class="archive-section-header">
         <h2 class="archive-group-title">{{ taxonomy.name }} 年</h2>
-        <div class="post-search-container">
-          <input type="text" class="post-search search-input" placeholder="🔍 搜索该年份下的文章..." data-year="{{ taxonomy.name }}">
-          <span class="post-search-stats"></span>
-        </div>
       </header>
       
       <div class="archive-posts-grid" data-year="{{ taxonomy.name }}">
@@ -101,7 +97,7 @@ layout: default
   document.addEventListener('DOMContentLoaded', function() {
     const dateSearchInput = document.getElementById('date-search');
     const searchStats = document.getElementById('search-stats');
-    const taxonomyItems = document.querySelectorAll('.taxonomy-item');
+    const taxonomyItems = document.querySelectorAll('.taxonomy-card');
     
     if (dateSearchInput) {
       dateSearchInput.addEventListener('input', function() {
@@ -114,10 +110,10 @@ layout: default
           const isVisible = year.includes(searchTerm);
           
           if (isVisible) {
-            item.classList.remove('hidden');
+            item.style.display = 'block';
             visibleCount++;
           } else {
-            item.classList.add('hidden');
+            item.style.display = 'none';
           }
         });
         
@@ -132,146 +128,5 @@ layout: default
       // 初始化统计
       searchStats.textContent = `共 ${taxonomyItems.length} 个年份`;
     }
-    
-    // 文章搜索功能
-    const postSearchInputs = document.querySelectorAll('.post-search');
-    
-    postSearchInputs.forEach(function(searchInput) {
-      const year = searchInput.getAttribute('data-year');
-      const postList = document.querySelector(`.post-list-by-taxonomy[data-year="${year}"]`);
-      const postItems = postList ? postList.querySelectorAll('.post-item') : [];
-      const noResults = postList ? postList.parentElement.querySelector('.no-results') : null;
-      const statsElement = searchInput.parentElement.querySelector('.post-search-stats');
-      
-      if (statsElement) {
-        statsElement.textContent = `共 ${postItems.length} 篇文章`;
-      }
-      
-      searchInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase().trim();
-        let visibleCount = 0;
-        
-        postItems.forEach(function(item) {
-          const title = item.getAttribute('data-title');
-          const date = item.getAttribute('data-date');
-          const isVisible = title.includes(searchTerm) || date.includes(searchTerm);
-          
-          if (isVisible) {
-            item.classList.remove('hidden');
-            visibleCount++;
-          } else {
-            item.classList.add('hidden');
-          }
-        });
-        
-        // 显示/隐藏无结果提示
-        if (noResults) {
-          if (searchTerm !== '' && visibleCount === 0) {
-            noResults.style.display = 'block';
-            postList.style.display = 'none';
-          } else {
-            noResults.style.display = 'none';
-            postList.style.display = 'block';
-          }
-        }
-        
-        // 更新统计
-        if (statsElement) {
-          if (searchTerm === '') {
-            statsElement.textContent = `共 ${postItems.length} 篇文章`;
-          } else {
-            statsElement.textContent = `找到 ${visibleCount} / ${postItems.length} 篇文章`;
-          }
-        }
-      });
-    });
-    
-    // 高亮搜索结果
-    function highlightSearchTerm(element, searchTerm) {
-      if (!searchTerm) return;
-      
-      const walker = document.createTreeWalker(
-        element,
-        NodeFilter.SHOW_TEXT,
-        null,
-        false
-      );
-      
-      const textNodes = [];
-      let node;
-      
-      while (node = walker.nextNode()) {
-        textNodes.push(node);
-      }
-      
-      textNodes.forEach(function(textNode) {
-        const parent = textNode.parentNode;
-        if (parent.tagName === 'SCRIPT' || parent.tagName === 'STYLE') return;
-        
-        const text = textNode.textContent;
-        const regex = new RegExp(`(${searchTerm})`, 'gi');
-        
-        if (regex.test(text)) {
-          const highlightedHTML = text.replace(regex, '<mark class="search-highlight">$1</mark>');
-          const wrapper = document.createElement('span');
-          wrapper.innerHTML = highlightedHTML;
-          parent.replaceChild(wrapper, textNode);
-        }
-      });
-    }
-    
-    // 清除高亮
-    function clearHighlight() {
-      const highlights = document.querySelectorAll('.search-highlight');
-      highlights.forEach(function(highlight) {
-        const parent = highlight.parentNode;
-        parent.replaceChild(document.createTextNode(highlight.textContent), highlight);
-        parent.normalize();
-      });
-    }
-    
-    // 添加键盘快捷键支持
-    document.addEventListener('keydown', function(e) {
-      // Ctrl+F 或 Cmd+F 聚焦到主搜索框
-      if ((e.ctrlKey || e.metaKey) && e.key === 'f' && dateSearchInput) {
-        e.preventDefault();
-        dateSearchInput.focus();
-        dateSearchInput.select();
-      }
-      
-      // Esc 键清空搜索
-      if (e.key === 'Escape') {
-        if (dateSearchInput && document.activeElement === dateSearchInput) {
-          dateSearchInput.value = '';
-          dateSearchInput.dispatchEvent(new Event('input'));
-        }
-        
-        postSearchInputs.forEach(function(input) {
-          if (document.activeElement === input) {
-            input.value = '';
-            input.dispatchEvent(new Event('input'));
-          }
-        });
-      }
-    });
   });
 </script>
-
-<style>
-  /* 搜索高亮样式 */
-  .search-highlight {
-    background-color: yellow;
-    color: black;
-    padding: 1px 2px;
-    border-radius: 2px;
-    font-weight: bold;
-  }
-  
-  /* 暗色主题下的高亮 */
-  @media (prefers-color-scheme: dark) {
-    .search-highlight {
-      background-color: #ffeb3b;
-      color: #333;
-    }
-  }
-</style>
