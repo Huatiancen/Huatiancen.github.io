@@ -150,8 +150,10 @@ layout: default
     const taxonomySearchInput = document.getElementById('taxonomy-search');
     const searchStats = document.getElementById('search-stats');
     const taxonomyCards = document.querySelectorAll('.taxonomy-tag-card');
-    const pageType = '{{ page.type }}';
-    const taxonomyType = pageType === 'categories' ? '分类' : '标签';
+    
+    // 检测页面类型
+    const isCategories = document.querySelector('h1').textContent.includes('分类');
+    const taxonomyType = isCategories ? '分类' : '标签';
     
     if (taxonomySearchInput) {
       taxonomySearchInput.addEventListener('input', function() {
