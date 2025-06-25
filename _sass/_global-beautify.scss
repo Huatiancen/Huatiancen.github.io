@@ -318,6 +318,18 @@ a:not(.btn):not(.pagination-item):hover {
   box-shadow: 0 4px 10px rgba(79, 172, 254, 0.3);
 }
 
+/* 右侧边栏美化 - 仅对非首页生效 */
+body:not(.home) .sidebar-right {
+  padding: 1rem;
+}
+
+/* 确保右侧边栏在大屏幕上显示 */
+@media (min-width: 64rem) {
+  body:not(.home) .sidebar-right {
+    display: block !important;
+  }
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   body:not(.home) .content {

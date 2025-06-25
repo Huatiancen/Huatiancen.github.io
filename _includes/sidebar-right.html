@@ -1,8 +1,91 @@
+<!-- 文章目录 -->
 {% if page.toc %}
-<div  class="toc-wrapper">
-  <h2 class="toc-title">Table of Contents</h2>
-    <nav class="toc-nav">
-      {% include toc.html html=content h_min=2 h_max=3 skipNoIDs=true class="toc" %}
+<div class="toc-wrapper sidebar-widget">
+  <h3 class="widget-title">📖 目录</h3>
+  <nav class="toc-nav">
+    {% include toc.html html=content h_min=2 h_max=3 skipNoIDs=true class="toc" %}
   </nav>
 </div>
 {% endif %}
+
+<!-- 最新文章 -->
+<div class="recent-posts-widget sidebar-widget">
+  <h3 class="widget-title">📝 最新文章</h3>
+  <div class="widget-content">
+    {% assign recent_posts = site.posts | limit: 5 %}
+    {% for post in recent_posts %}
+    <article class="widget-post">
+      <h4 class="widget-post-title">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </h4>
+      <time class="widget-post-date">{{ post.date | date: "%Y-%m-%d" }}</time>
+    </article>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- 标签云 -->
+<div class="tags-widget sidebar-widget">
+  <h3 class="widget-title">🏷️ 标签</h3>
+  <div class="widget-content">
+    <div class="tag-cloud">
+      {% assign tags = site.tags | sort %}
+      {% for tag in tags %}
+        {% assign tag_name = tag[0] %}
+        {% assign tag_posts = tag[1] %}
+        <a href="/tags/#{{ tag_name | slugify }}" class="tag-item" title="{{ tag_posts.size }} 篇文章">
+          {{ tag_name }}
+          <span class="tag-count">{{ tag_posts.size }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- 归档统计 -->
+<div class="archive-widget sidebar-widget">
+  <h3 class="widget-title">📊 统计</h3>
+  <div class="widget-content">
+    <div class="stat-grid">
+      <div class="stat-item">
+        <span class="stat-number">{{ site.posts.size }}</span>
+        <span class="stat-label">文章</span>
+      </div>
+      <div class="stat-item">
+        {% assign total_words = 0 %}
+        {% for post in site.posts %}
+          {% assign words = post.content | number_of_words %}
+          {% assign total_words = total_words | plus: words %}
+        {% endfor %}
+        <span class="stat-number">{{ total_words | divided_by: 1000 }}k</span>
+        <span class="stat-label">字数</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">{{ site.tags.size }}</span>
+        <span class="stat-label">标签</span>
+      </div>
+      <div class="stat-item">
+        {% assign categories = site.posts | map: 'categories' | join: ',' | split: ',' | uniq %}
+        <span class="stat-number">{{ categories.size }}</span>
+        <span class="stat-label">分类</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 友情链接 -->
+<div class="links-widget sidebar-widget">
+  <h3 class="widget-title">🔗 友情链接</h3>
+  <div class="widget-content">
+    <div class="friend-links">
+      <a href="https://github.com" target="_blank" class="friend-link">
+        <span class="link-icon">🐙</span>
+        <span class="link-text">GitHub</span>
+      </a>
+      <a href="https://jekyllrb.com" target="_blank" class="friend-link">
+        <span class="link-icon">💎</span>
+        <span class="link-text">Jekyll</span>
+      </a>
+    </div>
+  </div>
+</div>
