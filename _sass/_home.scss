@@ -1,24 +1,39 @@
 /* 首页专用样式 - GitHub Pages 兼容版本 */
-/* 强制覆盖全局样式，仅作用于首页 */
+/* 保持原有布局结构，仅清除不必要的美化样式 */
 
-/* 首页整体重置 */
+/* 首页整体样式 */
 body.home {
   background: #f8f9fa;
   color: #333;
 }
 
+/* 保持容器布局，清除美化背景 */
 body.home .container {
-  background: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
+  position: relative; /* 保持相对定位 */
 }
 
+/* 清除内容区域的美化，但保持布局 */
 body.home .content {
-  background: none !important;
+  background: transparent !important;
   box-shadow: none !important;
+  border: none !important;
+  backdrop-filter: none !important;
+  /* 保持原有的pure-u布局和padding，不完全清零 */
+}
+
+/* 保持侧边栏样式，但清除全局美化 */
+body.home .sidebar-left {
+  /* 保持原有的背景色和布局 */
+  backdrop-filter: none !important;
   border-radius: 0 !important;
-  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+body.home .sidebar-right {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 /* 欢迎区域基础样式 */
