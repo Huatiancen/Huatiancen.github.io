@@ -2,62 +2,94 @@
 layout: default
 ---
 
-{% include home-header.html %}
+<div class="archive-container fade-in-up">
+  <header class="archive-header">
+    <h1 class="archive-title">{{ page.title }}</h1>
+    <p class="archive-subtitle">按年份浏览所有文章</p>
+  </header>
 
-<h1>{{ page.title }}</h1>
-
-<!-- 搜索功能 -->
-<div class="search-container">
-  <div class="search-box">
-    <input type="text" id="date-search" placeholder="🔍 搜索年份..." autocomplete="off">
+  <!-- 搜索功能 -->
+  <div class="search-container">
+    <input type="text" id="date-search" class="search-input" placeholder="🔍 搜索年份..." autocomplete="off">
     <div class="search-stats">
       <span id="search-stats"></span>
     </div>
   </div>
-</div>
 
-{%- assign taxonomies = site.posts | group_by_exp: "post", "post.date | date: '%Y'" -%}
+  {%- assign taxonomies = site.posts | group_by_exp: "post", "post.date | date: '%Y'" -%}
 
-<div class="taxonomies-wrapper">
-  <ul class="taxonomies" id="taxonomies-list">
-    {%- for taxonomy in taxonomies -%}
-      <li class="taxonomy-item" data-year="{{ taxonomy.name }}">
-        {%- capture link -%}{{ page.permalink }}#{{ taxonomy.name }}{%- endcapture -%}
-        <a class="taxonomy" href="{{ link | relative_url }}">
-            <span class="taxonomy-name">{{ taxonomy.name }}</span>
-            <span class="taxonomy-count">{{ taxonomy.size }}</span>
-        </a> 
-      </li>
-    {%- endfor -%}
-  </ul>
-</div>
-
-{% comment %} Show posts by taxonomy {% endcomment %}
-{%- for taxonomy in taxonomies -%}
-  <div class="taxonomy-section" id="{{ taxonomy.name }}" data-year="{{ taxonomy.name }}">
-    <div class="taxonomy-header">
-      <h2>{{ taxonomy.name }}</h2>
-      <div class="post-search-box">
-        <input type="text" class="post-search" placeholder="🔍 搜索该年份下的文章..." data-year="{{ taxonomy.name }}">
-        <span class="post-search-stats"></span>
-      </div>
-    </div>
-    <ul class="post-list-by-taxonomy" data-year="{{ taxonomy.name }}">
-      {%- assign posts = taxonomy.items -%}
-      {%- for post in posts -%}
-        <li class="post-item" data-title="{{ post.title | downcase }}" data-date="{{ post.date | date: '%Y-%m-%d' }}">
-          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time> 
-          &raquo; 
-          <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-        </li>
+  <div class="taxonomies-wrapper">
+    <div class="taxonomies-grid" id="taxonomies-list">
+      {%- for taxonomy in taxonomies -%}
+        <div class="taxonomy-card" data-year="{{ taxonomy.name }}">
+          {%- capture link -%}{{ page.permalink }}#{{ taxonomy.name }}{%- endcapture -%}
+          <a class="taxonomy-link" href="{{ link | relative_url }}">
+            <div class="taxonomy-icon">📅</div>
+            <div class="taxonomy-content">
+              <span class="taxonomy-name">{{ taxonomy.name }}</span>
+              <span class="taxonomy-count">{{ taxonomy.size }} 篇文章</span>
+            </div>
+          </a> 
+        </div>
       {%- endfor -%}
-    </ul>
-    <div class="no-results" style="display: none;">
-      <p>😔 没有找到匹配的文章</p>
     </div>
-    <a href="#" onclick="backToTop()" class="back-to-top">Top &#8648;</a>
   </div>
-{%- endfor -%}
+
+  {% comment %} Show posts by taxonomy {% endcomment %}
+  {%- for taxonomy in taxonomies -%}
+    <section class="archive-section" id="{{ taxonomy.name }}" data-year="{{ taxonomy.name }}">
+      <header class="archive-section-header">
+        <h2 class="archive-group-title">{{ taxonomy.name }} 年</h2>
+        <div class="post-search-container">
+          <input type="text" class="post-search search-input" placeholder="🔍 搜索该年份下的文章..." data-year="{{ taxonomy.name }}">
+          <span class="post-search-stats"></span>
+        </div>
+      </header>
+      
+      <div class="archive-posts-grid" data-year="{{ taxonomy.name }}">
+        {%- assign posts = taxonomy.items -%}
+        {%- for post in posts -%}
+          <article class="archive-item" data-title="{{ post.title | downcase }}" data-date="{{ post.date | date: '%Y-%m-%d' }}">
+            <div class="archive-item-content">
+              <h3 class="archive-item-title">
+                <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+              </h3>
+              <div class="archive-item-meta">
+                <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y年%m月%d日" }}</time>
+                {% if post.tags %}
+                  <div class="archive-item-tags">
+                    {% for tag in post.tags limit:3 %}
+                      <span class="tag">{{ tag }}</span>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+              {% if post.excerpt %}
+                <p class="archive-item-excerpt">{{ post.excerpt | strip_html | truncate: 100 }}</p>
+              {% endif %}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+      
+      <div class="no-results" style="display: none;">
+        <div class="no-results-content">
+          <div class="no-results-icon">�</div>
+          <p>没有找到匹配的文章</p>
+        </div>
+      </div>
+      
+      <div class="back-to-top-container">
+        <button onclick="backToTop()" class="btn btn-secondary back-to-top">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+          </svg>
+          回到顶部
+        </button>
+      </div>
+    </section>
+  {%- endfor -%}
+</div>
 
 <script>
   function backToTop() {

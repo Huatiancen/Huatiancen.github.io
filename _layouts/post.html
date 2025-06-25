@@ -2,80 +2,106 @@
 layout: default
 ---
 
-<!-- 固定在右上角的返回按钮 -->
-<div class="back-button-fixed">
-  <a href="javascript:history.back()" class="back-button">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.42-1.41L7.83 13H20v-2z"/>
-    </svg>
-  </a>
-</div>
-
-<article class="post">
-  <h1 class="post-title">{{ page.title }}</h1>
-  
-  <!-- 增强的文章元数据 -->
-  {% include post-meta-enhanced.html %}
-  
-  <div class="post-meta">
-    {%- assign date_format = site.date_format | default: "%-d %b %Y" -%}
-    <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: date_format }}</time>
-    {%- if page.last_modified_at -%}
-      <span> ~ </span>
-      {%- assign mdate = page.last_modified_at | date_to_xmlschema -%}
-      <time datetime="{{ mdate }}" itemprop="dateModified">
-        {{ mdate | date: date_format }}
-      </time>
-    {%- endif -%}
-    {%- if page.author -%}
-      <span> • </span>
-      {% for author in page.author %}
-        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-          {{ author }}
+<article class="post card fade-in-up">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    
+    <div class="post-meta">
+      {%- assign date_format = site.date_format | default: "%-d %b %Y" -%}
+      <span class="post-date">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 4px;">
+          <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+        </svg>
+        <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: date_format }}</time>
+      </span>
+      
+      {%- if page.last_modified_at -%}
+        <span class="post-updated">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 4px;">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          {%- assign mdate = page.last_modified_at | date_to_xmlschema -%}
+          <time datetime="{{ mdate }}" itemprop="dateModified">
+            更新于 {{ mdate | date: date_format }}
+          </time>
         </span>
-        {%- if forloop.last == false %}, {% endif -%}
-      {% endfor %}
-    {%- endif -%}
+      {%- endif -%}
+      
+      {%- if page.author -%}
+        <span class="post-author">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle; margin-right: 4px;">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          </svg>
+          {% for author in page.author %}
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+              {{ author }}
+            </span>
+            {%- if forloop.last == false %}, {% endif -%}
+          {% endfor %}
+        </span>
+      {%- endif -%}
+    </div>
+  </header>
+
+  <div class="post-content">
+    {{ content }}
   </div>
 
-  {{ content }}
-
   {% if page.tags %}
-    {% include post-tags.html %}
+    <footer class="post-footer">
+      <div class="post-tags-section">
+        <h4>标签</h4>
+        <div class="post-tags">
+          {% for tag in page.tags %}
+            <a href="{{ '/tags/#' | append: tag | relative_url }}" class="tag">{{ tag }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </footer>
   {% endif %}
-
-  <!-- 打赏功能 -->
-  {% unless page.reward == false %}
-    {% include reward.html %}
-  {% endunless %}
-
-  <!-- 评论区 -->
-  {% unless page.comments == false %}
-    <div class="comments-section">
-      <h3>💬 评论区</h3>
-      {% if site.giscus %}
-        {% include giscus.html %}
-      {% elsif site.disqus %}
-        {% include disqus.html %}
-      {% else %}
-        <p>评论功能尚未配置，请在 <code>_config.yml</code> 中设置 Giscus 或 Disqus。</p>
-      {% endif %}
-    </div>
-  {% endunless %}
 </article>
 
+<!-- 导航按钮 -->
+<nav class="post-nav card">
+  <div class="post-nav-item post-nav-prev">
+    {% if page.previous %}
+      <a href="{{ page.previous.url | relative_url }}" rel="prev">
+        <div class="nav-arrow">←</div>
+        <div class="nav-content">
+          <div class="nav-label">上一篇</div>
+          <div class="nav-title">{{ page.previous.title }}</div>
+        </div>
+      </a>
+    {% endif %}
+  </div>
+  
+  <div class="post-nav-item post-nav-next">
+    {% if page.next %}
+      <a href="{{ page.next.url | relative_url }}" rel="next">
+        <div class="nav-content">
+          <div class="nav-label">下一篇</div>
+          <div class="nav-title">{{ page.next.title }}</div>
+        </div>
+        <div class="nav-arrow">→</div>
+      </a>
+    {% endif %}
+  </div>
+</nav>
+
 {% if site.related_posts != empty %}
-<aside class="related">
-  <h2>Related posts</h2>
-  <ul class="related-posts">
+<aside class="related-posts card">
+  <h3>相关文章</h3>
+  <div class="related-posts-grid">
     {% for post in site.related_posts limit:3 %}
-      <li>
-        <a href="{{ post.url | relative_url }}">
-          {{ post.title }}
-          <small><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time></small>
-        </a>
-      </li>
+      <article class="related-post">
+        <h4>
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h4>
+        <div class="related-post-meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time>
+        </div>
+      </article>
     {% endfor %}
-  </ul>
+  </div>
 </aside>
 {% endif %}
