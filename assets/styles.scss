@@ -30,7 +30,6 @@
 @import "message";
 @import "toc";
 @import "alignment";
-@import "archive";
 @import "home";
 
 @import "syntax-light";
@@ -57,6 +56,3 @@
     margin-left: var(--spacer);
   }
 }
-
-// 引入自定义图标
-@import 'custom-icons';

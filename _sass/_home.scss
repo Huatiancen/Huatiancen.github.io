@@ -8,15 +8,14 @@
   border-radius: 0 0 20px 20px;
   position: relative;
   overflow: hidden;
-  
-  &::before {
+    &::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><polygon points="0,100 1000,100 1000,0"/></svg>') no-repeat bottom;
+    background: rgba(255, 255, 255, 0.1);
     background-size: cover;
     pointer-events: none;
   }
