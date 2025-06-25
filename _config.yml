@@ -7,12 +7,18 @@ paginate: 5
 permalink: pretty
 cover_image: /bg.jpeg
 
-# Gems
+# Gems - 只使用 GitHub Pages 官方支持的插件
 plugins:
-  - jekyll-gist
-  - jekyll-paginate
-  - jekyll-seo-tag
   - jekyll-feed
+  - jekyll-gist
+  - jekyll-github-metadata
+  - jekyll-paginate
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-default-layout
+  - jekyll-titles-from-headings
+  - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-remote-theme
 
@@ -20,13 +26,16 @@ plugins:
 exclude:
   - .editorconfig
   - .git
+  - .gitignore
   - .jekyll-cache
+  - .sass-cache
   - Gemfile
   - Gemfile.lock
   - LICENSE.md
   - README.md
   - scripts/
-  - not-pure-poole.gemspec
+  - vendor/
+  - node_modules/
 
 # Optimize Jekyl SEO Tag
 twitter:
@@ -43,7 +52,14 @@ lang: en
 
 sass:
   sass_dir: _sass
-  style: :compressed
+  style: compressed
+
+# GitHub Pages 兼容性配置
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
 
 # Options
 
