@@ -8,6 +8,12 @@ layout: default
 <div class="welcome-section">
   <h1 class="welcome-title">欢迎来到海苔脆的博客</h1>
   <p class="welcome-subtitle">不改变世界也要给予挣扎</p>
+  
+  <!-- 打字机效果 -->
+  <div class="typewriter-container">
+    <div class="typewriter-text">欢迎来到我的博客</div>
+  </div>
+  
   <p class="welcome-description">
     这里记录着我的学习笔记、生活感悟和技术分享。
   </p>
@@ -16,6 +22,36 @@ layout: default
     <a href="/about/" class="btn btn-secondary">关于我</a>
   </div>
 </div>
+
+<!-- 动态统计区域 -->
+<div class="stats-container">
+  <div class="stat-item">
+    <div class="stat-icon">📝</div>
+    <div class="stat-number stat-articles">0</div>
+    <div class="stat-label">文章数量</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon">📖</div>
+    <div class="stat-number stat-words">0</div>
+    <div class="stat-label">总字数</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon">👥</div>
+    <div class="stat-number stat-visitors">0</div>
+    <div class="stat-label">访客数</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-icon">☕</div>
+    <div class="stat-number stat-coffee">0</div>
+    <div class="stat-label">咖啡杯数</div>
+  </div>
+</div>
+
+<!-- 今日诗词 -->
+{% include daily-poetry.html %}
+
+<!-- 天气小组件 -->
+{% include weather-widget.html %}
 
 <!-- 文章列表 -->
 <div class="posts">

@@ -59,7 +59,7 @@ title: 友链
 
   <div class="friend-card">
     <div class="friend-avatar">
-      <img src="https://re-char.github.io/image/avator.png" alt="Re_Char">
+      <img src="https://my-github-blog.oss-cn-hangzhou.aliyuncs.com/avatar.png" alt="Re_Char">
     </div>
     <div class="friend-info">
       <h3 class="friend-name">Re_Char の 趣味小屋</h3>

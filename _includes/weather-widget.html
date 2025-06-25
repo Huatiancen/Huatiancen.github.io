@@ -1,0 +1,211 @@
+<!-- 天气小组件 -->
+<div class="weather-widget">
+  <div class="weather-header">
+    <i class="fas fa-cloud-sun"></i>
+    <span>今日天气</span>
+    <button class="weather-refresh" onclick="refreshWeather()" title="刷新">
+      <i class="fas fa-sync-alt"></i>
+    </button>
+  </div>
+  
+  <div class="weather-content">
+    <div class="weather-main">
+      <div class="weather-icon" id="weather-icon">☀️</div>
+      <div class="weather-temp">
+        <span id="weather-temp">23</span>°C
+      </div>
+    </div>
+    
+    <div class="weather-info">
+      <div class="weather-desc" id="weather-desc">晴朗</div>
+      <div class="weather-location">
+        <i class="fas fa-map-marker-alt"></i>
+        <span id="weather-location">北京</span>
+      </div>
+    </div>
+    
+    <div class="weather-details">
+      <div class="weather-item">
+        <i class="fas fa-eye"></i>
+        <span>能见度</span>
+        <span id="visibility">10km</span>
+      </div>
+      <div class="weather-item">
+        <i class="fas fa-tint"></i>
+        <span>湿度</span>
+        <span id="humidity">65%</span>
+      </div>
+      <div class="weather-item">
+        <i class="fas fa-wind"></i>
+        <span>风速</span>
+        <span id="wind-speed">12km/h</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// 天气数据库（模拟）
+const weatherData = [
+  {
+    location: "北京",
+    temp: 23,
+    desc: "晴朗",
+    icon: "☀️",
+    visibility: "10km",
+    humidity: "65%",
+    windSpeed: "12km/h"
+  },
+  {
+    location: "上海",
+    temp: 26,
+    desc: "多云",
+    icon: "⛅",
+    visibility: "8km",
+    humidity: "72%",
+    windSpeed: "8km/h"
+  },
+  {
+    location: "广州",
+    temp: 28,
+    desc: "小雨",
+    icon: "🌦️",
+    visibility: "6km",
+    humidity: "85%",
+    windSpeed: "15km/h"
+  },
+  {
+    location: "深圳",
+    temp: 27,
+    desc: "阵雨",
+    icon: "🌧️",
+    visibility: "5km",
+    humidity: "88%",
+    windSpeed: "18km/h"
+  },
+  {
+    location: "杭州",
+    temp: 24,
+    desc: "晴转多云",
+    icon: "🌤️",
+    visibility: "9km",
+    humidity: "68%",
+    windSpeed: "10km/h"
+  },
+  {
+    location: "成都",
+    temp: 22,
+    desc: "阴天",
+    icon: "☁️",
+    visibility: "7km",
+    humidity: "78%",
+    windSpeed: "6km/h"
+  },
+  {
+    location: "西安",
+    temp: 20,
+    desc: "晴朗",
+    icon: "☀️",
+    visibility: "12km",
+    humidity: "55%",
+    windSpeed: "14km/h"
+  },
+  {
+    location: "南京",
+    temp: 25,
+    desc: "多云转晴",
+    icon: "⛅",
+    visibility: "9km",
+    humidity: "70%",
+    windSpeed: "11km/h"
+  }
+];
+
+let currentWeatherIndex = 0;
+
+// 刷新天气信息
+function refreshWeather() {
+  const refreshButton = document.querySelector('.weather-refresh');
+  refreshButton.classList.add('rotating');
+  
+  // 随机选择一个城市的天气
+  currentWeatherIndex = Math.floor(Math.random() * weatherData.length);
+  const weather = weatherData[currentWeatherIndex];
+  
+  // 添加过渡效果
+  const elements = [
+    document.getElementById('weather-icon'),
+    document.getElementById('weather-temp'),
+    document.getElementById('weather-desc'),
+    document.getElementById('weather-location'),
+    document.getElementById('visibility'),
+    document.getElementById('humidity'),
+    document.getElementById('wind-speed')
+  ];
+  
+  // 淡出
+  elements.forEach(el => {
+    if (el) el.style.opacity = '0';
+  });
+  
+  setTimeout(() => {
+    // 更新数据
+    if (document.getElementById('weather-icon')) document.getElementById('weather-icon').textContent = weather.icon;
+    if (document.getElementById('weather-temp')) document.getElementById('weather-temp').textContent = weather.temp;
+    if (document.getElementById('weather-desc')) document.getElementById('weather-desc').textContent = weather.desc;
+    if (document.getElementById('weather-location')) document.getElementById('weather-location').textContent = weather.location;
+    if (document.getElementById('visibility')) document.getElementById('visibility').textContent = weather.visibility;
+    if (document.getElementById('humidity')) document.getElementById('humidity').textContent = weather.humidity;
+    if (document.getElementById('wind-speed')) document.getElementById('wind-speed').textContent = weather.windSpeed;
+    
+    // 淡入
+    elements.forEach(el => {
+      if (el) el.style.opacity = '1';
+    });
+    
+    // 移除旋转动画
+    setTimeout(() => {
+      refreshButton.classList.remove('rotating');
+    }, 500);
+  }, 300);
+}
+
+// 根据时间自动更新天气
+function autoUpdateWeather() {
+  const hour = new Date().getHours();
+  
+  // 根据时间调整温度（简单模拟）
+  if (hour >= 6 && hour < 12) {
+    // 上午：温度适中
+    currentWeatherIndex = Math.floor(Math.random() * 3);
+  } else if (hour >= 12 && hour < 18) {
+    // 下午：温度较高
+    currentWeatherIndex = Math.floor(Math.random() * 2) + 2;
+  } else if (hour >= 18 && hour < 22) {
+    // 傍晚：温度下降
+    currentWeatherIndex = Math.floor(Math.random() * 2) + 4;
+  } else {
+    // 夜晚：温度较低
+    currentWeatherIndex = Math.floor(Math.random() * 2) + 6;
+  }
+  
+  const weather = weatherData[currentWeatherIndex] || weatherData[0];
+  
+  // 静默更新（无动画）
+  if (document.getElementById('weather-icon')) document.getElementById('weather-icon').textContent = weather.icon;
+  if (document.getElementById('weather-temp')) document.getElementById('weather-temp').textContent = weather.temp;
+  if (document.getElementById('weather-desc')) document.getElementById('weather-desc').textContent = weather.desc;
+  if (document.getElementById('weather-location')) document.getElementById('weather-location').textContent = weather.location;
+  if (document.getElementById('visibility')) document.getElementById('visibility').textContent = weather.visibility;
+  if (document.getElementById('humidity')) document.getElementById('humidity').textContent = weather.humidity;
+  if (document.getElementById('wind-speed')) document.getElementById('wind-speed').textContent = weather.windSpeed;
+}
+
+// 初始化
+document.addEventListener('DOMContentLoaded', function() {
+  autoUpdateWeather();
+  
+  // 每30分钟自动更新一次天气
+  setInterval(autoUpdateWeather, 30 * 60 * 1000);
+});
+</script>

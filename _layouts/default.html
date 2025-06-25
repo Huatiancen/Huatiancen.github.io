@@ -31,9 +31,11 @@
     </div>
 
     <script async src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
+    <script src="{{ '/assets/js/fancy-effects.js' | relative_url }}"></script>
 
     {%- include scroll.html -%}
     {%- include click-effect.html -%}
+    {%- include music-player.html -%}
 
     {%- if page.math -%}
       {% include mathjax.html %}

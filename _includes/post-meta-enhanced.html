@@ -1,0 +1,145 @@
+<!-- 增强文章元数据显示 -->
+<div class="post-meta-enhanced">
+  <div class="post-meta-item">
+    <i class="fas fa-calendar-alt"></i>
+    <span>{{ page.date | date: "%Y年%m月%d日" }}</span>
+  </div>
+  
+  {% if page.categories and page.categories.size > 0 %}
+  <div class="post-meta-item">
+    <i class="fas fa-folder"></i>
+    <span>
+      {% for category in page.categories %}
+        <a href="{{ '/categories/#' | append: category | relative_url }}" class="meta-link">{{ category }}</a>
+        {% unless forloop.last %} / {% endunless %}
+      {% endfor %}
+    </span>
+  </div>
+  {% endif %}
+  
+  {% if page.tags and page.tags.size > 0 %}
+  <div class="post-meta-item">
+    <i class="fas fa-tags"></i>
+    <span class="post-tags-enhanced">
+      {% for tag in page.tags %}
+        <a href="{{ '/tags/#' | append: tag | relative_url }}" class="tag-enhanced">#{{ tag }}</a>
+      {% endfor %}
+    </span>
+  </div>
+  {% endif %}
+  
+  <div class="post-meta-item">
+    <i class="fas fa-clock"></i>
+    <span class="reading-time">阅读时间约 <span id="reading-time">5</span> 分钟</span>
+  </div>
+  
+  <div class="post-meta-item">
+    <i class="fas fa-eye"></i>
+    <span class="post-views">浏览量 <span id="post-views">{{ page.views | default: 0 }}</span></span>
+  </div>
+</div>
+
+<!-- 文章目录（如果有标题） -->
+{% assign headings = content | split: '<h' %}
+{% if headings.size > 2 %}
+<div class="post-toc-container">
+  <div class="post-toc-header">
+    <i class="fas fa-list"></i>
+    <span>文章目录</span>
+    <button class="toc-toggle" onclick="toggleToc()">
+      <i class="fas fa-chevron-down"></i>
+    </button>
+  </div>
+  <div class="post-toc" id="post-toc">
+    <!-- 目录将由 JavaScript 生成 -->
+  </div>
+</div>
+{% endif %}
+
+<script>
+// 计算阅读时间
+function calculateReadingTime() {
+  const content = document.querySelector('.post-content, .page-content, .content');
+  if (!content) return;
+  
+  const text = content.innerText || content.textContent;
+  const wordsPerMinute = 200; // 中文大约每分钟200字
+  const words = text.length;
+  const readingTime = Math.ceil(words / wordsPerMinute);
+  
+  const readingTimeElement = document.getElementById('reading-time');
+  if (readingTimeElement) {
+    readingTimeElement.textContent = readingTime;
+  }
+}
+
+// 生成文章目录
+function generateTOC() {
+  const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  const tocContainer = document.getElementById('post-toc');
+  
+  if (!tocContainer || headings.length < 2) return;
+  
+  let tocHTML = '<ul class="toc-list">';
+  
+  headings.forEach((heading, index) => {
+    const level = parseInt(heading.tagName.charAt(1));
+    const id = heading.id || `heading-${index}`;
+    
+    if (!heading.id) {
+      heading.id = id;
+    }
+    
+    const indent = level - 1;
+    tocHTML += `
+      <li class="toc-item toc-level-${level}" style="margin-left: ${indent * 20}px;">
+        <a href="#${id}" class="toc-link" onclick="smoothScrollTo('${id}')">
+          ${heading.textContent}
+        </a>
+      </li>
+    `;
+  });
+  
+  tocHTML += '</ul>';
+  tocContainer.innerHTML = tocHTML;
+}
+
+// 平滑滚动到目标位置
+function smoothScrollTo(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+}
+
+// 切换目录显示/隐藏
+function toggleToc() {
+  const toc = document.getElementById('post-toc');
+  const toggle = document.querySelector('.toc-toggle i');
+  
+  if (toc.style.display === 'none' || !toc.style.display) {
+    toc.style.display = 'block';
+    toggle.className = 'fas fa-chevron-up';
+  } else {
+    toc.style.display = 'none';
+    toggle.className = 'fas fa-chevron-down';
+  }
+}
+
+// 初始化
+document.addEventListener('DOMContentLoaded', function() {
+  calculateReadingTime();
+  generateTOC();
+  
+  // 模拟增加浏览量
+  const viewsElement = document.getElementById('post-views');
+  if (viewsElement) {
+    let views = parseInt(viewsElement.textContent) || 0;
+    views += Math.floor(Math.random() * 10) + 1;
+    viewsElement.textContent = views;
+  }
+});
+</script>
