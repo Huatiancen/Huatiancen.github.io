@@ -1,0 +1,370 @@
+<!-- 鼠标点击特效 -->
+<style>
+.click-effect {
+  position: fixed;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  animation: ripple 0.8s ease-out forwards;
+}
+
+/* 默认蓝色波纹效果 */
+.click-effect.default {
+  background: radial-gradient(circle, rgba(0, 122, 255, 0.6) 0%, rgba(0, 122, 255, 0.2) 30%, transparent 70%);
+}
+
+/* 彩色波纹效果 */
+.click-effect.colorful {
+  background: radial-gradient(circle, 
+    rgba(255, 105, 180, 0.7) 0%, 
+    rgba(255, 165, 0, 0.5) 25%, 
+    rgba(0, 255, 255, 0.3) 50%, 
+    rgba(147, 112, 219, 0.2) 70%,
+    transparent 85%);
+}
+
+/* 爱心形状特效 */
+.click-effect.heart {
+  background: radial-gradient(circle, rgba(255, 20, 147, 0.8) 0%, transparent 60%);
+  animation: heart-burst 1s ease-out forwards;
+}
+
+/* 星星爆炸效果 */
+.click-effect.star {
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.9) 0%, rgba(255, 255, 0, 0.5) 40%, transparent 70%);
+  animation: star-burst 0.8s ease-out forwards;
+}
+
+/* 基础波纹动画 */
+@keyframes ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+  }
+}
+
+/* 大波纹动画 */
+@keyframes ripple-large {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  30% {
+    opacity: 0.9;
+  }
+  100% {
+    width: 150px;
+    height: 150px;
+    opacity: 0;
+  }
+}
+
+/* 爱心爆炸动画 */
+@keyframes heart-burst {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+  }
+  100% {
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5) rotate(360deg);
+  }
+}
+
+/* 星星爆炸动画 */
+@keyframes star-burst {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+  100% {
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+}
+
+/* 大型特效 */
+.click-effect.large {
+  animation: ripple-large 1s ease-out forwards;
+}
+
+/* 暗色主题适配 */
+@media (prefers-color-scheme: dark) {
+  .click-effect.default {
+    background: radial-gradient(circle, rgba(74, 158, 255, 0.6) 0%, rgba(74, 158, 255, 0.2) 30%, transparent 70%);
+  }
+  
+  .click-effect.colorful {
+    background: radial-gradient(circle, 
+      rgba(255, 105, 180, 0.8) 0%, 
+      rgba(255, 165, 0, 0.6) 25%, 
+      rgba(0, 255, 255, 0.4) 50%, 
+      rgba(147, 112, 219, 0.3) 70%,
+      transparent 85%);
+  }
+}
+
+/* 粒子特效容器 */
+.particle-container {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #007acc;
+  border-radius: 50%;
+  animation: particle-fly 1s ease-out forwards;
+}
+
+@keyframes particle-fly {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  let clickCount = 0;
+  const effectTypes = ['default', 'colorful', 'heart', 'star'];
+  
+  // 创建粒子容器
+  const particleContainer = document.createElement('div');
+  particleContainer.className = 'particle-container';
+  document.body.appendChild(particleContainer);
+  
+  function createParticles(x, y, count = 8) {
+    const colors = ['#007acc', '#ff69b4', '#ffa500', '#00ffff', '#9370db', '#ffd700'];
+    
+    for (let i = 0; i < count; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = x + 'px';
+      particle.style.top = y + 'px';
+      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+      
+      // 随机方向和距离
+      const angle = (Math.PI * 2 * i) / count;
+      const distance = 30 + Math.random() * 50;
+      const endX = x + Math.cos(angle) * distance;
+      const endY = y + Math.sin(angle) * distance;
+      
+      // 设置动画
+      particle.style.setProperty('--end-x', endX + 'px');
+      particle.style.setProperty('--end-y', endY + 'px');
+      
+      // 使用 CSS 变量进行动画
+      particle.style.animation = `particle-fly-${i} 1s ease-out forwards`;
+      
+      // 动态创建关键帧
+      const keyframes = `
+        @keyframes particle-fly-${i} {
+          0% {
+            opacity: 1;
+            transform: scale(1) translate(0, 0);
+          }
+          100% {
+            opacity: 0;
+            transform: scale(0) translate(${endX - x}px, ${endY - y}px);
+          }
+        }
+      `;
+      
+      // 添加关键帧到页面
+      const style = document.createElement('style');
+      style.textContent = keyframes;
+      document.head.appendChild(style);
+      
+      particleContainer.appendChild(particle);
+      
+      // 清理
+      setTimeout(() => {
+        if (particle.parentNode) {
+          particle.parentNode.removeChild(particle);
+        }
+        if (style.parentNode) {
+          style.parentNode.removeChild(style);
+        }
+      }, 1000);
+    }
+  }
+  
+  function createClickEffect(x, y) {
+    clickCount++;
+    
+    // 创建主要波纹效果
+    const ripple = document.createElement('div');
+    ripple.className = 'click-effect';
+    
+    // 根据点击次数选择不同效果
+    let effectType = 'default';
+    if (clickCount % 15 === 0) {
+      effectType = 'heart';
+      createParticles(x, y, 12); // 爱心效果时创建更多粒子
+    } else if (clickCount % 10 === 0) {
+      effectType = 'star';
+      createParticles(x, y, 10);
+    } else if (clickCount % 5 === 0) {
+      effectType = 'colorful';
+      createParticles(x, y, 8);
+    } else {
+      effectType = 'default';
+      if (Math.random() < 0.3) { // 30% 概率创建粒子
+        createParticles(x, y, 6);
+      }
+    }
+    
+    ripple.className += ' ' + effectType;
+    
+    // 每20次点击创建大特效
+    if (clickCount % 20 === 0) {
+      ripple.className += ' large';
+    }
+    
+    // 设置位置
+    ripple.style.left = x + 'px';
+    ripple.style.top = y + 'px';
+    
+    document.body.appendChild(ripple);
+    
+    // 清理
+    ripple.addEventListener('animationend', function() {
+      if (ripple.parentNode) {
+        ripple.parentNode.removeChild(ripple);
+      }
+    });
+    
+    setTimeout(function() {
+      if (ripple.parentNode) {
+        ripple.parentNode.removeChild(ripple);
+      }
+    }, 1500);
+  }
+  
+  // 鼠标点击事件
+  document.addEventListener('click', function(e) {
+    // 排除交互元素
+    if (e.target.tagName === 'INPUT' || 
+        e.target.tagName === 'TEXTAREA' || 
+        e.target.tagName === 'BUTTON' ||
+        e.target.tagName === 'A' ||
+        e.target.closest('button') ||
+        e.target.closest('a') ||
+        e.target.closest('.search-box') ||
+        e.target.closest('.post-search-box')) {
+      return;
+    }
+    
+    createClickEffect(e.clientX, e.clientY);
+  });
+  
+  // 触摸支持
+  document.addEventListener('touchstart', function(e) {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      createClickEffect(touch.clientX, touch.clientY);
+    }
+  });
+  
+  // 键盘快捷键 - 空格键在屏幕中心创建特效
+  document.addEventListener('keydown', function(e) {
+    if (e.code === 'Space' && !e.target.matches('input, textarea') && e.target !== document.body) {
+      return; // 只在 body 上响应空格键
+    }
+    
+    if (e.code === 'Space' && e.target === document.body) {
+      e.preventDefault();
+      createClickEffect(window.innerWidth / 2, window.innerHeight / 2);
+    }
+    
+    // 彩蛋：按 'C' 键创建彩色特效
+    if (e.key.toLowerCase() === 'c' && !e.target.matches('input, textarea')) {
+      createClickEffect(
+        Math.random() * window.innerWidth,
+        Math.random() * window.innerHeight
+      );
+    }
+  });
+  
+  // 双击创建特殊效果
+  document.addEventListener('dblclick', function(e) {
+    if (e.target.tagName === 'INPUT' || 
+        e.target.tagName === 'TEXTAREA' || 
+        e.target.closest('a')) {
+      return;
+    }
+    
+    e.preventDefault();
+    
+    // 创建多个同心圆效果
+    for (let i = 0; i < 3; i++) {
+      setTimeout(() => {
+        createClickEffect(e.clientX, e.clientY);
+      }, i * 100);
+    }
+    
+    createParticles(e.clientX, e.clientY, 15);
+  });
+  
+  // 右键创建星星效果
+  document.addEventListener('contextmenu', function(e) {
+    if (e.target.tagName === 'INPUT' || 
+        e.target.tagName === 'TEXTAREA') {
+      return;
+    }
+    
+    const ripple = document.createElement('div');
+    ripple.className = 'click-effect star';
+    ripple.style.left = e.clientX + 'px';
+    ripple.style.top = e.clientY + 'px';
+    
+    document.body.appendChild(ripple);
+    createParticles(e.clientX, e.clientY, 10);
+    
+    ripple.addEventListener('animationend', function() {
+      if (ripple.parentNode) {
+        ripple.parentNode.removeChild(ripple);
+      }
+    });
+  });
+});
+</script>
