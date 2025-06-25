@@ -5,7 +5,10 @@
 body.home {
   /* 确保变量可用 */
   font-family: var(--body-font);
-  /* 首页显示顶部导航栏，保持一致性 */
+}
+
+/* 首页内容区域显示顶部导航栏，保持一致性 */
+body.home .content {
   padding-top: 70px !important;
 }
 

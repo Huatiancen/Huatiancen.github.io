@@ -1,10 +1,6 @@
-- title: 首页
+- title: Blogs
   url: /
-- title: 按日期
-  url: /dates/
-- title: 按标签
-  url: /tags/
-- title: 按分类
-  url: /categories/
-- title: 关于
+- title: About
   url: /about/
+- title: Links
+  url: /links/

@@ -178,9 +178,14 @@
   transition: all 0.3s ease;
 }
 
-/* 页面内容区域顶部间距调整 */
-body {
+/* 页面内容区域顶部间距调整 - 只对内容区域生效，不影响侧边栏 */
+.content {
   padding-top: 4rem;
+}
+
+/* 确保左侧边栏不受顶部导航栏影响 */
+.sidebar-left {
+  padding-top: 0 !important;
 }
 
 /* 暗色主题适配 */
@@ -271,7 +276,7 @@ body {
     height: 3.5rem;
   }
   
-  body {
+  .content {
     padding-top: 3.5rem;
   }
   
