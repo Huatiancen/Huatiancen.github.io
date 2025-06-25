@@ -370,60 +370,6 @@ body:not(.home) .sidebar-right {
   }
 }
 
-/* 归档页面导航栏 */
-.archive-navigation {
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.nav-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.nav-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.8rem 1.5rem;
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  color: #495057;
-  text-decoration: none;
-  border-radius: 25px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-}
-
-.nav-btn:hover {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-}
-
-.nav-btn.active {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-}
-
-.nav-icon {
-  font-size: 1.1rem;
-}
-
-.nav-text {
-  font-size: 0.9rem;
-}
-
 /* 搜索功能增强 */
 .search-container .search-input {
   width: 100%;
@@ -465,6 +411,84 @@ body:not(.home) .sidebar-right {
   text-align: center;
   color: #718096;
   font-size: 0.9rem;
+}
+
+/* 统一左侧边栏导航美化 - 仅对非首页生效 */
+body:not(.home) .navigation {
+  margin-top: 2rem;
+}
+
+body:not(.home) .navigation-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+body:not(.home) .navigation-item {
+  margin-bottom: 0.8rem;
+}
+
+body:not(.home) .navigation-item a {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: none;
+  border-bottom: none;
+  backdrop-filter: blur(10px);
+}
+
+body:not(.home) .navigation-item a:hover,
+body:not(.home) .navigation-item a:focus {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 当前页面高亮 */
+body.layout-archive-dates .navigation-item a[href="/dates/"],
+body.layout-archive-taxonomies .navigation-item a[href="/tags/"],
+body.layout-archive-taxonomies .navigation-item a[href="/categories/"] {
+  background: rgba(255, 255, 255, 0.25);
+  font-weight: 600;
+}
+
+/* 社交图标美化 */
+body:not(.home) .social {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body:not(.home) .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+body:not(.home) .social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+body:not(.home) .social-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* 响应式设计 */
