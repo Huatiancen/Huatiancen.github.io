@@ -1,0 +1,476 @@
+// 首页样式
+// 欢迎区域
+.welcome-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 4rem 2rem;
+  margin: -2rem -2rem 3rem -2rem;
+  border-radius: 0 0 20px 20px;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><polygon points="0,100 1000,100 1000,0"/></svg>') no-repeat bottom;
+    background-size: cover;
+    pointer-events: none;
+  }
+  
+  .welcome-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .welcome-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    
+    @media (max-width: 768px) {
+      font-size: 2.2rem;
+    }
+  }
+  
+  .welcome-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+  
+  .welcome-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+    opacity: 0.85;
+  }
+  
+  .welcome-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    
+    @media (max-width: 480px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  
+  .welcome-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 2rem;
+    max-width: 500px;
+    
+    .stat-item {
+      text-align: center;
+      
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        color: #ffd700;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      
+      .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}
+
+// 按钮样式
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+  
+  &.btn-primary {
+    background: white;
+    color: #667eea;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  &.btn-secondary {
+    background: transparent;
+    color: white;
+    border-color: white;
+    
+    &:hover {
+      background: white;
+      color: #667eea;
+      transform: translateY(-2px);
+    }
+  }
+  
+  &.btn-outline {
+    background: transparent;
+    color: #667eea;
+    border-color: #667eea;
+    
+    &:hover {
+      background: #667eea;
+      color: white;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// 区域标题
+.section-title {
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #333;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 2px;
+  }
+}
+
+// 特色功能区域
+.features-section {
+  padding: 4rem 2rem;
+  background: #f8f9fa;
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    
+    p {
+      color: #666;
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+}
+
+// 最新文章区域
+.latest-posts-section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  .posts-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  .post-preview-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      border-color: #667eea;
+    }
+    
+    .post-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+      
+      .post-tags {
+        display: flex;
+        gap: 0.5rem;
+        
+        .post-tag {
+          background: #e3f2fd;
+          color: #1976d2;
+          padding: 2px 8px;
+          border-radius: 12px;
+          font-size: 0.8rem;
+        }
+      }
+    }
+    
+    .post-preview-title {
+      margin-bottom: 1rem;
+      
+      a {
+        color: #333;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: 600;
+        
+        &:hover {
+          color: #667eea;
+        }
+      }
+    }
+    
+    .post-preview-excerpt {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    
+    .read-more {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  
+  .view-all-posts {
+    text-align: center;
+  }
+}
+
+// 热门标签区域
+.popular-tags-section {
+  padding: 4rem 2rem;
+  background: #f8f9fa;
+  
+  .tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto 3rem auto;
+    
+    .tag-cloud-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: white;
+      color: #333;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid #e0e0e0;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: #667eea;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+      }
+      
+      .tag-count {
+        background: #e0e0e0;
+        color: #666;
+        font-size: 0.8rem;
+        padding: 2px 6px;
+        border-radius: 10px;
+        min-width: 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+      
+      &:hover .tag-count {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+      }
+    }
+  }
+  
+  .view-all-tags {
+    text-align: center;
+  }
+}
+
+// 暗色主题适配
+@media (prefers-color-scheme: dark) {
+  .welcome-section {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+  }
+  
+  .section-title {
+    color: white;
+  }
+  
+  .features-section {
+    background: #2d2d2d;
+    
+    .feature-card {
+      background: #3d3d3d;
+      color: white;
+      
+      h3 {
+        color: white;
+      }
+      
+      p {
+        color: #bbb;
+      }
+    }
+  }
+  
+  .latest-posts-section {
+    .post-preview-card {
+      background: #3d3d3d;
+      border-color: #505050;
+      
+      .post-meta {
+        color: #bbb;
+        
+        .post-tag {
+          background: #4a5568;
+          color: #a0aec0;
+        }
+      }
+      
+      .post-preview-title a {
+        color: white;
+        
+        &:hover {
+          color: #4a9eff;
+        }
+      }
+      
+      .post-preview-excerpt {
+        color: #bbb;
+      }
+      
+      .read-more {
+        color: #4a9eff;
+      }
+    }
+  }
+  
+  .popular-tags-section {
+    background: #2d2d2d;
+    
+    .tags-cloud .tag-cloud-item {
+      background: #3d3d3d;
+      border-color: #505050;
+      color: white;
+      
+      &:hover {
+        background: #4a9eff;
+      }
+      
+      .tag-count {
+        background: #505050;
+        color: #bbb;
+      }
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .welcome-section {
+    padding: 3rem 1rem;
+    margin: -1rem -1rem 2rem -1rem;
+    
+    .welcome-stats {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      
+      .stat-item .stat-number {
+        font-size: 2rem;
+      }
+    }
+  }
+  
+  .features-section,
+  .latest-posts-section,
+  .popular-tags-section {
+    padding: 3rem 1rem;
+  }
+  
+  .posts-preview {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-section .welcome-title {
+    font-size: 1.8rem;
+  }
+  
+  .welcome-section .welcome-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tags-cloud {
+    justify-content: flex-start;
+  }
+}

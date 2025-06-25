@@ -1,0 +1,253 @@
+<!-- 首页交互脚本 -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // 统计数字动画
+  function animateNumbers() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          const finalNumber = parseInt(target.textContent);
+          const duration = 2000; // 2秒动画
+          const step = finalNumber / (duration / 16); // 60fps
+          let current = 0;
+          
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= finalNumber) {
+              current = finalNumber;
+              clearInterval(timer);
+            }
+            target.textContent = Math.floor(current);
+          }, 16);
+          
+          observer.unobserve(target);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    statNumbers.forEach(stat => {
+      observer.observe(stat);
+    });
+  }
+  
+  // 平滑滚动
+  function initSmoothScroll() {
+    const links = document.querySelectorAll('a[href^="#"]');
+    
+    links.forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          e.preventDefault();
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  }
+  
+  // 卡片悬浮效果增强
+  function enhanceCardEffects() {
+    const cards = document.querySelectorAll('.feature-card, .post-preview-card');
+    
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-8px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+  }
+  
+  // 标签云动态效果
+  function enhanceTagCloud() {
+    const tagItems = document.querySelectorAll('.tag-cloud-item');
+    
+    tagItems.forEach((tag, index) => {
+      tag.style.animationDelay = `${index * 0.1}s`;
+      tag.classList.add('tag-animate-in');
+      
+      // 根据文章数量调整标签大小
+      const count = parseInt(tag.getAttribute('data-count') || '1');
+      const scale = Math.min(1 + count * 0.1, 1.5);
+      tag.style.setProperty('--tag-scale', scale);
+    });
+  }
+  
+  // 欢迎区域文字打字机效果
+  function typewriterEffect() {
+    const subtitle = document.querySelector('.welcome-subtitle');
+    if (!subtitle) return;
+    
+    const text = subtitle.textContent;
+    subtitle.textContent = '';
+    subtitle.style.borderRight = '2px solid white';
+    
+    let i = 0;
+    const timer = setInterval(() => {
+      subtitle.textContent += text.charAt(i);
+      i++;
+      
+      if (i >= text.length) {
+        clearInterval(timer);
+        setTimeout(() => {
+          subtitle.style.borderRight = 'none';
+        }, 1000);
+      }
+    }, 100);
+  }
+  
+  // 滚动视差效果
+  function initParallax() {
+    const welcomeSection = document.querySelector('.welcome-section');
+    if (!welcomeSection) return;
+    
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const rate = scrolled * -0.5;
+      welcomeSection.style.transform = `translateY(${rate}px)`;
+    });
+  }
+  
+  // 懒加载图片
+  function initLazyLoading() {
+    const images = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.classList.add('loaded');
+          imageObserver.unobserve(img);
+        }
+      });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+  }
+  
+  // 主题切换动画
+  function initThemeTransition() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    prefersDark.addEventListener('change', (e) => {
+      document.body.style.transition = 'all 0.3s ease';
+      setTimeout(() => {
+        document.body.style.transition = '';
+      }, 300);
+    });
+  }
+  
+  // 初始化所有功能
+  animateNumbers();
+  initSmoothScroll();
+  enhanceCardEffects();
+  enhanceTagCloud();
+  
+  // 延迟执行的效果
+  setTimeout(() => {
+    typewriterEffect();
+  }, 500);
+  
+  // 检查是否支持视差效果（性能考虑）
+  if (window.innerWidth > 768 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    initParallax();
+  }
+  
+  initLazyLoading();
+  initThemeTransition();
+  
+  // 添加页面加载完成的动画
+  document.body.classList.add('page-loaded');
+});
+</script>
+
+<style>
+/* 页面加载动画 */
+body {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body.page-loaded {
+  opacity: 1;
+}
+
+/* 标签动画 */
+.tag-cloud-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: tag-fade-in 0.5s ease forwards;
+}
+
+@keyframes tag-fade-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 卡片动画 */
+.feature-card,
+.post-preview-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 懒加载图片 */
+img {
+  transition: opacity 0.3s ease;
+}
+
+img.loaded {
+  opacity: 1;
+}
+
+/* 打字机效果 */
+.welcome-subtitle {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #667eea;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5a6fd8;
+}
+
+/* 暗色主题滚动条 */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-track {
+    background: #2d2d2d;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #4a9eff;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #357abd;
+  }
+}
+</style>

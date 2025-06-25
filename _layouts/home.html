@@ -4,7 +4,117 @@ layout: default
 
 {% include home-header.html %}
 
-<div class="posts">
+<!-- 首页欢迎区域 -->
+<div class="welcome-section">
+  <div class="welcome-content">
+    <div class="welcome-text">
+      <h1 class="welcome-title">欢迎来到海苔脆的博客</h1>
+      <p class="welcome-subtitle">不改变世界也要给予挣扎</p>
+      <p class="welcome-description">
+        这里记录着我的学习笔记、生活感悟和技术分享。
+        与你分享知识的旅程，共同探索技术的魅力。
+      </p>
+      <div class="welcome-actions">
+        <a href="#latest-posts" class="btn btn-primary">阅读文章</a>
+        <a href="/about/" class="btn btn-secondary">关于我</a>
+      </div>
+    </div>
+    <div class="welcome-stats">
+      <div class="stat-item">
+        <div class="stat-number">{{ site.posts | size }}</div>
+        <div class="stat-label">文章总数</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">{{ site.tags | size }}</div>
+        <div class="stat-label">标签数量</div>
+      </div>
+      <div class="stat-item">
+        {% assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+        <div class="stat-number">{{ years | size }}</div>
+        <div class="stat-label">年份跨度</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 特色功能区域 -->
+<div class="features-section">
+  <h2 class="section-title">博客特色</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <h3>智能搜索</h3>
+      <p>支持标签搜索和文章内容搜索，快速找到你想要的内容</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+      <h3>评论互动</h3>
+      <p>基于 GitHub Discussions 的评论系统，与我实时交流</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <h3>响应式设计</h3>
+      <p>完美适配各种设备，随时随地享受阅读体验</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✨</div>
+      <h3>交互特效</h3>
+      <p>精美的点击特效和动画，让浏览体验更加生动</p>
+    </div>
+  </div>
+</div>
+
+<!-- 最新文章区域 -->
+<div class="latest-posts-section" id="latest-posts">
+  <h2 class="section-title">最新文章</h2>
+  <div class="posts-preview">
+    {% for post in site.posts limit:6 %}
+    <article class="post-preview-card">
+      <div class="post-meta">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+        {% if post.tags.size > 0 %}
+        <div class="post-tags">
+          {% for tag in post.tags limit:2 %}
+          <span class="post-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <h3 class="post-preview-title">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </h3>
+      <p class="post-preview-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+      <a href="{{ post.url | relative_url }}" class="read-more">阅读全文 →</a>
+    </article>
+    {% endfor %}
+  </div>
+  
+  <div class="view-all-posts">
+    <a href="/dates/" class="btn btn-outline">查看所有文章</a>
+  </div>
+</div>
+
+<!-- 热门标签区域 -->
+<div class="popular-tags-section">
+  <h2 class="section-title">热门标签</h2>
+  <div class="tags-cloud">
+    {% assign sorted_tags = site.tags | sort: 1 %}
+    {% for tag in sorted_tags limit:15 %}
+    {% assign tag_posts_count = tag[1] | size %}
+    <a href="/tags/#{{ tag[0] | slugify }}" class="tag-cloud-item" data-count="{{ tag_posts_count }}">
+      {{ tag[0] }}
+      <span class="tag-count">{{ tag_posts_count }}</span>
+    </a>
+    {% endfor %}
+  </div>
+  <div class="view-all-tags">
+    <a href="/tags/" class="btn btn-outline">查看所有标签</a>
+  </div>
+</div>
+
+<!-- 传统的分页文章列表（可选显示） -->
+<div class="traditional-posts" style="display: none;">
+  <h2 class="section-title">所有文章</h2>
   {% for post in paginator.posts %}
   <section class="post-entry">
     <h2 class="post-title">
@@ -43,3 +153,5 @@ layout: default
     <span class="pagination-item newer">Newer</span>
   {% endif %}
 </div>
+
+{% include home-scripts.html %}
