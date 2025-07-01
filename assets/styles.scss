@@ -18,55 +18,13 @@
 // https://github.com/poole/poole.
 
 @import "variables";
-@import "top-navbar"; // 顶部导航栏样式
 @import "base";
 @import "type";
 @import "code";
 @import "layout";
 @import "sidebar";
-@import "sidebar-right";
 @import "posts";
-@import "archive";
 @import "pagination";
 @import "message";
-@import "toc";
-@import "alignment";
-// @import "global-style"; // 暂时禁用可能有问题的文件
-@import "global-beautify";
-@import "home";
 
 @import "syntax-light";
-
-// 暗色主题适配
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1a202c;
-    color: #e2e8f0;
-  }
-  
-  .sidebar-left {
-    background-color: #2d3748 !important;
-  }
-  
-  .content {
-    background-color: #2d3748;
-    color: #e2e8f0;
-  }
-}
-
-// Sass for creating the swatches
-.colors {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-
-  dt {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 12px;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.15);
-  }
-
-  dd {
-    margin-left: 1rem;
-  }
-}
