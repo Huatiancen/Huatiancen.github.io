@@ -2,83 +2,237 @@
 layout: default
 ---
 
-<!-- 简化的首页欢迎区域 -->
-<div class="welcome-section">
-  <h1 class="welcome-title">欢迎来到海苔脆的博客</h1>
-  <p class="welcome-subtitle">不改变世界也要给予挣扎</p>
-  
-  <!-- 打字机效果 -->
-  <div class="typewriter-container">
-    <div class="typewriter-text">欢迎来到我的博客</div>
-  </div>
-  
-  <p class="welcome-description">
-    这里记录着我的学习笔记、生活感悟和技术分享
-  </p>
-  <div class="welcome-actions">
-    <a href="/dates/" class="btn btn-primary">阅读文章</a>
-    <a href="/about/" class="btn btn-secondary">关于我</a>
-  </div>
-</div>
-
-<!-- 动态统计区域 -->
-<div class="stats-container">
-  <div class="stat-item">
-    <div class="stat-icon">📝</div>
-    <div class="stat-number stat-articles">0</div>
-    <div class="stat-label">文章数量</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-icon">📖</div>
-    <div class="stat-number stat-words">0</div>
-    <div class="stat-label">总字数</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-icon">👥</div>
-    <div class="stat-number stat-visitors">0</div>
-    <div class="stat-label">访客数</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-icon">☕</div>
-    <div class="stat-number stat-coffee">0</div>
-    <div class="stat-label">咖啡杯数</div>
-  </div>
-</div>
-
-<!-- 今日诗词 -->
-{% include daily-poetry.html %}
-
-<!-- 天气小组件 -->
-{% include weather-widget.html %}
-
-<!-- 文章列表 -->
-<div class="posts">
-  {% for post in paginator.posts %}
-  <section class="post-entry">
-    <h2 class="post-title">
-      <a href="{{ post.url | relative_url }}">
-        {{ post.title }}
-      </a>
-    </h2>
-
-    <div class="post-meta">
-      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time>
+<!-- 主要内容区域 -->
+<div class="home-main">
+  <!-- Hero区域 -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-avatar">
+        <img src="https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/202506241603691.png" alt="头像" class="avatar-img">
+        <div class="avatar-ring"></div>
+      </div>
+      <h1 class="hero-title">
+        <span class="title-line">你好，我是</span>
+        <span class="title-name">海苔脆</span>
+      </h1>
+      <p class="hero-subtitle">不改变世界也要给予挣扎</p>
+      <div class="hero-tags">
+        <span class="tag">🎓 学生</span>
+        <span class="tag">💻 编程爱好者</span>
+        <span class="tag">📚 终身学习者</span>
+      </div>
+      <div class="hero-actions">
+        <a href="/dates/" class="btn btn-primary">
+          <i class="fas fa-book-open"></i>
+          阅读文章
+        </a>
+        <a href="/about/" class="btn btn-outline">
+          <i class="fas fa-user"></i>
+          关于我
+        </a>
+      </div>
     </div>
-
-    <p>{{ post.excerpt | strip_html }}</p>
+    
+    <!-- 背景装饰 -->
+    <div class="hero-bg">
+      <div class="bg-circle circle-1"></div>
+      <div class="bg-circle circle-2"></div>
+      <div class="bg-circle circle-3"></div>
+    </div>
   </section>
-  {% endfor %}
+
+  <!-- 统计数据 -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-edit"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number" id="post-count">{{ site.posts.size }}</div>
+          <div class="stat-label">篇文章</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-tags"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number">{{ site.tags.size }}</div>
+          <div class="stat-label">个标签</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-folder"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number">{{ site.categories.size }}</div>
+          <div class="stat-label">个分类</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-calendar"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number" id="days-count">0</div>
+          <div class="stat-label">天</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 最新文章 -->
+  <section class="recent-posts">
+    <div class="section-header">
+      <h2 class="section-title">
+        <i class="fas fa-clock"></i>
+        最新文章
+      </h2>
+      <a href="/dates/" class="section-more">
+        查看全部 <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    
+    <div class="posts-grid">
+      {% for post in site.posts limit:6 %}
+      <article class="post-card">
+        <div class="post-header">
+          <div class="post-category">
+            {% if post.categories.first %}
+              <span class="category-tag">{{ post.categories.first }}</span>
+            {% endif %}
+          </div>
+          <time class="post-date" datetime="{{ post.date | date_to_xmlschema }}">
+            {{ post.date | date: "%m月%d日" }}
+          </time>
+        </div>
+        
+        <h3 class="post-title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h3>
+        
+        <div class="post-excerpt">
+          {{ post.excerpt | strip_html | truncatewords: 20 }}
+        </div>
+        
+        <div class="post-footer">
+          <div class="post-tags">
+            {% for tag in post.tags limit:2 %}
+              <span class="post-tag">#{{ tag }}</span>
+            {% endfor %}
+          </div>
+          <a href="{{ post.url | relative_url }}" class="read-more">
+            阅读更多 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
 </div>
 
-<div class="pagination">
-  {% if paginator.next_page %}
-    <a class="pagination-item older" href="{{ paginator.next_page_path | relative_url }}">Older</a>
-  {% else %}
-    <span class="pagination-item older">Older</span>
-  {% endif %}
-  {% if paginator.previous_page %}
-    <a class="pagination-item newer" href="{{ paginator.previous_page_path | prepend: relative_url }}">Newer</a>
-  {% else %}
-    <span class="pagination-item newer">Newer</span>
-  {% endif %}
+<!-- 右侧边栏内容 -->
+<div class="home-sidebar">
+  <!-- 个人简介卡片 -->
+  <div class="sidebar-card profile-card">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fas fa-user-circle"></i>
+        关于我
+      </h3>
+    </div>
+    <div class="card-content">
+      <p>一个热爱编程和学习的学生，喜欢记录学习过程中的点点滴滴，分享技术心得和生活感悟。</p>
+      <div class="profile-skills">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Vue</span>
+        <span class="skill-tag">Node.js</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 标签云 -->
+  <div class="sidebar-card tags-card">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fas fa-tags"></i>
+        热门标签
+      </h3>
+    </div>
+    <div class="card-content">
+      <div class="tag-cloud">
+        {% assign sorted_tags = site.tags | sort: 1 | reverse %}
+        {% for tag in sorted_tags limit:20 %}
+          <a href="/tags/#{{ tag[0] }}" class="cloud-tag" data-count="{{ tag[1].size }}">
+            {{ tag[0] }}
+            <span class="tag-count">{{ tag[1].size }}</span>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- 最近更新 -->
+  <div class="sidebar-card recent-card">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fas fa-history"></i>
+        最近更新
+      </h3>
+    </div>
+    <div class="card-content">
+      <div class="recent-list">
+        {% for post in site.posts limit:5 %}
+        <div class="recent-item">
+          <a href="{{ post.url | relative_url }}" class="recent-title">
+            {{ post.title | truncate: 30 }}
+          </a>
+          <time class="recent-date">{{ post.date | date: "%m-%d" }}</time>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+// 计算博客运行天数
+function updateDaysCount() {
+  const startDate = new Date('2024-01-01'); // 博客开始日期
+  const currentDate = new Date();
+  const timeDiff = currentDate.getTime() - startDate.getTime();
+  const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+  document.getElementById('days-count').textContent = daysDiff;
+}
+
+// 数字动画效果
+function animateNumber(element, targetNumber, duration = 1000) {
+  const startNumber = 0;
+  const increment = targetNumber / (duration / 16);
+  let currentNumber = startNumber;
+  
+  const timer = setInterval(() => {
+    currentNumber += increment;
+    if (currentNumber >= targetNumber) {
+      currentNumber = targetNumber;
+      clearInterval(timer);
+    }
+    element.textContent = Math.floor(currentNumber);
+  }, 16);
+}
+
+// 页面加载完成后执行
+document.addEventListener('DOMContentLoaded', function() {
+  updateDaysCount();
+  
+  // 统计数字动画
+  const postCountElement = document.getElementById('post-count');
+  if (postCountElement) {
+    const postCount = parseInt(postCountElement.textContent);
+    animateNumber(postCountElement, postCount);
+  }
+});
+</script>
