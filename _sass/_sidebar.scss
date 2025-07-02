@@ -1,11 +1,12 @@
 // Sidebar
 //
-// Styles for the sidebar.
+// 极简风格的侧边栏样式
 
 .masthead {
   text-align: center;
   margin: auto;
   width: 100%;
+  padding: 1.5rem;
 
   a {
     color: inherit;
@@ -14,19 +15,24 @@
 }
 
 .avatar-image {
-  width: 30%;
-  height: auto;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   display: block;
-  margin-right: auto;
-  margin-left: auto;
+  margin: 0 auto 1rem auto;
+  border: 2px solid var(--border-color);
+  transition: transform 0.3s ease;
+}
+
+.avatar-image:hover {
+  transform: scale(1.05);
 }
 
 .masthead-title {
   padding: 0;
-  margin: 0;
-  font-size: 2rem;
-  font-weight: 900;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
 
   a:hover,
   a:focus {
@@ -36,55 +42,118 @@
 
 .masthead-tagline {
   padding: 0;
-  margin: 0;
-  font-size: 1.25rem;
+  margin: 0 0 1.5rem 0;
+  font-size: 0.9rem;
   font-weight: 400;
-  opacity: .7;
+  opacity: 0.7;
+  line-height: 1.4;
 }
 
 .navigation-list {
-  margin-top: var(--spacer-2);
+  margin: 1.5rem 0;
   padding: 0;
   list-style: none;
 }
 
 .navigation-item {
   display: block;
-  margin-bottom: var(--spacer);
+  margin-bottom: 0.8rem;
 }
 
 .navigation-item a {
+  display: block;
+  padding: 0.5rem 1rem;
   background: transparent;
   color: inherit;
-  letter-spacing: 0.05em;
-  font-size: 90%;
-  border-bottom: 2px solid;
-  border-color: inherit;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
 
   &:hover,
   &:focus {
+    background: var(--gray-100);
     color: var(--link-hover-color);
+    border-color: var(--border-color);
   }
 }
 
 .social {
-  margin-top: var(--spacer-2);
-  font-size: 150%;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
   white-space: normal;
-  line-height: .5;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .social-icon {
-  padding: var(--spacer);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  background: var(--gray-100);
+  
   &:hover,
   &:focus {
-    color: var(--link-hover-color);
-    background-color: transparent;
+    background: var(--link-hover-color);
+    color: white;
+    transform: translateY(-2px);
   }
 }
 
+.custom-social-icon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.social-icon:hover .custom-social-icon {
+  opacity: 1;
+}
+
 @media (max-width: $md-width) {
+  .masthead {
+    padding: 1rem;
+  }
+  
   .avatar-image {
-    width: 15%;
+    width: 60px;
+    height: 60px;
+  }
+  
+  .masthead-title {
+    font-size: 1.3rem;
+  }
+  
+  .masthead-tagline {
+    font-size: 0.85rem;
+  }
+  
+  .navigation-item a {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .social {
+    font-size: 1.1rem;
+  }
+  
+  .social-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .custom-social-icon {
+    width: 16px;
+    height: 16px;
   }
 }
