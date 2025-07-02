@@ -4,6 +4,7 @@
 ---
 
 @import "variables";
+@import "top-navbar";
 @import "base";
 @import "type";
 @import "code";
@@ -14,3 +15,18 @@
 @import "message";
 
 @import "syntax-light";
+
+/* 全局顶部导航栏间距调整 */
+body {
+  padding-top: 4rem; /* 为固定顶部导航栏预留空间 */
+}
+
+/* 确保内容区域不被顶部导航栏遮挡 */
+.content {
+  margin-top: 1rem;
+}
+
+/* 首页特殊处理 */
+body.home .content {
+  margin-top: 0;
+}
