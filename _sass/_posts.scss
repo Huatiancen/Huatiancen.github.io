@@ -259,14 +259,14 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+    background: linear-gradient(90deg, #2f8fae, #1f6f8b, #0f5a74);
     border-radius: 12px 12px 0 0;
   }
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    border-color: var(--link-color);
+    box-shadow: 0 12px 26px rgba(16, 54, 79, 0.13);
+    border-color: #1f6f8b;
   }
 }
 
@@ -286,7 +286,7 @@
 
 .friend-card:hover .friend-avatar img {
   transform: scale(1.1);
-  border-color: var(--link-color);
+  border-color: #1f6f8b;
 }
 
 .friend-info {
@@ -308,6 +308,7 @@
     min-height: 2.8rem;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -331,7 +332,7 @@
   right: 1rem;
   width: 32px;
   height: 32px;
-  background: var(--link-color);
+  background: #1f6f8b;
   color: white;
   border-radius: 50%;
   display: flex;

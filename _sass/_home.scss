@@ -21,7 +21,12 @@ body.home .sidebar-right {
 }
 
 body.home .sidebar-left {
+  background-image: none !important;
+  background:
+    linear-gradient(160deg, rgba(248, 252, 255, 0.95), rgba(236, 245, 251, 0.9)) !important;
+  color: #1f3642 !important;
   padding: 5rem 1rem 1rem;
+  border-right: 1px solid rgba(31, 111, 139, 0.12);
 }
 
 body.home .sidebar-right {
@@ -36,6 +41,14 @@ body.home .masthead {
   box-shadow: 0 10px 24px rgba(16, 54, 79, 0.08);
 }
 
+body.home .masthead,
+body.home .masthead a,
+body.home .masthead small,
+body.home .navigation-item a,
+body.home .social-icon {
+  color: #1f3642;
+}
+
 body.home .masthead-title a {
   color: #133747;
 }
@@ -46,6 +59,8 @@ body.home .masthead-tagline {
 }
 
 body.home .navigation-item a {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(31, 111, 139, 0.08);
   border-radius: 10px;
 }
 
@@ -58,6 +73,7 @@ body.home .navigation-item a:focus {
 
 body.home .social-icon {
   background: #edf5f9;
+  border: 1px solid rgba(31, 111, 139, 0.12);
 }
 
 body.home .social-icon:hover,
@@ -402,6 +418,11 @@ body.home .sidebar-widget {
   body.home .sidebar-left,
   body.home .sidebar-right {
     padding-top: 1rem;
+  }
+
+  body.home .sidebar-left {
+    border-right: none;
+    border-radius: 14px;
   }
 
   body.home .masthead {

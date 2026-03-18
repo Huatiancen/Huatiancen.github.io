@@ -6,7 +6,6 @@
   margin-top: var(--spacer-2);
   margin-bottom: var(--spacer-2);
 }
-}
 
 .taxonomies {
   list-style: none;
@@ -67,8 +66,8 @@
 
         &:hover {
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-          border-color: #007acc;
+          box-shadow: 0 10px 22px rgba(16, 54, 79, 0.12);
+          border-color: #1f6f8b;
         }
 
         .taxonomy-name {
@@ -77,7 +76,7 @@
         }
 
         .taxonomy-count {
-          background: #007acc;
+          background: #1f6f8b;
           color: white;
           padding: 4px 8px;
           border-radius: 12px;
@@ -94,17 +93,18 @@
 .taxonomy-section {
   margin: 3rem 0;
   padding: 2rem;
-  background: white;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(219, 231, 238, 0.95);
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 24px rgba(16, 54, 79, 0.08);
 
   .taxonomy-header {
     margin-bottom: 1.5rem;
 
     h2 {
       margin-bottom: 1rem;
-      color: #333;
-      border-bottom: 2px solid #007acc;
+      color: #173746;
+      border-bottom: 2px solid #1f6f8b;
       padding-bottom: 0.5rem;
       display: inline-block;
     }
@@ -134,17 +134,17 @@
       }
 
       a {
-        color: #333;
+        color: #1f3642;
         text-decoration: none;
         transition: color 0.3s ease;
 
         &:hover {
-          color: #007acc;
+          color: #1f6f8b;
         }
       }
 
       &:hover {
-        background: #f8f9fa;
+        background: #f2f8fb;
         margin: 0 -1rem;
         padding: 8px 1rem;
         border-radius: 6px;
@@ -168,7 +168,7 @@
     display: inline-block;
     margin-top: 1rem;
     padding: 8px 16px;
-    background: #007acc;
+    background: #1f6f8b;
     color: white;
     text-decoration: none;
     border-radius: 20px;
@@ -176,7 +176,7 @@
     transition: all 0.3s ease;
 
     &:hover {
-      background: #005599;
+      background: #0f5a74;
       transform: translateY(-2px);
     }
   }
