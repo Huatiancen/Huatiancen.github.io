@@ -7,6 +7,23 @@
   margin-bottom: var(--spacer-2);
 }
 
+.archive-header {
+  margin-bottom: 1.3rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(219, 231, 238, 0.8);
+}
+
+.archive-title {
+  margin: 0;
+  color: #173746;
+  font-size: clamp(1.6rem, 3vw, 2.05rem);
+}
+
+.archive-subtitle {
+  margin: 0.4rem 0 0;
+  color: #5d7786;
+}
+
 .taxonomies {
   list-style: none;
   display: grid;
@@ -24,6 +41,7 @@
     text-decoration: none;
     border-bottom: 1px solid;
     margin-bottom: var(--spacer);
+    border-color: rgba(219, 231, 238, 0.85);
   }
 }
 
@@ -56,8 +74,8 @@
         justify-content: space-between;
         align-items: center;
         padding: 12px 16px;
-        background: white;
-        border: 1px solid #e0e0e0;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(219, 231, 238, 0.9);
         border-radius: 8px;
         text-decoration: none;
         color: #333;

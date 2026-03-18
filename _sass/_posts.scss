@@ -85,6 +85,28 @@
   margin-bottom: var(--spacer-3);
 }
 
+.fade-in-up {
+  animation: fade-in-up 0.45s ease-out both;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(219, 231, 238, 0.9);
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(16, 54, 79, 0.08);
+}
+
 .page,
 .post {
   font-family: var(--body-font);
@@ -97,6 +119,64 @@
   li + li {
     margin-top: .25rem;
   }
+}
+
+.layout-page .page {
+  line-height: 1.8;
+}
+
+.layout-page .page-title {
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  color: #173746;
+  margin-bottom: 0.9rem;
+}
+
+.layout-post .post {
+  padding: 1.45rem;
+  line-height: 1.82;
+}
+
+.layout-post .post-header {
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(219, 231, 238, 0.85);
+}
+
+.layout-post .post-title {
+  margin-bottom: 0.7rem;
+  font-size: clamp(1.7rem, 3.2vw, 2.25rem);
+  color: #102a37;
+  line-height: 1.3;
+}
+
+.layout-post .post-meta {
+  margin-top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.1rem;
+  align-items: center;
+  color: #58717f;
+}
+
+.layout-post .post-content {
+  color: #2f4652;
+}
+
+.layout-post .post-content p {
+  margin-bottom: 1.05rem;
+}
+
+.layout-post .post-content h2,
+.layout-post .post-content h3,
+.layout-post .post-content h4 {
+  color: #153b4c;
+  margin-top: 1.7rem;
+}
+
+.layout-post .post-footer {
+  margin-top: 1.4rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(219, 231, 238, 0.85);
 }
 
 // Blog post or page title
@@ -168,6 +248,126 @@
   padding: var(--spacer) 0;
   color: var(--gray-600);
   font-family: var(--body-font);
+}
+
+.layout-post .post-tags-section h4 {
+  margin: 0 0 0.6rem;
+  color: #22485a;
+}
+
+.layout-post .post-tags a.tag {
+  display: inline-block;
+  background: #f2f8fb;
+  color: #1f6f8b;
+  border: 1px solid rgba(31, 111, 139, 0.2);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  margin: 0 0.4rem 0.4rem 0;
+  text-decoration: none;
+}
+
+.layout-post .post-tags a.tag:hover {
+  background: #1f6f8b;
+  color: #ffffff;
+}
+
+.post-nav {
+  margin-bottom: 1.4rem;
+  padding: 0.7rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.post-nav-item a {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 84px;
+  padding: 0.85rem;
+  border-radius: 12px;
+  border: 1px solid rgba(219, 231, 238, 0.9);
+  background: #ffffff;
+  text-decoration: none;
+  color: #244b5d;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.post-nav-item a:hover {
+  transform: translateY(-2px);
+  border-color: rgba(31, 111, 139, 0.35);
+  box-shadow: 0 10px 20px rgba(16, 54, 79, 0.1);
+}
+
+.post-nav-next a {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.nav-label {
+  font-size: 0.8rem;
+  color: #68818f;
+}
+
+.nav-title {
+  font-size: 0.95rem;
+  color: #133b4d;
+  line-height: 1.45;
+}
+
+.nav-arrow {
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: #edf6fa;
+  color: #1f6f8b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.related-posts.card {
+  padding: 1rem;
+}
+
+.related-posts.card h3 {
+  margin: 0 0 0.8rem;
+  color: #183c4e;
+}
+
+.related-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.related-post {
+  background: #ffffff;
+  border: 1px solid rgba(219, 231, 238, 0.9);
+  border-radius: 12px;
+  padding: 0.75rem;
+}
+
+.related-post h4 {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.related-post h4 a {
+  color: #1c4456;
+  text-decoration: none;
+}
+
+.related-post h4 a:hover {
+  color: #1f6f8b;
+  text-decoration: underline;
+}
+
+.related-post-meta {
+  font-size: 0.8rem;
+  color: #6a828f;
 }
 
 .post-tags-icon {
@@ -378,6 +578,27 @@
 
 // 响应式设计
 @media (max-width: 768px) {
+  .layout-post .post {
+    padding: 1rem;
+  }
+
+  .layout-post .post-title {
+    font-size: 1.55rem;
+  }
+
+  .post-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .post-nav-next a {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .related-posts-grid {
+    grid-template-columns: 1fr;
+  }
+
   .friend-links-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
