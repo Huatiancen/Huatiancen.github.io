@@ -40,6 +40,13 @@ body.home .content.content-home {
   padding-right: 1.2rem;
 }
 
+body.home .content.content-home > main {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .homepage {
   --home-accent: #1f6f8b;
   --home-accent-soft: #2f8fae;
