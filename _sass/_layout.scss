@@ -4,7 +4,8 @@
 
 .container {
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 1360px;
 }
 
 .home-header {
@@ -16,16 +17,11 @@
   padding-top: var(--spacer-2);
   padding-left: var(--spacer-2);
   padding-right: var(--spacer-2);
+  width: 100%;
+  max-width: 1160px;
   margin-left:  auto;
   margin-right: auto;
   min-height: 100vh;
-}
-
-.sidebar-left {
-  display: flex;
-  padding: var(--spacer);
-  background: center / cover;
-  height: 100vh;
 }
 
 footer {
@@ -38,13 +34,6 @@ footer {
     padding-top: var(--spacer-3);
     padding-left: var(--spacer-3);
     padding-right: var(--spacer-3);
-    margin-left: 25%;
-  }
-
-  .sidebar-left {
-    position: fixed;
-    top: 0;
-    bottom: 0;
   }
 
   .home-header {
@@ -52,26 +41,9 @@ footer {
   }
 }
 
-@media (min-width: $lg-width) {
-  .sidebar-right {
-    display: block;
-  }
-}
-
-@media (max-width: $lg-width) {
-  .sidebar-right {
-    display: none;
-  }
-}
-
 @media (max-width: $md-width) {
   .content {
     width: 100%;
-  }
-}
-
-@media (min-width: $md-width) and (max-width: $lg-width) {
-  .content {
-    width: 75%;
+    max-width: 100%;
   }
 }

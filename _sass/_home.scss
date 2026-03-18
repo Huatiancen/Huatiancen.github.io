@@ -32,15 +32,12 @@ body.home .home-container {
 body.home .content.content-home {
   width: 100% !important;
   max-width: 1320px;
-  margin: 0 auto;
+  margin: 0 auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
   padding-top: 1.15rem;
   padding-left: 1.2rem;
   padding-right: 1.2rem;
-}
-
-body.home .sidebar-left,
-body.home .sidebar-right {
-  background-color: transparent !important;
 }
 
 .homepage {
