@@ -14,9 +14,9 @@
 }
 
 .navbar-container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -75,10 +75,11 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.7rem 1rem;
+  padding: 0.6rem 0.92rem;
   text-decoration: none;
   color: #355260;
   font-weight: 500;
+  font-size: 0.92rem;
   border-radius: 10px;
   transition: all 0.3s ease;
   position: relative;
@@ -106,13 +107,13 @@
 .nav-link:hover {
   color: #1f6f8b;
   transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(20, 90, 115, 0.13);
+  box-shadow: 0 7px 15px rgba(20, 90, 115, 0.12);
 }
 
 .nav-link.active {
   background: linear-gradient(135deg, #1f6f8b, #0f5a74);
   color: white;
-  box-shadow: 0 8px 18px rgba(20, 90, 115, 0.24);
+  box-shadow: 0 7px 15px rgba(20, 90, 115, 0.21);
 }
 
 .nav-link.active::before {
@@ -152,16 +153,6 @@
   transition: all 0.3s ease;
 }
 
-/* 页面内容区域顶部间距调整 - 只对内容区域生效，不影响侧边栏 */
-.content {
-  padding-top: 4rem;
-}
-
-/* 确保左侧边栏不受顶部导航栏影响 */
-.sidebar-left {
-  padding-top: 0 !important;
-}
-
 /* 暗色主题适配 */
 @media (prefers-color-scheme: dark) {
   .top-navbar {
@@ -189,7 +180,7 @@
 /* 响应式设计 */
 @media (max-width: 48rem) {
   .navbar-container {
-    padding: 0 1rem;
+    padding: 0 0.85rem;
   }
   
   .navbar-nav {
@@ -229,10 +220,6 @@
 @media (max-width: 36rem) {
   .navbar-container {
     height: 3.5rem;
-  }
-  
-  .content {
-    padding-top: 3.5rem;
   }
   
   .brand-link {

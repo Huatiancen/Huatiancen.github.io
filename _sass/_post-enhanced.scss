@@ -165,14 +165,14 @@
     border-color: rgba(255, 255, 255, 0.1);
     
     .post-meta-item i {
-      color: #9f7aea;
+      color: #7ec4dd;
     }
     
     .meta-link {
-      color: #9f7aea;
+      color: #7ec4dd;
       
       &:hover {
-        color: #b794f6;
+        color: #9bd8ec;
       }
     }
     
@@ -195,7 +195,7 @@
     
     .toc-link:hover {
       background: rgba(159, 122, 234, 0.1);
-      border-left-color: #9f7aea;
+      border-left-color: #7ec4dd;
     }
   }
 }
@@ -283,7 +283,6 @@
       top: -10px;
       left: 15px;
       font-size: 3rem;
-      color: #667eea;
       color: #1f6f8b;
       opacity: 0.3;
       font-family: Georgia, serif;

@@ -10,7 +10,10 @@
 @import "code";
 @import "layout";
 @import "sidebar";
+@import "sidebar-right";
 @import "posts";
+@import "archive";
+@import "post-enhanced";
 @import "pagination";
 @import "message";
 @import "home";
@@ -19,12 +22,12 @@
 
 /* 全局顶部导航栏间距调整 */
 body {
-  padding-top: 4rem; /* 为固定顶部导航栏预留空间 */
+  padding-top: 3.75rem; /* 为固定顶部导航栏预留空间 */
 }
 
 /* 确保内容区域不被顶部导航栏遮挡 */
 .content {
-  margin-top: 1rem;
+  margin-top: 0.35rem;
 }
 
 /* 首页特殊处理 */

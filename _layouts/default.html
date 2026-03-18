@@ -8,7 +8,7 @@
     <!-- 全站统一顶部导航栏 -->
     {%- include top-navbar.html -%}
 
-    <div class="container pure-g">
+    <div class="container pure-g{% if page.layout == 'home' %} home-container{% endif %}">
       {%- assign cover_bg_color = site.cover_bg_color | default: "rgb(40, 73, 77)" -%}
       {%- assign cover_color    = site.cover_color    | default: "rgb(255, 255, 255)" -%}
       {%- assign cover_image    = site.cover_image -%}
@@ -21,6 +21,11 @@
       {%- if page.cover_image -%}
         {%- assign cover_image     = page.cover_image -%}
       {%- endif -%}
+      {% if page.layout == 'home' %}
+      <div class="content content-home pure-u-1">
+        {%- include content.html -%}
+      </div>
+      {% else %}
       <div class="sidebar-left pure-u-1 pure-u-md-1-4" style="background-color: {{ cover_bg_color }}; color: {{ cover_color}}; {% if cover_image %}background-image: url({{ cover_image | relative_url }});{% endif %}">
         {%- include sidebar-left.html -%}
       </div>
@@ -31,6 +36,7 @@
       <div class="sidebar-right pure-u-1 pure-u-md-1-4">
         {%- include sidebar-right.html -%}
       </div>
+      {% endif %}
     </div>
 
     <script async src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script>
