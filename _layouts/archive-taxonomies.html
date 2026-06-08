@@ -34,6 +34,23 @@ layout: default
     {%- endif -%}
   {%- endfor -%}
 
+  <div class="archive-search" data-archive-search="taxonomies">
+    <label class="archive-search-label" for="archive-taxonomy-search">
+      {% if page.type == 'categories' %}筛选分类{% else %}筛选标签{% endif %}
+    </label>
+    <div class="archive-search-box">
+      <input
+        id="archive-taxonomy-search"
+        class="archive-search-input"
+        type="search"
+        placeholder="输入标签、标题或日期..."
+        autocomplete="off"
+      >
+      <button class="archive-search-clear" type="button" aria-label="清空标签筛选">清空</button>
+    </div>
+    <p class="archive-search-status" aria-live="polite"></p>
+  </div>
+
   <div class="taxonomies-wrapper">
     <div class="taxonomies-cloud" id="taxonomies-list">
       {%- for i in (1..max_count) reversed -%}
@@ -42,7 +59,7 @@ layout: default
           {%- assign slugified_taxonomy_name = taxonomy_name | slugify -%}
           {%- assign posts = taxonomy[1] -%}
           {%- if posts.size == i -%}
-            <div class="taxonomy-tag-card" data-tag="{{ slugified_taxonomy_name | downcase }}">
+            <div class="taxonomy-tag-card" data-tag="{{ slugified_taxonomy_name | downcase }}" data-name="{{ taxonomy_name | downcase | escape }}">
               {%- capture link -%}{{ page.permalink }}#{{ slugified_taxonomy_name }}{%- endcapture -%}
               <a class="taxonomy-tag-link" href="{{ link | relative_url }}">
                 <div class="tag-icon">
@@ -86,7 +103,12 @@ layout: default
           
           <div class="archive-posts-grid" data-tag="{{ slugified_taxonomy_name | downcase }}">
             {%- for post in posts -%}
-              <article class="archive-item" data-title="{{ post.title | downcase }}" data-date="{{ post.date | date: '%Y-%m-%d' }}">
+              <article
+                class="archive-item"
+                data-title="{{ post.title | downcase }}"
+                data-date="{{ post.date | date: '%Y-%m-%d' }}"
+                data-search-text="{{ post.title | strip_html | downcase | escape }} {{ post.date | date: '%Y-%m-%d' }} {{ post.tags | join: ' ' | downcase | escape }} {{ post.excerpt | strip_html | downcase | escape }}"
+              >
                 <div class="archive-item-content">
                   <h3 class="archive-item-title">
                     <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
@@ -133,6 +155,76 @@ layout: default
 <script>
   function backToTop() {
     const main = document.getElementById("site-main");
-    main.scrollTop = 0;
+    if (main) {
+      main.scrollTop = 0;
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }
+
+  (function initTaxonomyArchiveSearch() {
+    const searchRoot = document.querySelector('[data-archive-search="taxonomies"]');
+    if (!searchRoot) return;
+
+    const input = searchRoot.querySelector(".archive-search-input");
+    const clearButton = searchRoot.querySelector(".archive-search-clear");
+    const status = searchRoot.querySelector(".archive-search-status");
+    const taxonomyCards = Array.from(document.querySelectorAll(".taxonomy-tag-card"));
+    const sections = Array.from(document.querySelectorAll(".archive-section"));
+
+    function normalize(value) {
+      return (value || "").toString().trim().toLowerCase();
+    }
+
+    function applyFilter() {
+      const query = normalize(input.value);
+      let visiblePosts = 0;
+      let visibleGroups = 0;
+
+      sections.forEach((section) => {
+        const groupName = normalize(section.dataset.tag);
+        const posts = Array.from(section.querySelectorAll(".archive-item"));
+        let groupVisiblePosts = 0;
+
+        posts.forEach((post) => {
+          const haystack = normalize(post.dataset.searchText);
+          const visible = !query || groupName.includes(query) || haystack.includes(query);
+          post.hidden = !visible;
+          if (visible) groupVisiblePosts += 1;
+        });
+
+        const sectionVisible = groupVisiblePosts > 0 || (!query && posts.length > 0);
+        section.hidden = !sectionVisible;
+        const noResults = section.querySelector(".no-results");
+        if (noResults) noResults.style.display = query && groupVisiblePosts === 0 ? "block" : "none";
+
+        visiblePosts += groupVisiblePosts;
+        if (sectionVisible) visibleGroups += 1;
+      });
+
+      taxonomyCards.forEach((card) => {
+        const slug = normalize(card.dataset.tag);
+        const name = normalize(card.dataset.name);
+        const relatedSection = sections.find((section) => normalize(section.dataset.tag) === slug);
+        card.hidden = query ? !(slug.includes(query) || name.includes(query) || (relatedSection && !relatedSection.hidden)) : false;
+      });
+
+      if (!query) {
+        status.textContent = "输入关键词后，可按标签、文章标题或日期筛选。";
+      } else if (visiblePosts > 0) {
+        status.textContent = `找到 ${visiblePosts} 篇文章，匹配 ${visibleGroups} 个分组。`;
+      } else {
+        status.textContent = `没有找到包含“${input.value.trim()}”的文章。`;
+      }
+    }
+
+    input.addEventListener("input", applyFilter);
+    clearButton.addEventListener("click", () => {
+      input.value = "";
+      input.focus();
+      applyFilter();
+    });
+
+    applyFilter();
+  })();
 </script>
