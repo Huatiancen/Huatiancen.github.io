@@ -31,7 +31,7 @@ title: Tiancen Hua
     </div>
     <img
       class="academic-profile__photo"
-      src="https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/202506241740565.png"
+      src="{{ '/assets/images/profile-life.jpg' | relative_url }}"
       alt="Tiancen Hua"
     >
   </header>
@@ -80,7 +80,7 @@ title: Tiancen Hua
 
   .academic-profile__hero {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 168px;
+    grid-template-columns: minmax(0, 1fr) 220px;
     gap: 2rem;
     align-items: start;
   }
@@ -120,8 +120,8 @@ title: Tiancen Hua
   }
 
   .academic-profile__photo {
-    width: 168px;
-    aspect-ratio: 1;
+    width: 220px;
+    aspect-ratio: 3 / 2;
     object-fit: cover;
     border-radius: 8px;
     border: 1px solid rgba(31, 111, 139, 0.16);
@@ -180,7 +180,7 @@ title: Tiancen Hua
 
     .academic-profile__photo {
       order: -1;
-      width: 132px;
+      width: min(100%, 260px);
     }
 
     .academic-profile__item {
