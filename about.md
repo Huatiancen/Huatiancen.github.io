@@ -43,21 +43,9 @@ title: Tiancen Hua
     <div class="academic-profile__item">
       <div>
         <strong>Nanjing University</strong>
-        <p>B.Eng. candidate in Software Engineering, School of Software</p>
       </div>
       <span>2023 - Present</span>
     </div>
-  </section>
-
-  <section class="academic-profile__section">
-    <h2>Interests</h2>
-    <ul>
-      <li>Software system design and software architecture</li>
-      <li>Operating systems and systems programming</li>
-      <li>Compiler principles and program analysis</li>
-      <li>Data management and database fundamentals</li>
-      <li>Structured learning methods for technical subjects</li>
-    </ul>
   </section>
 
   <section class="academic-profile__section">
@@ -71,6 +59,10 @@ title: Tiancen Hua
 </div>
 
 <style>
+  .page > .page-title {
+    display: none;
+  }
+
   .academic-profile {
     max-width: 900px;
     margin: 0 auto;
