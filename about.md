@@ -1,23 +1,30 @@
 ---
 layout: page
-title: 花天岑
+title: Tiancen Hua
 ---
 
-## 个人简介
+## Profile
 
 <img src="https://huatiancen.oss-cn-nanjing.aliyuncs.com/img/202506241740565.png" style="zoom:5%;" />
 
-男，汉族，共青团员，江苏泰州人，南京大学软件学院2023级本科生，绰号“海苔脆”
+I am an undergraduate student in Software Engineering at the School of Software,
+Nanjing University, Class of 2023. My academic interests include software system
+design, software architecture, operating systems, compilers, data management,
+and the engineering practices that turn complex ideas into reliable systems.
 
-## 性格
+This site serves as a personal knowledge base. I use it to organize course
+notes, technical summaries, review materials, and selected reflections on
+learning and software development. The notes are written with an emphasis on
+clarity, structure, and long-term reuse.
 
-esfp 天蝎座 
+## Focus Areas
 
-## 爱好
+- Software design and architecture
+- Systems programming and operating systems
+- Compiler principles and program analysis
+- Data management and database fundamentals
+- Learning methods for technical subjects
 
-在现充和死宅之间反复横跳，目前玩得比较多的是无畏契约和金铲铲之战（云顶之弈）
+## Contact
 
-## 联系方式
-
-邮箱：1047347257@qq.com
-
+Email: 1047347257@qq.com
