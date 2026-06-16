@@ -253,24 +253,6 @@
 
 // 文章内容增强
 .post-content, .page-content {
-  // 代码块增强
-  pre {
-    position: relative;
-    
-    &::before {
-      content: '代码';
-      position: absolute;
-      top: 0.5rem;
-      right: 1rem;
-      background: linear-gradient(135deg, #1f6f8b, #0f5a74);
-      color: white;
-      padding: 0.2rem 0.5rem;
-      border-radius: 3px;
-      font-size: 0.7rem;
-      font-weight: 500;
-    }
-  }
-  
   // 引用块增强
   blockquote {
     border-left: 4px solid #1f6f8b;
