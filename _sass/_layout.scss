@@ -66,8 +66,12 @@ body:not(.home) {
 }
 
 .post-toc-aside {
+  position: sticky;
+  top: 6.25rem;
+  align-self: start;
   width: 100%;
   max-width: 100%;
+  max-height: calc(100vh - 7.25rem);
   min-width: 0;
 }
 
@@ -145,6 +149,8 @@ footer {
   }
 
   .post-toc-aside {
+    position: static;
+    max-height: none;
     order: -1;
   }
 }
@@ -155,6 +161,8 @@ footer {
   }
 
   .post-toc-aside {
+    position: static;
+    max-height: none;
     order: -1;
   }
 }
