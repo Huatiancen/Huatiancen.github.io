@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 'Architecture5'
-date: 2026-06-08 00:21 +0800
-last_modified_at: 2026-06-08 00:21 +0800
+date: 2026-06-08 00:23 +0800
+last_modified_at: 2026-06-16 00:23 +0800
 tags: ['软件系统设计']
 toc: true
 ---
@@ -704,4 +704,3 @@ Method for Choosing the Views
 - 只生产足够支持编码的信息
 - 不需要的部分写 N/A
 - 白板图可以拍照作为 primary presentation
-

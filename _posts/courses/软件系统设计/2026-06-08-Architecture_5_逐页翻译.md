@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 'Architecture_5_逐页翻译'
-date: 2026-06-08 00:17 +0800
-last_modified_at: 2026-06-08 00:17 +0800
+date: 2026-06-08 00:19 +0800
+last_modified_at: 2026-06-16 00:19 +0800
 tags: ['软件系统设计']
 toc: true
 ---
@@ -1961,4 +1961,3 @@ toc: true
 ## 第 129 页
 
 # 谢谢
-

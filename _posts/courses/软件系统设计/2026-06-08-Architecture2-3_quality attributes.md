@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 'Architecture2-3_quality attributes'
-date: 2026-06-08 00:19 +0800
-last_modified_at: 2026-06-08 00:19 +0800
+date: 2026-06-08 00:21 +0800
+last_modified_at: 2026-06-16 00:21 +0800
 tags: ['软件系统设计']
 toc: true
 ---

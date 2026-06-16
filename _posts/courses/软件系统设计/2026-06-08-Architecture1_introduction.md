@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 'Architecture1_introduction'
-date: 2026-06-08 00:18 +0800
-last_modified_at: 2026-06-08 00:18 +0800
+date: 2026-06-08 00:20 +0800
+last_modified_at: 2026-06-16 00:20 +0800
 tags: ['软件系统设计']
 toc: true
 ---
@@ -58,9 +58,9 @@ toc: true
 
 ## 什么是软件架构 What is Software Architecture
 
-### SEI 定义
+### SEI对软件架构的定义
 
-软件架构 **software architecture** 是一个程序或计算系统的结构或结构集合，它包括：
+软件架构 **software architecture ** 是一个程序或计算系统的结构或结构集合，它包括：
 
 - 软件元素：**software elements**
 - 这些元素的外部可见属性：**externally visible properties**
@@ -226,7 +226,7 @@ Kruchten 的 **4+1 View Model** 包括：
   - 描述主要进程和组件如何映射到应用硬件上
 - **Development View 开发视图**
   - 描述软件组件在开发环境中的内部组织方式，例如配置管理工具中的组织
-- **Architecture Use Cases / Scenarios 架构用例 / 场景**
+- **Architecture Use Cases架构用例 **
   - 捕获架构相关需求，通常会关联多个视图
 
 这里的 “+1” 是用例视图，它用于验证和串联其他几个视图。

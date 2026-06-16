@@ -2,7 +2,7 @@
 layout: post
 title: '2026UG_SysArch2-3_quality attributes_逐页翻译'
 date: 2026-06-08 00:11 +0800
-last_modified_at: 2026-06-08 00:11 +0800
+last_modified_at: 2026-06-16 00:11 +0800
 tags: ['软件系统设计']
 toc: true
 ---
@@ -1140,4 +1140,3 @@ toc: true
   - ASP 可以在敏捷迭代中使用，让架构关注点持续可见。
 - They help teams discover, prioritize, and revisit ASRs.
   - 它们帮助团队发现、排序并持续回顾 ASR。
-

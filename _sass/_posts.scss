@@ -105,6 +105,7 @@
   border: 1px solid rgba(219, 231, 238, 0.9);
   border-radius: 18px;
   box-shadow: 0 10px 24px rgba(16, 54, 79, 0.08);
+  box-sizing: border-box;
 }
 
 .page,
@@ -134,6 +135,9 @@
 .layout-post .post {
   padding: 1.45rem;
   line-height: 1.82;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .layout-post .post-header {
@@ -160,6 +164,23 @@
 
 .layout-post .post-content {
   color: #2f4652;
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.layout-post .post-content table,
+.layout-post .post-content pre,
+.layout-post .post-content .highlight {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.layout-post .post-content img {
+  max-width: 100%;
+  height: auto;
 }
 
 .layout-post .post-content p {
@@ -277,6 +298,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .post-nav-item a {
@@ -291,6 +315,12 @@
   text-decoration: none;
   color: #244b5d;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.post-nav-item,
+.post-nav-item a,
+.related-posts {
+  min-width: 0;
 }
 
 .post-nav-item a:hover {

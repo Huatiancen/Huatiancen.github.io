@@ -42,11 +42,33 @@ body:not(.home) {
 }
 
 .layout-post .content.content-main > main {
-  max-width: 980px;
+  max-width: 1240px;
 }
 
 .layout-page .content.content-main > main {
   max-width: 1040px;
+}
+
+.post-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 900px) minmax(220px, 280px);
+  gap: 1.35rem;
+  align-items: start;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.post-main {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.post-toc-aside {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .layout-page .content-main .page,
@@ -115,5 +137,24 @@ footer {
   .layout-archive-taxonomies .content-main .archive-container {
     border-radius: 14px;
     padding: 1rem;
+  }
+
+  .post-shell {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-toc-aside {
+    order: -1;
+  }
+}
+
+@media (max-width: 72rem) {
+  .post-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .post-toc-aside {
+    order: -1;
   }
 }

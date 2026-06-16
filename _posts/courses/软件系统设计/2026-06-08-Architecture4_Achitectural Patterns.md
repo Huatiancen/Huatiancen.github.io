@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 'Architecture4_Achitectural Patterns'
-date: 2026-06-08 00:20 +0800
-last_modified_at: 2026-06-08 00:20 +0800
+date: 2026-06-08 00:22 +0800
+last_modified_at: 2026-06-16 00:22 +0800
 tags: ['软件系统设计']
 toc: true
 ---
