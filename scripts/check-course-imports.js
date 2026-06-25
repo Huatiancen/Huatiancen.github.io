@@ -14,6 +14,11 @@ const specs = [
     source: '/Users/huatiancen/File/The_Third_Year_Of_Spring/Software_Quality_Management/软件质量与管理',
     target: path.join(repo, '_posts/courses/软件质量管理'),
   },
+  {
+    course: '商务智能',
+    source: '/Users/huatiancen/File/The_Third_Year_Of_Spring/Business_Intelligence/商务智能',
+    target: path.join(repo, '_posts/courses/商务智能'),
+  },
 ];
 
 function walkMd(dir, prefix = '') {
