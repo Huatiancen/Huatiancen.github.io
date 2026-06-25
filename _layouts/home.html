@@ -61,17 +61,17 @@ layout: default
     <div class="course-grid">
       {% for course in featured_courses %}
         {% assign course_posts = site.tags[course] %}
-        {% if course_posts %}
-          {% assign latest_post = course_posts | first %}
-          {% assign course_slug = course | slugify %}
-          <article class="course-card">
-            <a href="{{ '/tags/#' | append: course_slug | relative_url }}" class="course-card-link">
-              <span class="course-name">{{ course }}</span>
-              <span class="course-count">{{ course_posts.size }} 篇</span>
-              <span class="course-latest">最近：{{ latest_post.title }}</span>
-            </a>
-          </article>
-        {% endif %}
+        {% assign latest_post = course_posts | first %}
+        {% assign course_slug = course | slugify %}
+        <article class="course-card">
+          <a href="{{ '/tags/#' | append: course_slug | relative_url }}" class="course-card-link">
+            <span class="course-name">{{ course }}</span>
+            <span class="course-count">{{ course_posts.size | default: 0 }} 篇</span>
+            <span class="course-latest">
+              {% if latest_post %}最近：{{ latest_post.title }}{% else %}暂无文章{% endif %}
+            </span>
+          </a>
+        </article>
       {% endfor %}
     </div>
   </section>

@@ -80,6 +80,24 @@ layout: default
           {%- endif -%}
         {%- endfor -%}
       {%- endfor -%}
+      {%- if page.type == 'tags' -%}
+        {%- for empty_tag in site.data.empty_tags -%}
+          {%- assign existing_posts = site.tags[empty_tag] -%}
+          {%- unless existing_posts -%}
+            {%- assign slugified_taxonomy_name = empty_tag | slugify -%}
+            <div class="taxonomy-tag-card" data-tag="{{ slugified_taxonomy_name | downcase }}" data-name="{{ empty_tag | downcase | escape }}">
+              {%- capture link -%}{{ page.permalink }}#{{ slugified_taxonomy_name }}{%- endcapture -%}
+              <a class="taxonomy-tag-link" href="{{ link | relative_url }}">
+                <div class="tag-icon">🏷️</div>
+                <div class="tag-content">
+                  <span class="tag-name">{{ slugified_taxonomy_name }}</span>
+                  <span class="tag-count">0 篇文章</span>
+                </div>
+              </a>
+            </div>
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
     </div>
   </div>
 
@@ -150,6 +168,26 @@ layout: default
       {%- endif -%}
     {%- endfor -%}
   {%- endfor -%}
+  {%- if page.type == 'tags' -%}
+    {%- for empty_tag in site.data.empty_tags -%}
+      {%- assign existing_posts = site.tags[empty_tag] -%}
+      {%- unless existing_posts -%}
+        {%- assign slugified_taxonomy_name = empty_tag | slugify -%}
+        <section class="archive-section archive-section-empty" id="{{ slugified_taxonomy_name }}" data-tag="{{ slugified_taxonomy_name | downcase }}" data-empty="true">
+          <header class="archive-section-header">
+            <h2 class="archive-group-title">标签：{{ slugified_taxonomy_name }}</h2>
+          </header>
+
+          <div class="no-results" style="display: block;">
+            <div class="no-results-content">
+              <div class="no-results-icon">∅</div>
+              <p>这个标签暂时没有文章</p>
+            </div>
+          </div>
+        </section>
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
 </div>
 
 <script>
@@ -193,7 +231,8 @@ layout: default
           if (visible) groupVisiblePosts += 1;
         });
 
-        const sectionVisible = groupVisiblePosts > 0 || (!query && posts.length > 0);
+        const isEmptyGroup = section.dataset.empty === "true";
+        const sectionVisible = groupVisiblePosts > 0 || (!query && (posts.length > 0 || isEmptyGroup)) || (query && isEmptyGroup && groupName.includes(query));
         section.hidden = !sectionVisible;
         const noResults = section.querySelector(".no-results");
         if (noResults) noResults.style.display = query && groupVisiblePosts === 0 ? "block" : "none";
