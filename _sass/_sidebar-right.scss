@@ -37,6 +37,12 @@
   position: relative;
 }
 
+.toc-wrapper .toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .toc-wrapper .toc a {
   color: #5f7480;
   text-decoration: none;
@@ -62,16 +68,26 @@
   font-weight: 600;
 }
 
-/* 二级目录缩进 */
+/* 二级及更深目录缩进 */
 .toc-wrapper .toc li li a {
   padding-left: 1.15rem;
   font-size: 0.82rem;
 }
 
-/* 三级目录缩进 */
 .toc-wrapper .toc li li li a {
   padding-left: 1.85rem;
   font-size: 0.78rem;
+}
+
+.toc-wrapper .toc li li li li a {
+  padding-left: 2.35rem;
+  font-size: 0.75rem;
+}
+
+.toc-wrapper .toc li li li li li a,
+.toc-wrapper .toc li li li li li li a {
+  padding-left: 2.75rem;
+  font-size: 0.72rem;
 }
 
 /* 目录滚动条美化 */
