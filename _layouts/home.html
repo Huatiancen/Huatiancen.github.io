@@ -57,7 +57,7 @@ layout: default
       <a href="/tags/" class="view-all">全部标签 <i class="fas fa-arrow-right"></i></a>
     </div>
 
-    {% assign featured_courses = "软件系统设计|软件质量管理|cpp|人机交互|软件测试|移动互联网|软工Ⅱ|OS|编译原理|数据管理基础|数据结构与算法" | split: "|" %}
+    {% assign featured_courses = "软件系统设计|软件质量管理|商务智能|cpp|人机交互|软件测试|移动互联网|软工Ⅱ|OS|编译原理|数据管理基础|数据结构与算法" | split: "|" %}
     <div class="course-grid">
       {% for course in featured_courses %}
         {% assign course_posts = site.tags[course] %}
